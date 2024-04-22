@@ -55,6 +55,7 @@ export class RegisterComponent {
     phone = phone.replace(/\D/g, '');
 
     phone = phone.replace(/(\d{2})(\d)/, '($1) $2');
+    phone = phone.replace(/(\d{5})(\d)/, '$1-$2');
     event.target.value = phone;
     this.cellphone = phone;
   }
