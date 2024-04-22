@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: basicT-api
+
+  datasource:
+    url:
+    username:
+    password:
+    driver-class-name:
