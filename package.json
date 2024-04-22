@@ -1,0 +1,14 @@
+{
+  "name": "basic-t",
+  "description": "Um sistema PDV ",
+  "authors": [
+    "Gabriel Araújo Lima <gabriel.araujo2902@outlook.com>",
+    "João Pedro Aveiro Pereira da Silva <joaopedroaveiro2016@gmail.com>",
+    "Vinicius de Jesus da Silva <viniciusjesusfilho07@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jpaveiro/BasicT-NG.git"
+  },
+  "license": "ISC"
+}
