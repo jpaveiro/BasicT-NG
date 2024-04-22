@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: basicT-api
+
+  datasource:
+    url: http://localhost:3306/
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
