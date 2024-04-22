@@ -5,8 +5,54 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
+  password: string = '';
+  seePassword: boolean = false;
+  cpf: String = '';
 
+  ngAfterViewInit() {
+    this.posicionarIcone('password', 'visibility_icon');
+  }
+
+  setPassword(event: any) {
+    this.password = event.target.value;
+  }
+
+  posicionarIcone(inputId: string, iconId: string) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+
+    if (input && icon) {
+      const inputRect = input.getBoundingClientRect();
+      const inputTop = inputRect.top;
+      const inputRight = inputRect.right;
+
+      icon.style.top = inputTop + 'px';
+      icon.style.right = window.innerWidth - inputRight + 'px';
+    }
+  }
+
+  formatCpf(event: any) {
+    let cpf = event.target.value;
+
+    cpf = cpf.replace(/\D/g, '');
+
+    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+    event.target.value = cpf;
+
+    this.cpf = cpf;
+  }
+
+  toggleSeePassword() {
+    const icon = document.getElementById('visibility_icon');
+    this.seePassword = !this.seePassword;
+    if (icon) {
+      icon.textContent = this.seePassword ? 'visibility' : 'visibility_off';
+    }
+  }
 }
