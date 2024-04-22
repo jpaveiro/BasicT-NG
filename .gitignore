@@ -1,0 +1,76 @@
+/server/HELP.md
+/server/target/
+/server/!.mvn/wrapper/maven-wrapper.jar
+/server/!**/src/main/**/target/
+/server/!**/src/test/**/target/
+
+### STS ###
+/server/.apt_generated
+/server/.classpath
+/server/.factorypath
+/server/.project
+/server/.settings
+/server/.springBeans
+/server/.sts4-cache
+
+### IntelliJ IDEA ###
+/server/.idea
+/server/*.iws
+/server/*.iml
+/server/*.ipr
+
+### NetBeans ###
+/server/nbproject/private/
+/server/nbbuild/
+/server/dist/
+/server/nbdist/
+/server/.nb-gradle/
+/server/build/
+/server/!**/src/main/**/build/
+/server/!**/src/test/**/build/
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Compiled output
+/client/dist
+/client/tmp
+/client/out-tsc
+/client/bazel-out
+
+# Node
+/client/node_modules
+/client/package-lock.json
+/client/yarn.lock
+/client/npm-debug.log
+/client/yarn-error.log
+
+# IDEs and editors
+/client/.idea/
+/client/.project
+/client/.classpath
+/client/.c9/
+/client/*.launch
+/client/.settings/
+/client/*.sublime-workspace
+
+# Visual Studio Code
+/client/.vscode/*
+/client/!.vscode/settings.json
+/client/!.vscode/tasks.json
+/client/!.vscode/launch.json
+/client/!.vscode/extensions.json
+/client/.history/*
+
+# Miscellaneous
+/client/.angular/cache
+/client/.sass-cache/
+/client/connect.lock
+/client/coverage
+/client/libpeerconnection.log
+/client/testem.log
+/client/typings
+
+# System files
+/client/.DS_Store
+/client/Thumbs.db
+.DS_Store
