@@ -1,0 +1,21 @@
+<div class="login-component">
+  <form autocomplete="off" autocapitalize="off">
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Digite seu email." required/>
+    </div>
+    <div>
+      <label for="email">Senha:</label>
+      <input type="password" id="password" name="password" placeholder="Digite sua senha." (keyup)="setPassword($event)" required/>
+      <span class="material-symbols-outlined input_icons" id="visibility_icon" (click)="toggleSeePassword()">
+        visibility_off
+      </span>
+    </div>
+    <div>
+      <button type="submit">Login</button>
+    </div>
+    <div>
+      <a href="/register">Cadastre-se</a>
+    </div>
+  </form>
+</div>
