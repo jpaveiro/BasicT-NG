@@ -11,6 +11,7 @@ export class RegisterComponent {
   password: string = '';
   seePassword: boolean = false;
   cpf: String = '';
+  cellphone: String = "";
 
   ngAfterViewInit() {
     this.posicionarIcone('password', 'visibility_icon');
@@ -46,6 +47,16 @@ export class RegisterComponent {
     event.target.value = cpf;
 
     this.cpf = cpf;
+  }
+
+  formatCellphone(event: any) {
+    let phone = event.target.value;
+
+    phone = phone.replace(/\D/g, '');
+
+    phone = phone.replace(/(\d{2})(\d)/, '($1) $2');
+    event.target.value = phone;
+    this.cellphone = phone;
   }
 
   toggleSeePassword() {

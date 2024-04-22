@@ -57,8 +57,10 @@
         id="phone"
         name="phone"
         placeholder="DDD + Telefone."
-        minlength="10"
-        maxlength="11" />
+        minlength="13"
+        maxlength="14"
+        value="{{cellphone}}"
+        (keyup)="formatCellphone($event)" />
     </div>
     <div>
       <label for="cpf">CPF:</label>
