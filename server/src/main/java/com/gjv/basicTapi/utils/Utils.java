@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.UUID;
 
-public class Util {
+public class Utils {
 
   /**
    * @param password Espera uma senha para ser criptografada.
