@@ -3,7 +3,6 @@ spring:
     name: basicT-api
 
   datasource:
-    url:
-    username:
-    password:
-    driver-class-name:
+    url: http://localhost:3306/
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
