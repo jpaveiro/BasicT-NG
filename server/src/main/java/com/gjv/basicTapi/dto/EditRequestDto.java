@@ -10,6 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EditRequestDto {
-    public String id;
-    public String password;
+    private String id;
+    private String password;
+    private String name;
+    private String cellphone;
+    private String email;
+    private String cpf;
+    private String rg;
 }
