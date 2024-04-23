@@ -13,9 +13,15 @@ export class RegisterComponent {
   cpf: String = '';
   cellphone: String = "";
   email: String = "";
+  bday: String = "";
 
   ngAfterViewInit() {
     this.posicionarIcone('password', 'visibility_icon');
+  }
+
+  handleBday(event: any) {
+    console.log(this.bday);
+    this.bday = event.target.value;
   }
 
   setPassword(event: any) {
