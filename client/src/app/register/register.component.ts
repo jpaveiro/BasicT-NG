@@ -12,6 +12,7 @@ export class RegisterComponent {
   seePassword: boolean = false;
   cpf: String = '';
   cellphone: String = "";
+  email: String = "";
 
   ngAfterViewInit() {
     this.posicionarIcone('password', 'visibility_icon');
@@ -19,6 +20,10 @@ export class RegisterComponent {
 
   setPassword(event: any) {
     this.password = event.target.value;
+  }
+
+  handleEmail(event: any) {
+    this.email = event.target.value.toLowerCase();
   }
 
   posicionarIcone(inputId: string, iconId: string) {
