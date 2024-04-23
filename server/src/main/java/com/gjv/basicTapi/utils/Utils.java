@@ -6,6 +6,16 @@ import java.util.UUID;
 
 public class Utils {
 
+  public static String checkName(String name) {
+    String regex = "^[\\p{L} .'-áéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ]+$";
+
+    if (name.matches(regex)) {
+      return name.toUpperCase();
+    }
+
+    return null;
+  }
+
   /**
    * @param password Espera uma senha para ser criptografada.
    * @return uma senha criptografada em SHA-256.
@@ -28,7 +38,6 @@ public class Utils {
 
       return hexString.toString();
     } catch (Exception e) {
-      e.printStackTrace();
       return null;
     }
   }
@@ -50,7 +59,7 @@ public class Utils {
     cpf = cpf.replaceAll("[^0-9]", "");
 
     if (cpf.length() != 11) {
-      return "Muito grande/pequeno";
+      return null;
     }
 
     int sum = 0;
