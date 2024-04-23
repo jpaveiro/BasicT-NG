@@ -57,6 +57,15 @@ public class Utils {
   }
 
   /**
+   * 
+   * @param phone Espera um telefone com ou sem formatação
+   * @return retorna um telefone sem formatação
+   */
+  public static String formatPhone(String phone) {
+    return phone.replaceAll("[^0-9]", "");
+  }
+
+  /**
    * @param cpf Espera um cpf com ou sem formatação.
    * @return retorna um cpf sem formatação no tipo String apenas se o tamanho dele sem formatação for igual a 11.
    */

@@ -31,7 +31,7 @@ public class UserService {
 
         String id = Utils.generateId();
         String name = Utils.checkName(request.getName());
-        String cellphone = request.getCellphone();
+        String cellphone = Utils.formatPhone(request.getCellphone());
         String email = request.getEmail();
         String cpf = Utils.checkCpf(request.getCpf());
         String rg = Utils.checkRg(request.getRg());
