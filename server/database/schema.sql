@@ -5,10 +5,12 @@ USE BasicT_database;
 CREATE TABLE Users(
 	id 			VARCHAR(255), 
 	name 			CHAR(255),
-	cellphone  	VARCHAR(20),
+	cellphone  	        VARCHAR(20),
 	email	 		VARCHAR(255),
-	cpf 			VARCHAR(11),
+	cpf 			VARCHAR(11) 	UNIQUE,
 	rg 			VARCHAR(20),
-	password 	VARCHAR(255),
+	state_rg		VARCHAR(6),
+	date_nasc		DATE,
+	password 	        VARCHAR(255),
 	PRIMARY KEY (id)
 );
