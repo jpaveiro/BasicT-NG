@@ -10,5 +10,8 @@
     "type": "git",
     "url": "https://github.com/jpaveiro/BasicT-NG.git"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "client": "cd client && ng serve"
+  }
 }
