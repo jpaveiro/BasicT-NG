@@ -51,6 +51,11 @@ public class Utils {
     return formatId + "-" + formatId + "-" + formatId;
   }
 
+  public static String generateToken() {
+    String id = UUID.randomUUID().toString();
+    return id.replaceAll("-", "").substring(0, 15);
+  }
+
   /**
    * @param cpf Espera um cpf com ou sem formatação.
    * @return retorna um cpf sem formatação no tipo String apenas se o tamanho dele sem formatação for igual a 11.
