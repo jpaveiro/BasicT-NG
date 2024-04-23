@@ -1,6 +1,8 @@
 package com.gjv.basicTapi.controller;
 
+import com.gjv.basicTapi.dto.LoginRequestDto;
 import com.gjv.basicTapi.dto.UserRequestDto;
+import com.gjv.basicTapi.model.User;
 import com.gjv.basicTapi.usecase.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +27,17 @@ public class UserController {
     {
         long startTime = System.currentTimeMillis();
         ResponseEntity<?> response = userService.setUser(request);
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
+        return response;
+    }
+
+    @PostMapping("/v1/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequestDto request)
+    {
+        long startTime = System.currentTimeMillis();
+        ResponseEntity<?> response = userService.login(request);
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
         LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
