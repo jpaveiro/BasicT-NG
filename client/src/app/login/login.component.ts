@@ -10,6 +10,7 @@ import { Component, AfterViewInit } from '@angular/core';
 export class LoginComponent implements AfterViewInit {
   password: string = "";
   seePassword: boolean = false;
+  email: String = "";
 
   ngAfterViewInit() {
     this.posicionarIcone("password", "visibility_icon");
@@ -41,4 +42,7 @@ export class LoginComponent implements AfterViewInit {
     }
   }
   
+  setEmail(event: any) {
+    this.email = event;
+  }
 }
