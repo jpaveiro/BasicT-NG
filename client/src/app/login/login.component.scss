@@ -9,6 +9,7 @@
     display: flex;
     // align-items: center;
     justify-content: center;
+    background-color: white;
     flex-direction: column;
     width: 40%;
     // height: 310px;
@@ -26,7 +27,6 @@
         width: 80%;
         border: 0;
         padding: 0 10px 5px 10px;
-        background-color: whitesmoke;
         border-bottom: 2px solid black;
       }
       input:focus {
