@@ -8,6 +8,8 @@
     "email": "admin@admin.org",
     "cpf": "000.000.000-00",
     "rg": "12.345.678-9",
+    "stateRg": "SSP/SP",
+    "birthDate": "2000-11-12",
     "password": "123"
 }
 >>> {"message": "Sucesss"}
@@ -17,6 +19,8 @@
 - rg, cpf e telefone irão perder toda a formatação
 - rg e cpf tem validadores
 - a senha é criptografada antes de ser inserida no banco de dados
+- apenas usuarios maiores de 18 anos podem ter conta
+
 
 - [POST] - /api/user/v1/login/
 ```
