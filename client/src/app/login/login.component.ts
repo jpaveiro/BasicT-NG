@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import axios from 'axios';
 import { env } from '../../../config/enviroments';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,17 @@ export class LoginComponent implements AfterViewInit {
   seePassword: boolean = false;
   email: String = "";
 
+  constructor(private cookieService: CookieService) { }
+
   ngAfterViewInit() {
     this.posicionarIcone("password", "visibility_icon");
+  }
+
+  saveCookie(cookieName: string, cookieValue: string) {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+    
+    this.cookieService.set(cookieName, cookieValue, expirationDate);
   }
 
   setPassword(event: any) {
@@ -55,7 +65,9 @@ export class LoginComponent implements AfterViewInit {
         password: this.password
       }
       const response = await axios.post(env.apiUrl + "/user/v1/login", params);
-      console.log(response.data);
+      this.saveCookie("basict:user-token", response.data.token);
+      localStorage.setItem("user-name",  response.data.name);
+      location.href = "/";
     } catch (error) {
       console.error("Erro ao efetuar login:", error);
     }
