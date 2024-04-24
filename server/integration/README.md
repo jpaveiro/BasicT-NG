@@ -48,6 +48,6 @@
     "password": "12345678",
     "id": "7317e83e9fc74e2-7317e83e9fc74e2-7317e83e9fc74e2"
 }
->>> null
+>>> { "message": "Sucess" }
 ```
 - Edita um usuario com base no id e na senha
