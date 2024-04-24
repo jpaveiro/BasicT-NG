@@ -11,7 +11,7 @@
     justify-content: center;
     flex-direction: column;
     width: 40%;
-    height: 50%;
+    // height: 310px;
     padding: 40px;
     div {
       display: flex;
@@ -53,6 +53,11 @@
       p {
         font-size: 12px;
       }
+    }
+  }
+  @media only screen and (max-width: 900px) {
+    .form {
+      width: 95% !important;
     }
   }
 }
