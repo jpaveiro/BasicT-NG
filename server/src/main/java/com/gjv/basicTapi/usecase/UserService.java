@@ -1,5 +1,6 @@
 package com.gjv.basicTapi.usecase;
 
+import com.gjv.basicTapi.dto.EditRequestDto;
 import com.gjv.basicTapi.dto.LoginRequestDto;
 import com.gjv.basicTapi.dto.UserRequestDto;
 import com.gjv.basicTapi.model.StandardResponse;
@@ -125,5 +126,26 @@ public class UserService {
                 .name(user.getName())
                 .build();
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+    }
+    public ResponseEntity<?> editUser(EditRequestDto request)
+    {
+        if (request.getName() == null || request.getCellphone() == null ||
+        request.getEmail() == null || request.getCpf() == null ||
+        request.getRg() == null || request.getPassword() == null || request.getId() == null)
+        {
+            StandardResponse response = StandardResponse.builder()
+                    .message("Error: You must fill in all fields.")
+                    .build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+        String id = request.getId();
+        String name = Utils.checkName(request.getName());
+        String cellphone = Utils.formatPhone(request.getCellphone());
+        String email = request.getEmail();
+        String cpf = Utils.checkCpf(request.getCpf());
+        String rg = Utils.checkRg(request.getRg());
+        String password = Utils.hashPassword(request.getPassword());
+        userRepository.editUser(name, cellphone, email, cpf, rg, password, id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
     }
 }
