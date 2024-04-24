@@ -15,8 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
 
 @Service
@@ -49,47 +47,38 @@ public class UserService {
         Date birthDate = Utils.checkBirthDate(request.getBirthDate());
         String password = Utils.hashPassword(request.getPassword());
 
-        if (name == null)
-        {
-            StandardResponse response = StandardResponse.builder()
-                    .message("The entered name field is invalid.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        ResponseEntity<StandardResponse> responseError;
+
+        responseError = Utils.validateField("name", name);
+        if (responseError != null) {
+            return responseError;
         }
-        if (cellphone == null)
-        {
-            StandardResponse response = StandardResponse.builder()
-                    .message("The entered cellphone field is invalid.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
+        responseError = Utils.validateField("cellphone", cellphone);
+        if (responseError != null) {
+            return responseError;
         }
-        if (email == null)
-        {
-            StandardResponse response = StandardResponse.builder()
-                    .message("The entered email field is invalid.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
+        responseError = Utils.validateField("email", email);
+        if (responseError != null) {
+            return responseError;
         }
-        if (cpf == null)
-        {
-            StandardResponse response = StandardResponse.builder()
-                    .message("The entered cpf field is invalid.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
+        responseError = Utils.validateField("cpf", cpf);
+        if (responseError != null) {
+            return responseError;
         }
-        if (rg == null)
-        {
-            StandardResponse response = StandardResponse.builder()
-                    .message("The entered rg field is invalid.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
+        responseError = Utils.validateField("rg", rg);
+        if (responseError != null) {
+            return responseError;
         }
-        if (birthDate == null) {
-            StandardResponse response = StandardResponse.builder()
-                    .message("The entered birthDate field is invalid.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
+        responseError = Utils.validateField("birthDate", birthDate);
+        if (responseError != null) {
+            return responseError;
         }
+
         try {
             userRepository.setUser(
                     id,
