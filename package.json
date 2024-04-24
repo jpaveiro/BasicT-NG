@@ -12,6 +12,7 @@
   },
   "license": "ISC",
   "scripts": {
-    "client": "cd client && ng serve"
+    "client": "cd client && ng serve",
+    "client:build": "cd client && ng build"
   }
 }
