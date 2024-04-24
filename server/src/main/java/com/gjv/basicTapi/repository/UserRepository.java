@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
@@ -20,7 +21,8 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     @Modifying
     @Transactional
-    @Query("INSERT INTO User(id, name, cellphone, email, cpf, rg, password) VALUES (:id, :name, :cellphone, :email, :cpf, :rg, :password)")
+    @Query("INSERT INTO User(id, name, cellphone, email, cpf, rg, stateRg, birthDate, password) " +
+            "VALUES (:id, :name, :cellphone, :email, :cpf, :rg, :stateRg, :birthDate, :password)")
     void setUser(
             @Param("id") String id,
             @Param("name") String name,
@@ -28,6 +30,8 @@ public interface UserRepository extends JpaRepository<User, String> {
             @Param("email") String email,
             @Param("cpf") String cpf,
             @Param("rg") String rg,
+            @Param("stateRg") String stateRg,
+            @Param("birthDate") Date birthDate,
             @Param("password") String password
     );
 }
