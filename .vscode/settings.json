@@ -1,3 +1,4 @@
 {
-  "material-icon-theme.activeIconPack": "angular"
+  "material-icon-theme.activeIconPack": "angular",
+  "java.compile.nullAnalysis.mode": "automatic"
 }

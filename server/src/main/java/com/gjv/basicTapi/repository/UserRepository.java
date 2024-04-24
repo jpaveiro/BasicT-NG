@@ -34,4 +34,16 @@ public interface UserRepository extends JpaRepository<User, String> {
             @Param("birthDate") Date birthDate,
             @Param("password") String password
     );
+    @Modifying
+    @Transactional
+    @Query("UPDATE User SET name=:name, cellphone=:cellphone, email=:email, cpf=:cpf, rg=:rg, password=:password WHERE id = :id")
+    void editUser(
+        @Param("name") String name,
+        @Param("cellphone") String cellphone,
+        @Param("email") String email,
+        @Param("cpf") String cpf,
+        @Param("rg") String rg,
+        @Param("password") String password,
+        @Param("id") String id
+    );
 }
