@@ -1,5 +1,9 @@
 package com.gjv.basicTapi.utils;
 
+import com.gjv.basicTapi.model.StandardResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.Date;
@@ -126,7 +130,7 @@ public class Utils {
   }
 
   public static Date checkBirthDate(String birthDate) {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     try {
       LocalDate parsedDate = LocalDate.parse(birthDate, formatter);
@@ -147,4 +151,15 @@ public class Utils {
       return null;
     }
   }
+
+  public static ResponseEntity<StandardResponse> validateField(String fieldName, Object fieldValue) {
+    if (fieldValue == null) {
+      StandardResponse response = StandardResponse.builder()
+              .message("Error: The entered " + fieldName + " field is invalid.")
+              .build();
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+    return null;
+  }
+
 }
