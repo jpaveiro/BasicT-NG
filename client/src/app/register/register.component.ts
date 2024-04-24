@@ -16,7 +16,7 @@ export class RegisterComponent {
   bday: String = "";
 
   ngAfterViewInit() {
-    this.posicionarIcone('password', 'visibility_icon');
+    this.setIconLocation('password', 'visibility_icon');
   }
 
   handleBday(event: any) {
@@ -32,7 +32,7 @@ export class RegisterComponent {
     this.email = event.target.value.toLowerCase();
   }
 
-  posicionarIcone(inputId: string, iconId: string) {
+  setIconLocation(inputId: string, iconId: string) {
     const input = document.getElementById(inputId);
     const icon = document.getElementById(iconId);
 

@@ -21,7 +21,7 @@ export class LoginComponent implements AfterViewInit {
   constructor(private cookieService: CookieService) { }
 
   ngAfterViewInit() {
-    this.posicionarIcone("password", "visibility_icon");
+    this.setIconLocation("password", "visibility_icon");
   }
 
   saveCookie(cookieName: string, cookieValue: string) {
@@ -35,7 +35,7 @@ export class LoginComponent implements AfterViewInit {
     this.password = event.target.value;
   }
 
-  posicionarIcone(inputId: string, iconId: string) {
+  setIconLocation(inputId: string, iconId: string) {
     const input = document.getElementById(inputId);
     const icon = document.getElementById(iconId);
     
