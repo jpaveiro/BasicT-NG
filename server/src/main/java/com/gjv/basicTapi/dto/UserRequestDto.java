@@ -17,5 +17,7 @@ public class UserRequestDto {
     private String email;
     private String cpf;
     private String rg;
+    private String stateRg;
+    private String birthDate;
     private String password;
 }

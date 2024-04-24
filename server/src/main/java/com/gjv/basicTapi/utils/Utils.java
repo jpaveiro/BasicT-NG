@@ -2,6 +2,11 @@ package com.gjv.basicTapi.utils;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.UUID;
 
 public class Utils {
@@ -118,5 +123,28 @@ public class Utils {
       return rgFormated;
     }
     return null;
+  }
+
+  public static Date checkBirthDate(String birthDate) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+    try {
+      LocalDate parsedDate = LocalDate.parse(birthDate, formatter);
+
+      LocalDate now = LocalDate.now();
+      if(parsedDate.isAfter(now)) {
+        return null;
+      }
+
+      int years_old = Period.between(parsedDate, now).getYears();
+
+      if (years_old < 18) {
+        return null;
+      }
+
+      return Date.valueOf(parsedDate);
+    } catch (DateTimeParseException e) {
+      return null;
+    }
   }
 }

@@ -9,6 +9,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Entity
 @Data
 @Builder
@@ -34,6 +37,12 @@ public class User {
 
     @Column(name = "rg")
     private String rg;
+
+    @Column(name = "state_rg")
+    private String stateRg;
+
+    @Column(name = "birth_date")
+    private Date birthDate;
 
     @Column(name = "password")
     private String password;
