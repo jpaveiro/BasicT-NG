@@ -1,5 +1,6 @@
 package com.gjv.basicTapi.usecase;
 
+import com.gjv.basicTapi.controller.UserController;
 import com.gjv.basicTapi.dto.LoginRequestDto;
 import com.gjv.basicTapi.dto.UserRequestDto;
 import com.gjv.basicTapi.model.StandardResponse;
@@ -7,20 +8,29 @@ import com.gjv.basicTapi.model.User;
 import com.gjv.basicTapi.model.UserResponse;
 import com.gjv.basicTapi.repository.UserRepository;
 import com.gjv.basicTapi.utils.Utils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Date;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+
     public ResponseEntity<?> setUser(UserRequestDto request)
     {
         if (request.getName() == null || request.getCellphone() == null ||
         request.getEmail() == null || request.getCpf() == null ||
+        request.getStateRg() == null || request.getBirthDate() == null ||
         request.getRg() == null || request.getPassword() == null)
         {
             StandardResponse response = StandardResponse.builder()
@@ -35,6 +45,8 @@ public class UserService {
         String email = request.getEmail();
         String cpf = Utils.checkCpf(request.getCpf());
         String rg = Utils.checkRg(request.getRg());
+        String stateRg = request.getStateRg();
+        Date birthDate = Utils.checkBirthDate(request.getBirthDate());
         String password = Utils.hashPassword(request.getPassword());
 
         if (name == null)
@@ -72,21 +84,38 @@ public class UserService {
                     .build();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
+        if (birthDate == null) {
+            StandardResponse response = StandardResponse.builder()
+                    .message("The entered birthDate field is invalid.")
+                    .build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+        try {
+            userRepository.setUser(
+                    id,
+                    name,
+                    cellphone,
+                    email,
+                    cpf,
+                    rg,
+                    stateRg,
+                    birthDate,
+                    password
+            );
 
-        userRepository.setUser(
-                id,
-                name,
-                cellphone,
-                email,
-                cpf,
-                rg,
-                password
-        );
-
-        StandardResponse response = StandardResponse.builder()
-                .message("Sucess: User registered.")
-                .build();
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+            StandardResponse response = StandardResponse.builder()
+                    .message("Sucess: User registered.")
+                    .build();
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+        catch (Exception e)
+        {
+            StandardResponse response = StandardResponse.builder()
+                    .message("Error: User alredy registered.")
+                    .build();
+            LOGGER.info("Error: User alredy registered.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+        }
     }
 
     public ResponseEntity<?> login(LoginRequestDto request)
