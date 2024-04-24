@@ -1,4 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
+import axios from 'axios';
+import { env } from '../../../config/enviroments';
 
 @Component({
   selector: 'app-login',
@@ -44,5 +46,18 @@ export class LoginComponent implements AfterViewInit {
   
   setEmail(event: any) {
     this.email = event.target.value.toLowerCase();
+  }
+
+  async loginEvent() {
+    try {
+      const params = {
+        email: this.email,
+        password: this.password
+      }
+      const response = await axios.post(env.apiUrl + "/user/v1/login", params);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Erro ao efetuar login:", error);
+    }
   }
 }
