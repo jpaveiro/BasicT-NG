@@ -1,6 +1,6 @@
 # Rotas para a integração
 
-- [POST] - /api/user/v1/set/
+- [POST] - /api/user/v1/set
 ```
 {
     "name": "Admin",
@@ -22,7 +22,7 @@
 - apenas usuarios maiores de 18 anos podem ter conta
 
 
-- [POST] - /api/user/v1/login/
+- [POST] - /api/user/v1/login
 ```
 {
     "email": "admin@admin.org",
@@ -34,3 +34,20 @@
 }
 ```
 - O token é gerado automaticamente
+
+- [PUT] - /api/user/v1/edit
+```
+{
+    "name": "Admin",
+    "cellphone": "(00) 00000-0000",
+    "email": "admin@admin.org",
+    "cpf": "000.000.000-00",
+    "rg": "12.345.678-9",
+    "stateRg": "SSP/SP",
+    "birthDate": "2000-11-12",
+    "password": "12345678",
+    "id": "7317e83e9fc74e2-7317e83e9fc74e2-7317e83e9fc74e2"
+}
+>>> null
+```
+- Edita um usuario com base no id e na senha
