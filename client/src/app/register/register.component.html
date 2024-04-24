@@ -53,13 +53,13 @@
       />
     </div>
     <div>
-      <label for="cpf">Data <br/>de Nascimento:</label>
+      <label for="bday">Data de Nascimento:</label>
       <input
         type="date"
         id="bday"
         name="bday"
-        (keyup)="handleBday($event)" 
-        value="{{bday}}"/>
+        (change)="handleBday($event)" 
+        [value]="bday"/>
     </div>
     <div>
       <label for="phone">Telefone:</label>

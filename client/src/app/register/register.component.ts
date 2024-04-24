@@ -11,17 +11,22 @@ export class RegisterComponent {
   password: string = '';
   seePassword: boolean = false;
   cpf: String = '';
-  cellphone: String = "";
-  email: String = "";
-  bday: String = "";
+  cellphone: String = '';
+  email: String = '';
+  bday: String = '';
 
   ngAfterViewInit() {
     this.setIconLocation('password', 'visibility_icon');
   }
 
   handleBday(event: any) {
-    console.log(this.bday);
-    this.bday = event.target.value;
+    const inputValue = event.target.value;
+    const isValidDate = /^\d{4}-\d{2}-\d{2}$/.test(inputValue);
+
+    if (isValidDate) {
+      console.log(inputValue)
+      this.bday = inputValue;
+    }
   }
 
   setPassword(event: any) {
