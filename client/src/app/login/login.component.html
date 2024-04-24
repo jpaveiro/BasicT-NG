@@ -1,4 +1,7 @@
 <div class="login-component">
+  <div *ngIf="loading">
+    <app-loader />
+  </div>
   <div autocomplete="off" autocapitalize="off" class="form">
     <h2>Faça login.</h2>
     <br />

@@ -1,12 +1,14 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, NgModule } from '@angular/core';
 import axios from 'axios';
 import { env } from '../../../config/enviroments';
 import { CookieService } from 'ngx-cookie-service';
+import { LoaderComponent } from '../loader/loader.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [LoaderComponent, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -14,6 +16,7 @@ export class LoginComponent implements AfterViewInit {
   password: string = "";
   seePassword: boolean = false;
   email: String = "";
+  loading: boolean = false;
 
   constructor(private cookieService: CookieService) { }
 
@@ -59,6 +62,10 @@ export class LoginComponent implements AfterViewInit {
   }
 
   async loginEvent() {
+    if (!this.email && !this.password) {
+      return;
+    }
+    this.loading = true;
     try {
       const params = {
         email: this.email,
@@ -70,6 +77,8 @@ export class LoginComponent implements AfterViewInit {
       location.href = "/home";
     } catch (error) {
       console.error("Erro ao efetuar login:", error);
+    } finally {
+      this.loading = false;
     }
   }
 }
