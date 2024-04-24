@@ -67,7 +67,7 @@ export class LoginComponent implements AfterViewInit {
       const response = await axios.post(env.apiUrl + "/user/v1/login", params);
       this.saveCookie("basict:user-token", response.data.token);
       localStorage.setItem("user-name",  response.data.name);
-      location.href = "/";
+      location.href = "/home";
     } catch (error) {
       console.error("Erro ao efetuar login:", error);
     }
