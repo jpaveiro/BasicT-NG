@@ -163,7 +163,20 @@ public class UserService {
         String cpf = Utils.checkCpf(request.getCpf());
         String rg = Utils.checkRg(request.getRg());
         String password = Utils.hashPassword(request.getPassword());
-        userRepository.editUser(name, cellphone, email, cpf, rg, password, id);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+
+        try {
+            userRepository.editUser(name, cellphone, email, cpf, rg, password, id);
+
+            StandardResponse response = StandardResponse.builder()
+                .message("Sucess")
+                .build();
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+        } catch (Exception e) {
+            StandardResponse response = StandardResponse.builder()
+                .message("Error: cant edit user")
+                .build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
     }
 }
