@@ -43,6 +43,6 @@ export class LoginComponent implements AfterViewInit {
   }
   
   setEmail(event: any) {
-    this.email = event;
+    this.email = event.target.value.toLowerCase();
   }
 }
