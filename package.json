@@ -1,6 +1,7 @@
 {
   "name": "basic-t",
   "description": "Um sistema PDV ",
+  "version": "0.0.1",
   "authors": [
     "Gabriel Araújo Lima <gabriel.araujo2902@outlook.com>",
     "João Pedro Aveiro Pereira da Silva <joaopedroaveiro2016@gmail.com>",
