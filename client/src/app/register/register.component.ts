@@ -56,11 +56,7 @@ export class RegisterComponent {
     }
 
     try {
-      const secondResponse = await axios.post(env.apiUrl + "/user/v1/set", secondParams)
-      if (secondResponse) {
-        alert('Data de nascimento inválida');
-        return;
-      }
+      await axios.post(env.apiUrl + "/user/v1/set", secondParams)
       location.href = "/";
     } catch (err: any) {
       const message = err.response.data.message;
