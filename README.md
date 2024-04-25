@@ -31,3 +31,4 @@ Desenvolvidor por [Gabriel Araújo](https://github.com/themyntt), [Vinicius de J
 
 ## Finalizações
 - Este projeto é um reboot de outra versão do basicT, [caso queira dar uma olhada](https://github.com/themyntt/basicT)
+- O desenvolvimento do projeto está na branch "develop"; está branch (main) terá apenas as versões estáveis
