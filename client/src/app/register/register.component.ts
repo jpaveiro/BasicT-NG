@@ -55,8 +55,23 @@ export class RegisterComponent {
       password: this.password
     }
 
-    await axios.post(env.apiUrl + "/user/v1/set", secondParams)
-    location.href = "/";
+    try {
+      const secondResponse = await axios.post(env.apiUrl + "/user/v1/set", secondParams)
+      if (secondResponse) {
+        alert('Data de nascimento inválida');
+        return;
+      }
+      location.href = "/";
+    } catch (err: any) {
+      const message = err.response.data.message;
+
+      if (message.toLowerCase() == "error: the entered birthdate field is invalid.") {
+        alert('Data de nascimento inválida');
+        return;
+      }
+      alert("Erro interno.")
+    }
+    
   }
 
   formatRg(event: any) {
