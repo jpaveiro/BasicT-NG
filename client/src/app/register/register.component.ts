@@ -60,9 +60,14 @@ export class RegisterComponent {
       location.href = "/";
     } catch (err: any) {
       const message = err.response.data.message;
+      console.warn(message);
 
       if (message.toLowerCase() == "error: the entered birthdate field is invalid.") {
         alert('Data de nascimento inválida');
+        return;
+      }
+      if(message.toLowerCase() == "error: user alredy registered.") {
+        alert('Usuário já cadastrado');
         return;
       }
       alert("Erro interno.")
