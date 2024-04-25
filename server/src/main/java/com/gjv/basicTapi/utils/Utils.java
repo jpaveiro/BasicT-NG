@@ -15,6 +15,10 @@ import java.util.UUID;
 
 public class Utils {
 
+  /**
+   * @param name Espera um nome para verificar se é válido.
+   * @return um nome em UpperCase se ele for válido
+   */
   public static String checkName(String name) {
     String regex = "^[\\p{L} .'-áéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ]+$";
 
@@ -129,6 +133,10 @@ public class Utils {
     return null;
   }
 
+  /**
+   * @param birthDate espera uma data no formato yyyy-MM-dd do tipo String
+   * @return retorna uma data do tipo Date apenas se a data for válida.
+   */
   public static Date checkBirthDate(String birthDate) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -152,6 +160,11 @@ public class Utils {
     }
   }
 
+  /**
+   * @param fieldName espera o nome do campo
+   * @param  fieldValue espera o objeto do campo
+   * @return retorna uma ResponseEntity de erro caso o campo esteja nulo.
+   */
   public static ResponseEntity<StandardResponse> validateField(String fieldName, Object fieldValue) {
     if (fieldValue == null) {
       StandardResponse response = StandardResponse.builder()
