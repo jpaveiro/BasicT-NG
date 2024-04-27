@@ -15,7 +15,7 @@ CREATE TABLE Users(
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE Product(
+CREATE TABLE Products(
 	id_product			VARCHAR(255),
 	name				VARCHAR(255),
 	prod_quantity		INTEGER,
@@ -24,7 +24,7 @@ CREATE TABLE Product(
 	PRIMARY KEY (id_product)
 );
 
-CREATE TABLE Purchase(
+CREATE TABLE Purchases(
 	id_purchase			VARCHAR(255),
 	id_user				VARCHAR(255),
 	id_prod				VARCHAR(255),
