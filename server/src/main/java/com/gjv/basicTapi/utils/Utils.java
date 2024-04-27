@@ -160,6 +160,16 @@ public class Utils {
     }
   }
 
+  public static String checkBarCode(String barCode) {
+    String regex = "[^0-9]";
+
+    if (barCode.matches(regex)) {
+      return null;
+    }
+
+    return barCode;
+  }
+
   /**
    * @param fieldName espera o nome do campo
    * @param  fieldValue espera o objeto do campo
