@@ -1,30 +1,33 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { LoaderComponent } from '../loader/loader.component';
+import axios from 'axios';
+import { env } from '../../../config/enviroments';
 
 interface FinalData {
   name: string;
   quantity: number;
-  price: number;
+  price: string;
 }
 
 @Component({
   selector: 'app-new-sale',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoaderComponent],
   templateUrl: './new-sale.component.html',
   styleUrl: './new-sale.component.scss'
 })
 export class NewSaleComponent {
-  name: string = "";
+  codeBar: string = "";
   quantity: number = 1;
-  price: number = 0;
   finalPrice: number = 0;
   seeTable: boolean = false;
+  loader: boolean = false;
 
   allData: FinalData[] = [];
 
-  setName(e: any) {
-    this.name = e.target.value.toUpperCase();
+  setCodeBar(e: any) {
+    this.codeBar = e.target.value.toUpperCase();
   }
 
   setQuantity(e: any) {
@@ -34,24 +37,31 @@ export class NewSaleComponent {
     this.quantity = parseInt(e.target.value);
   }
 
-  setPrice(e: any) {
-    if (parseFloat(e.target.value) <= 0) {
-      return;
-    }
-    this.price = parseFloat(e.target.value);
-  }
+  async addProducts() {
+    let productName: any = null;
+    let price: number = 0;
 
-  addProducts() {
     if (
-      this.name &&
-      this.quantity &&
-      this.price
+      this.codeBar &&
+      this.quantity 
     ) {
-      this.seeTable = true;
-      this.allData.push({name: this.name, quantity: this.quantity, price: this.price})
-      for (let product of this.allData) {
-        this.finalPrice += product.price * ((product.quantity >= 1) ? product.quantity : 1);
+      this.loader = true;
+      try {
+        const response = await axios.post(env.apiUrl + "/product/v1/get", {idProduct: this.codeBar});
+        productName = response.data.name;
+        price = response.data.price * this.quantity;
+      } catch {
+        alert("Produto não cadastrado.")
+        this.loader = false;
+        return;
       }
+      this.seeTable = true;
+      this.allData.push({name: productName, quantity: this.quantity, price: price.toFixed(2)})
+      this.finalPrice = 0;
+      for (let product of this.allData) {
+        this.finalPrice += parseFloat(product.price);
+      }
+      this.loader = false;
       return;
     }
     alert("Preencha todos os campos");
