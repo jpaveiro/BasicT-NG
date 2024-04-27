@@ -26,6 +26,7 @@ export class NewSaleComponent {
   loader: boolean = false;
   purchaseCode: string = "";
   userId: string = "";
+  productIds: string[] = [];
 
   allData: FinalData[] = [];
 
@@ -41,6 +42,31 @@ export class NewSaleComponent {
   setCodeBar(e: any) {
     this.codeBar = e.target.value.toUpperCase();
   }
+  
+  async sell() {
+    this.loader = true;
+    for (let i = 0; i < this.allData.length; i++) {
+      const product = this.allData[i];
+      const productId = this.productIds[i];
+      try {
+        const params = {
+          purchaseCode: this.purchaseCode,
+          userId: this.userId,
+          quantity: product.quantity,
+          productId: productId,
+          totalAmount: product.price
+        };
+        await axios.post(env.apiUrl + "/purchase/v1/sell", params);
+        alert("Você vendeu!");
+        location.href = "/home";
+      } catch (error) {
+        alert("Não foi possível vender");
+        break;
+      } finally {
+        this.loader = false;
+      }
+    }
+    }
 
   setQuantity(e: any) {
     if (parseInt(e.target.value) <= 0) {
@@ -52,6 +78,7 @@ export class NewSaleComponent {
   async addProducts() {
     let productName: any = null;
     let price: number = 0;
+    let productId: string = "";
 
     if (
       this.codeBar &&
@@ -62,6 +89,7 @@ export class NewSaleComponent {
         const response = await axios.post(env.apiUrl + "/product/v1/get", {idProduct: this.codeBar});
         productName = response.data.name;
         price = response.data.price * this.quantity;
+        productId = response.data.idProduct;
       } catch {
         alert("Produto não cadastrado.")
         this.loader = false;
@@ -69,6 +97,7 @@ export class NewSaleComponent {
       }
       this.seeTable = true;
       this.allData.push({name: productName, quantity: this.quantity, price: price.toFixed(2)})
+      this.productIds.push(productId);
       this.finalPrice = 0;
       for (let product of this.allData) {
         this.finalPrice += parseFloat(product.price);
