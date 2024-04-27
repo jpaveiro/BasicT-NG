@@ -10,5 +10,63 @@
       </span>
     </div>
     <br />
+    <h2 *ngIf="seeTable">Preço final: {{finalPrice.toFixed(2)}}</h2>
+    <br />
+    <div class="sell">
+      <div>
+        <label for="name">Nome:</label>
+        <input
+          type="name"
+          id="name"
+          name="name"
+          placeholder="Digite o nome do produto."
+          (keyup)="setName($event)"
+          value="{{name}}"
+          required
+        />
+      </div>      
+      <div>
+        <label for="name">Quantidade:</label>
+        <input
+          type="number"
+          id="number"
+          name="number"
+          placeholder="Digite a quantidade deste mesmo produto."
+          (keyup)="setQuantity($event)"
+          value="{{quantity}}"
+          minlength="0"
+          required
+        />
+      </div>      
+      <div>
+        <label for="name">Preço:</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          placeholder="Digite o preço do produto."
+          (keyup)="setPrice($event)"
+          value="{{price}}"
+          minlength="0"
+          required
+        />
+      </div>          
+    </div>
+    <button class="btn" (click)="addProducts()">Adicionar Produto</button>
+    <div *ngIf="seeTable">
+      <br />
+      <table>
+        <tr>
+          <th>Nome</th>
+          <th>Quantidade</th>
+          <th>Preço</th>
+        </tr>
+        <tr *ngFor="let product of allData">
+          <td>{{product.name}}</td>
+          <td>{{product.quantity}}</td>
+          <td>{{product.price}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
