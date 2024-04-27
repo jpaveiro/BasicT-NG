@@ -101,9 +101,9 @@ public class UserService {
         catch (Exception e)
         {
             StandardResponse response = StandardResponse.builder()
-                    .message("Error: User alredy registered.")
+                    .message("Error: The system was unable to register the user. Probably user already registered.")
                     .build();
-            LOGGER.info("Error: User alredy registered.");
+            LOGGER.info("Error: The system was unable to register the user.\nDetails: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
