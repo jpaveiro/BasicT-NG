@@ -32,5 +32,5 @@ CREATE TABLE Purchases(
 	total_amount		NUMERIC(8,2),
 	PRIMARY KEY(id_purchase),
     FOREIGN KEY (id_user) REFERENCES Users(id),
-    FOREIGN KEY (id_prod) REFERENCES Product(id_product)
+    FOREIGN KEY (id_prod) REFERENCES Products(id_product)
 );
