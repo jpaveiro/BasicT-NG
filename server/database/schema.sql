@@ -35,11 +35,6 @@ CREATE TABLE Purchases(
   FOREIGN KEY (id_user) REFERENCES Users(id),
   FOREIGN KEY (id_prod) REFERENCES Products(id_product)
 );
-
-
--- The password is a SHA256 hash for 'admin'
-INSERT INTO Users (id, name, cellphone, email, cpf, rg, state_rg, birth_date, password) VALUES
-	('1', 'ADMIN', '00000000000', 'admin', '00000000000', '000000000', 'XXX/XX', '0000-00-00', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
     
 SELECT * 
 FROM Users;
