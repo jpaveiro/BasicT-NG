@@ -20,7 +20,7 @@ public class PurchaseService {
 
   public ResponseEntity<?> getAll(int page) {
     Page<Purchase> purchasePage = purchaseRepository.findAll(
-        PageRequest.of(page - 1, 7, Sort.by(Sort.Direction.DESC, "createdAt"))
+        PageRequest.of(page - 1, 7, Sort.by(Sort.Direction.DESC, "purchaseDate"))
     );
 
     if (purchasePage.isEmpty()) {
