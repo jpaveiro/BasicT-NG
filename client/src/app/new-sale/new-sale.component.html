@@ -1,7 +1,11 @@
 <div class="new-sale-component">
+  <div *ngIf="loader">
+    <app-loader />
+  </div>
   <div class="main-container">
     <h2>Nova venda</h2>
     <div class="material-control" (click)="redirect('home')">
+      <br />
       <span class="material-symbols-outlined">
         arrow_back
       </span>
@@ -14,14 +18,14 @@
     <br />
     <div class="sell">
       <div>
-        <label for="name">Nome:</label>
+        <label for="name">Código de barras:</label>
         <input
           type="name"
           id="name"
           name="name"
-          placeholder="Digite o nome do produto."
-          (keyup)="setName($event)"
-          value="{{name}}"
+          placeholder="Digite o código de barras do produto."
+          (keyup)="setCodeBar($event)"
+          value="{{codeBar}}"
           required
         />
       </div>      
@@ -38,19 +42,6 @@
           required
         />
       </div>      
-      <div>
-        <label for="name">Preço:</label>
-        <input
-          type="number"
-          id="price"
-          name="price"
-          placeholder="Digite o preço do produto."
-          (keyup)="setPrice($event)"
-          value="{{price}}"
-          minlength="0"
-          required
-        />
-      </div>          
     </div>
     <button class="btn" (click)="addProducts()">Adicionar Produto</button>
     <div *ngIf="seeTable">
