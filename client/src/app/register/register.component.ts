@@ -41,7 +41,11 @@ export class RegisterComponent {
     }
     const response = await axios.post(env.apiUrl + "/user/v1/login", params)
     if (!response.data.token) {
-      alert('Usuário ou senha inválidos');
+      alert('Usuário ou senha inválidos.');
+      return;
+    }
+    if (response.data.name != "ADMIN") {
+      alert('Este usuário não tem permissão para isso.')
       return;
     }
     const secondParams = {
