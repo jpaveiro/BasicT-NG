@@ -12,7 +12,7 @@
     "birthDate": "2000-11-12",
     "password": "123"
 }
->>> {"message": "Sucesss"}
+>>> {"message": "Sucess"}
 ```
 - Todas as informações são obrigatórias
 - O id é gerado automaticamente de forma aleatória
