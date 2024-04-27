@@ -1,7 +1,10 @@
 package com.gjv.basicTapi.usecase;
 
+import com.gjv.basicTapi.dto.NewPurchaseRequestDto;
 import com.gjv.basicTapi.model.Purchase;
 import com.gjv.basicTapi.repository.PurchaseRepository;
+import com.gjv.basicTapi.utils.Utils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,5 +28,22 @@ public class PurchaseService {
     }
 
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(purchasePage);
+  }
+
+  public ResponseEntity<?> sellProduct(NewPurchaseRequestDto purchaseInfo) {
+    Purchase purchase = Purchase.builder()
+       .idUser(purchaseInfo.getUserId())
+       .idProduct(purchaseInfo.getProductId())
+       .productQuantity(purchaseInfo.getQuantity())
+       .totalAmount(purchaseInfo.getTotalAmount())
+       .idPurchase(Utils.generateId())
+       .build();
+
+    try {
+      purchaseRepository.save(purchase);
+      return ResponseEntity.status(HttpStatus.ACCEPTED).body("Sucess: Product has been sold.");
+    } catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: Product can't be sold.");
+    }
   }
 }
