@@ -29,4 +29,7 @@ public class Product {
     @Column(name = "price")
     private double price;
 
+    @Column(name = "created_at")
+    private String createdAt;
+
 }
