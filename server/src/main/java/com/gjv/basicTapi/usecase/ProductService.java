@@ -9,9 +9,6 @@ import com.gjv.basicTapi.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,11 +23,11 @@ public class ProductService {
     public ResponseEntity<?> setProduct(SetProductRequestDto request)
     {
         if (request.getIdProduct() == null || request.getName() == null
-                || request.getPrice() == null || request.getProdQuantity() == null)
+            || request.getPrice() == null || request.getProdQuantity() == null)
         {
             StandardResponse response = StandardResponse.builder()
-                    .message("Error: You must fill in all fields.")
-                    .build();
+                .message("Error: You must fill in all fields.")
+                .build();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
@@ -47,36 +44,44 @@ public class ProductService {
 
         try {
             productRepository.setProduct(
-                    barCode,
-                    productName,
-                    prodQuantity,
-                    price
+                barCode,
+                productName,
+                prodQuantity,
+                price
             );
 
             StandardResponse response = StandardResponse.builder()
-                    .message("Sucess: Product registered.")
-                    .build();
+                .message("Sucess: Product registered.")
+                .build();
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }
         catch (Exception e)
         {
             StandardResponse response = StandardResponse.builder()
-                    .message("Error: The system was unable to register the product. Probably product already registered.")
-                    .build();
+                .message("Error: The system was unable to register the product. Probably product already registered.")
+                .build();
             LOGGER.info("Error: The system was unable to register the product.\nDetails: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
 
-    public ResponseEntity<?> getProduct(int page) {
-        Page<Product> productPage = productRepository.findAll(
-            PageRequest.of(page - 1, 7, Sort.by(Sort.Direction.DESC, "createdAt"))
-        );
-
-        if (productPage.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no products found");
+    public ResponseEntity<?> getProduct(GetProductRequestDto request)
+    {
+        if (request.getIdProduct() == null)
+        {
+            StandardResponse response = StandardResponse.builder()
+                .message("Error: You must fill in all fields.")
+                .build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(productPage.getContent());
+        Product product = productRepository.getProduct(request.getIdProduct());
+
+        ResponseEntity<?> responseError = Utils.validateField("product", product);
+        if (responseError != null) {
+            return responseError;
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 }
