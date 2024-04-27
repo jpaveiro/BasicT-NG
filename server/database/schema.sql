@@ -16,12 +16,12 @@ CREATE TABLE Users(
 );
 
 CREATE TABLE Products(
-    id_product VARCHAR(255) NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    prod_quantity INTEGER NOT NULL,
-    price NUMERIC(8, 2) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id_product)
+  id_product VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  prod_quantity INTEGER NOT NULL,
+  price NUMERIC(8, 2) NOT NULL,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (id_product)
 );
 
 CREATE TABLE Purchases(
@@ -29,12 +29,12 @@ CREATE TABLE Purchases(
 	id_user VARCHAR(255) NOT NULL,
 	id_prod VARCHAR(255) NOT NULL,
   prod_quantity	INTEGER NOT NULL,
-	purchase_date	DATETIME NOT NULL,
+	purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	total_amount NUMERIC(8,2) NOT NULL,
 	PRIMARY KEY(id_purchase),
   FOREIGN KEY (id_user) REFERENCES Users(id),
   FOREIGN KEY (id_prod) REFERENCES Products(id_product)
 );
-    
+
 SELECT * 
 FROM Users;
