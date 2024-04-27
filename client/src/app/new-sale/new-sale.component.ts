@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { LoaderComponent } from '../loader/loader.component';
 import axios from 'axios';
 import { env } from '../../../config/enviroments';
+import { CookieService } from 'ngx-cookie-service';
 
 interface FinalData {
   name: string;
@@ -23,8 +24,19 @@ export class NewSaleComponent {
   finalPrice: number = 0;
   seeTable: boolean = false;
   loader: boolean = false;
+  purchaseCode: string = "";
+  userId: string = "";
 
   allData: FinalData[] = [];
+
+  constructor(private cookieService: CookieService) {
+    this.purchaseCode = this.generatePurchaseCode();
+    this.userId = this.cookieService.get("basict:user-id");
+  }
+
+  generatePurchaseCode(): string {
+    return Math.random().toString(36).substring(2, 15);
+  }
 
   setCodeBar(e: any) {
     this.codeBar = e.target.value.toUpperCase();
