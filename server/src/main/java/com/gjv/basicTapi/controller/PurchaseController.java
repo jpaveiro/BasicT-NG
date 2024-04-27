@@ -1,11 +1,14 @@
 package com.gjv.basicTapi.controller;
 
+import com.gjv.basicTapi.dto.NewPurchaseRequestDto;
 import com.gjv.basicTapi.usecase.PurchaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +30,18 @@ public class PurchaseController {
     }
     long startTime = System.currentTimeMillis();
     ResponseEntity<?> response = purchaseService.getAll(page);
+    long endTime = System.currentTimeMillis();
+    long elapsedTime = endTime - startTime;
+    LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
+    return response;
+  }
+
+  @PostMapping("/v1/sell")
+  public ResponseEntity<?> sell(
+      @RequestBody NewPurchaseRequestDto purchaseInfo
+  ) {
+    long startTime = System.currentTimeMillis();
+    ResponseEntity<?> response = purchaseService.sellProduct(purchaseInfo);
     long endTime = System.currentTimeMillis();
     long elapsedTime = endTime - startTime;
     LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
