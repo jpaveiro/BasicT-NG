@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+import com.gjv.basicTapi.dto.DeleteUserRequestDto;
 import java.util.Date;
 
 @Service
@@ -177,6 +177,25 @@ public class UserService {
                 .build();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-
+    }
+    public ResponseEntity<?> deleteUser(DeleteUserRequestDto request)
+    {
+        String id = request.getIdUser();
+        String password = Utils.hashPassword(request.getPasswordAdmin());
+        User user = userRepository.getUser(id, password);
+        if (user.getId() == user.getPassword()) 
+        {
+            StandardResponse response = StandardResponse.builder()
+                    .message("Usuário deletado com sucesso")
+                    .build();
+            return ResponseEntity.ok().body(response);
+        }
+        else
+        {
+            StandardResponse response = StandardResponse.builder()
+                    .message("Usuário não encontrado ou senha inválida")
+                    .build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
     }
 }
