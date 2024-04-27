@@ -31,12 +31,6 @@ public class Purchase {
     @Column(name = "prod_quantity")
     private int productQuantity;
 
-    @Column(name = "purchase_date")
-    private Timestamp purchaseDate;
-
     @Column(name = "total_amount")
     private double totalAmount;
-
-    @Column(name = "created_at")
-    private String createdAt;
 }
