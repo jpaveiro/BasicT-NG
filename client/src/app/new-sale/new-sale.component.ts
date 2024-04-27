@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './new-sale.component.scss'
 })
 export class NewSaleComponent {
-
+  redirect(route: any) {
+    location.href = "/" + route;
+  }
 }
