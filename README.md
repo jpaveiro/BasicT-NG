@@ -1,7 +1,7 @@
 # basicT Next Generation
 
-WebApp ponto de venda desenvolvido com Angular, SpringBoot e MySQL.
-Desenvolvidor por [Gabriel Araújo](https://github.com/themyntt), [Vinicius de Jesus](https://github.com/viniciusdevjesus) e [João Aveiro](https://github.com/jpaveiro).
+WebApp Ponto de Venda desenvolvido com Angular, SpringBoot e MySQL.
+Desenvolvido por [Gabriel Araújo](https://github.com/themyntt), [João Pedro Aveiro](https://github.com/jpaveiro) e [Vinicius de Jesus](https://github.com/viniciusdevjesus).
 
 ## Pré-requisitos
 - NodeJS >= 20.5.X
@@ -9,7 +9,7 @@ Desenvolvidor por [Gabriel Araújo](https://github.com/themyntt), [Vinicius de J
 - MySQL
 
 ## Uso (Desenvolvimento)
-- clone este repositório ```git clone https://github.com/jpaveiro/BasicT-NG/```
+- Clone este repositório ```git clone https://github.com/jpaveiro/BasicT-NG/```
 
 ### Front-end
 - Entre na pasta client
