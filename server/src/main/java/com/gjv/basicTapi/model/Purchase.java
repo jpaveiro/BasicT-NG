@@ -36,4 +36,7 @@ public class Purchase {
 
     @Column(name = "total_amount")
     private double totalAmount;
+
+    @Column(name = "created_at")
+    private String createdAt;
 }
