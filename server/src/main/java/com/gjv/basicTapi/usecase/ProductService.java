@@ -1,6 +1,8 @@
 package com.gjv.basicTapi.usecase;
 
-import com.gjv.basicTapi.dto.AddProductRequestDto;
+import com.gjv.basicTapi.dto.GetProductRequestDto;
+import com.gjv.basicTapi.dto.SetProductRequestDto;
+import com.gjv.basicTapi.model.Product;
 import com.gjv.basicTapi.model.StandardResponse;
 import com.gjv.basicTapi.repository.ProductRepository;
 import com.gjv.basicTapi.utils.Utils;
@@ -18,7 +20,7 @@ public class ProductService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.class);
 
-    public ResponseEntity<?> setProduct(AddProductRequestDto request)
+    public ResponseEntity<?> setProduct(SetProductRequestDto request)
     {
         if (request.getIdProduct() == null || request.getName() == null
                 || request.getPrice() == null || request.getProdQuantity() == null)
@@ -61,5 +63,25 @@ public class ProductService {
             LOGGER.info("Error: The system was unable to register the product.\nDetails: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
+    }
+
+    public ResponseEntity<?> getProduct(GetProductRequestDto request)
+    {
+        if (request.getIdProduct() == null)
+        {
+            StandardResponse response = StandardResponse.builder()
+                    .message("Error: You must fill in all fields.")
+                    .build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
+        Product product = productRepository.getProduct(request.getIdProduct());
+
+        ResponseEntity<?> responseError = Utils.validateField("product", product);
+        if (responseError != null) {
+            return responseError;
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 }
