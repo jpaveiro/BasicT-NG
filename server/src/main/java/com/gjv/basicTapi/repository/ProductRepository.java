@@ -1,7 +1,6 @@
 package com.gjv.basicTapi.repository;
 
 import com.gjv.basicTapi.model.Product;
-import com.gjv.basicTapi.model.User;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, String> {
     @Query("SELECT u FROM Product u WHERE u.idProduct = :idProduct")
-    User getProduct(
+    Product getProduct(
             @Param("idProduct") String idProduct
     );
 
