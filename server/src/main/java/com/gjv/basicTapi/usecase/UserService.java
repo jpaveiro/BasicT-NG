@@ -141,6 +141,7 @@ public class UserService {
         UserResponse response = UserResponse.builder()
                 .token(token)
                 .name(user.getName())
+                .userId(user.getId())
                 .build();
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
