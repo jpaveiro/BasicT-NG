@@ -16,11 +16,12 @@ CREATE TABLE Users(
 );
 
 CREATE TABLE Products(
-	id_product VARCHAR(255) NOT NULL,
-	name VARCHAR(255) NOT NULL,
-	prod_quantity	INTEGER NOT NULL,
-	price	NUMERIC(8, 2) NOT NULL,
-	PRIMARY KEY (id_product)
+    id_product VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    prod_quantity INTEGER NOT NULL,
+    price NUMERIC(8, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_product)
 );
 
 CREATE TABLE Purchases(
