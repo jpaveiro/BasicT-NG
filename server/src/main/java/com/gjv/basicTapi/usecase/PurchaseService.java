@@ -37,6 +37,7 @@ public class PurchaseService {
        .productQuantity(purchaseInfo.getQuantity())
        .totalAmount(purchaseInfo.getTotalAmount())
        .idPurchase(Utils.generateId())
+       .purchaseCode(purchaseInfo.getPurchaseCode())
        .build();
 
     try {
