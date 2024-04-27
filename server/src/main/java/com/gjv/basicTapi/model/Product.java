@@ -23,9 +23,6 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "prod_quantity")
-    private int prodQuantity;
-
     @Column(name = "price")
     private double price;
 

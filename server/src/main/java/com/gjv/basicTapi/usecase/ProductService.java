@@ -23,7 +23,7 @@ public class ProductService {
     public ResponseEntity<?> setProduct(SetProductRequestDto request)
     {
         if (request.getIdProduct() == null || request.getName() == null
-            || request.getPrice() == null || request.getProdQuantity() == null)
+            || request.getPrice() == null)
         {
             StandardResponse response = StandardResponse.builder()
                 .message("Error: You must fill in all fields.")
@@ -34,7 +34,6 @@ public class ProductService {
         String barCode = Utils.checkBarCode(request.getIdProduct());
         String productName = request.getName();
         double price = request.getPrice();
-        int prodQuantity = request.getProdQuantity();
 
         ResponseEntity<?> responseBarCode = Utils.validateField("idProduct", barCode);
         if (responseBarCode != null)
@@ -46,7 +45,6 @@ public class ProductService {
             productRepository.setProduct(
                 barCode,
                 productName,
-                prodQuantity,
                 price
             );
 

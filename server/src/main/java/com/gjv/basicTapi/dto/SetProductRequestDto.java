@@ -12,6 +12,5 @@ import lombok.NoArgsConstructor;
 public class SetProductRequestDto {
     private String idProduct;
     private String name;
-    private Integer prodQuantity;
     private Double price;
 }

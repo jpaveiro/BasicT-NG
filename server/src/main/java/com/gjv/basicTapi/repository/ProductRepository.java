@@ -17,12 +17,11 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     @Modifying
     @Transactional
-    @Query("INSERT INTO Product(idProduct, name, prodQuantity, price) " +
-            "VALUES (:idProduct, :name, :prodQuantity, :price)")
+    @Query("INSERT INTO Product(idProduct, name, price) " +
+            "VALUES (:idProduct, :name, :price)")
     void setProduct(
             @Param("idProduct") String idProduct,
             @Param("name") String name,
-            @Param("prodQuantity") int productQuantity,
             @Param("price") double price
     );
 }
