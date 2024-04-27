@@ -56,7 +56,7 @@ public class UserController {
         LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
         return response;
     }
-    @DeleteMapping("/api/product/v1/delete")
+    @DeleteMapping("/v1/delete")
     public ResponseEntity<?> deleteUser(@RequestBody DeleteUserRequestDto request)
     {
         long startTime = System.currentTimeMillis();
