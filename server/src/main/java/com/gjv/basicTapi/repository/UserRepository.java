@@ -19,6 +19,11 @@ public interface UserRepository extends JpaRepository<User, String> {
             @Param("password") String password
     );
 
+    @Query("SELECT u FROM User u WHERE u.id = :id")
+    User getUser(
+            @Param("id") String id
+    );
+
     @Modifying
     @Transactional
     @Query("INSERT INTO User(id, name, cellphone, email, cpf, rg, stateRg, birthDate, password) " +
@@ -34,6 +39,7 @@ public interface UserRepository extends JpaRepository<User, String> {
             @Param("birthDate") Date birthDate,
             @Param("password") String password
     );
+
     @Modifying
     @Transactional
     @Query("UPDATE User SET name=:name, cellphone=:cellphone, email=:email, cpf=:cpf, rg=:rg, password=:password WHERE id = :id")
@@ -45,5 +51,12 @@ public interface UserRepository extends JpaRepository<User, String> {
         @Param("rg") String rg,
         @Param("password") String password,
         @Param("id") String id
+    );
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM User u WHERE u.id = :id")
+    void deleteUser(
+            @Param("id") String id
     );
 }
