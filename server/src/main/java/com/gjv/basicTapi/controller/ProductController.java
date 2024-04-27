@@ -29,7 +29,7 @@ public class ProductController {
         return response;
     }
 
-    @GetMapping("/v1/get")
+    @PostMapping("/v1/get")
     public ResponseEntity<?> getProduct(@RequestBody GetProductRequestDto request)
     {
         long startTime = System.currentTimeMillis();
