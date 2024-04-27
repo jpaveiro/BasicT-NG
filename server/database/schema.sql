@@ -14,30 +14,24 @@ CREATE TABLE Users(
 	password 	    	VARCHAR(255),
 	PRIMARY KEY (id)
 );
+
 CREATE TABLE Product(
-	id_prod				VARCHAR(255),
+	id_product			VARCHAR(255),
 	name				VARCHAR(255),
-	product_quantity	INTEGER,
-	price				NUMERIC(8,2),
+	prod_quantity		INTEGER,
+	price				NUMERIC(8, 2),
 	status				VARCHAR(255),
-	PRIMARY KEY (id_prod)
+	PRIMARY KEY (id_product)
 );
-CREATE TABLE Order(
-	id_order			VARCHAR(255),
+
+CREATE TABLE Purchase(
+	id_purchase			VARCHAR(255),
 	id_user				VARCHAR(255),
-	id_prod				VARCHAR(255),	
-	date_order			DATETIME,
-	status_prod			VARCHAR(255),
+	id_prod				VARCHAR(255),
+    prod_quantity		INTEGER,
+	purchase_date		DATETIME,
 	total_amount		NUMERIC(8,2),
-	product_quantity	INTEGER,
-	PRIMARY KEY(id_order)
+	PRIMARY KEY(id_purchase),
+    FOREIGN KEY (id_user) REFERENCES Users(id),
+    FOREIGN KEY (id_prod) REFERENCES Product(id_product)
 );
-
-ALTER TABLE Order
-ADD CONSTRAINT fk_id_prod FOREIGN KEY (id_prod)
-REFERENCES Product (id_prod);
-
-ALTER TABLE Order
-ADD CONSTRAINT fk_id_user FOREIGN KEY (id_user)
-REFERENCES Users (id);
-
