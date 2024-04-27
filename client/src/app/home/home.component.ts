@@ -28,4 +28,8 @@ export class HomeComponent {
     this.cookieService.deleteAll();
     location.href = "/";
   }
+
+  redirect(route: any) {
+    location.href = "/" + route;
+  }
 }
