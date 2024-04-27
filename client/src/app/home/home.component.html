@@ -1,1 +1,11 @@
-<p>home works!</p>
+<div class="home-component">
+  <div class="main-container">
+    <h2>Bem vindo, {{userName}}</h2>
+    <p>O que vamos fazer hoje?</p>
+    <br />
+    <div>
+      <button type="submit" (click)="redirect('sell')" class="btn">Nova venda</button>
+      <button type="submit" (click)="logout()" class="btn btn-exit">Sair</button>
+    </div>
+  </div>
+</div>
