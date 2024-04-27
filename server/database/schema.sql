@@ -29,7 +29,7 @@ CREATE TABLE Purchases(
 	id_prod VARCHAR(255) NOT NULL,
   prod_quantity	INTEGER NOT NULL,
 	purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	purchase_code INTEGER NOT NULL,
+	purchase_code VARCHAR(255) NOT NULL,
 	total_amount NUMERIC(8,2) NOT NULL,
 	PRIMARY KEY(id_purchase),
   FOREIGN KEY (id_user) REFERENCES Users(id),
