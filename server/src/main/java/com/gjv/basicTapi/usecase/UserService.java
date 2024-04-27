@@ -168,12 +168,12 @@ public class UserService {
             userRepository.editUser(name, cellphone, email, cpf, rg, password, id);
 
             StandardResponse response = StandardResponse.builder()
-                .message("Sucess")
+                .message("Sucess: User has been edited.")
                 .build();
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
         } catch (Exception e) {
             StandardResponse response = StandardResponse.builder()
-                .message("Error: cant edit user")
+                .message("Error: User can't be edited.")
                 .build();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
@@ -181,21 +181,22 @@ public class UserService {
     public ResponseEntity<?> deleteUser(DeleteUserRequestDto request)
     {
         String id = request.getIdUser();
+        String emailAdmin = request.getEmailAdmin();
         String password = Utils.hashPassword(request.getPasswordAdmin());
-        User user = userRepository.getUser(id, password);
-        if (user.getId() == user.getPassword()) 
-        {
-            StandardResponse response = StandardResponse.builder()
-                    .message("Usuário deletado com sucesso")
-                    .build();
-            return ResponseEntity.ok().body(response);
+
+        User user = userRepository.getUser(request.getIdUser());
+
+        ResponseEntity<?> responseError = Utils.validateField("user", user);
+        if (responseError != null) {
+            return responseError;
         }
-        else
-        {
-            StandardResponse response = StandardResponse.builder()
-                    .message("Usuário não encontrado ou senha inválida")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
+
+
+        userRepository.deleteUser(request.getIdUser());
+
+        StandardResponse response = StandardResponse.builder()
+                .message("Sucess: User has been deleted.")
+                .build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
 }
