@@ -14,4 +14,5 @@ public class NewPurchaseRequestDto {
   private String productId;
   private int quantity;
   private double totalAmount;
+  private String purchaseCode;
 }

@@ -36,4 +36,7 @@ public class Purchase {
 
     @Column(name = "purchase_date")
     private String purchaseDate;
+
+    @Column(name = "purchase_code")
+    private String purchaseCode;
 }
