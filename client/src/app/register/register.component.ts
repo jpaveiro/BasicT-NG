@@ -66,7 +66,7 @@ export class RegisterComponent {
         alert('Data de nascimento inválida');
         return;
       }
-      if(message.toLowerCase() == "error: user alredy registered.") {
+      if(message == "Error: The system was unable to register the user. Probably user already registered.") {
         alert('Usuário já cadastrado');
         return;
       }
