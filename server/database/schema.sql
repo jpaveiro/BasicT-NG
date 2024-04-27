@@ -20,7 +20,6 @@ CREATE TABLE Products(
 	name				VARCHAR(255),
 	prod_quantity		INTEGER,
 	price				NUMERIC(8, 2),
-	status				VARCHAR(255),
 	PRIMARY KEY (id_product)
 );
 
