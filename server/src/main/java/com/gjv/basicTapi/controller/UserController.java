@@ -3,7 +3,6 @@ package com.gjv.basicTapi.controller;
 import com.gjv.basicTapi.dto.EditRequestDto;
 import com.gjv.basicTapi.dto.LoginRequestDto;
 import com.gjv.basicTapi.dto.UserRequestDto;
-import com.gjv.basicTapi.model.User;
 import com.gjv.basicTapi.usecase.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
