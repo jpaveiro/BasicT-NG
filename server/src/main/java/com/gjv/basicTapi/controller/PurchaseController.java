@@ -22,6 +22,9 @@ public class PurchaseController {
   public ResponseEntity<?> getAll(
       @RequestParam("page") int page
   ) {
+    if (page <= 0) {
+      return null;
+    }
     long startTime = System.currentTimeMillis();
     ResponseEntity<?> response = purchaseService.getAll(page);
     long endTime = System.currentTimeMillis();
