@@ -1,7 +1,6 @@
 package com.gjv.basicTapi.usecase;
 
 import com.gjv.basicTapi.dto.EditRequestDto;
-import com.gjv.basicTapi.controller.UserController;
 import com.gjv.basicTapi.dto.LoginRequestDto;
 import com.gjv.basicTapi.dto.UserRequestDto;
 import com.gjv.basicTapi.model.StandardResponse;
@@ -191,8 +190,7 @@ public class UserService {
             return responseError;
         }
 
-
-        userRepository.deleteUser(request.getIdUser());
+        userRepository.deleteUser(id);
 
         StandardResponse response = StandardResponse.builder()
                 .message("Sucess: User has been deleted.")
