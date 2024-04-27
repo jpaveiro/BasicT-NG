@@ -30,10 +30,14 @@ public class ProductController {
     }
 
     @GetMapping("/v1/get")
-    public ResponseEntity<?> getProduct(@RequestBody GetProductRequestDto request)
+    public ResponseEntity<?> getProduct(@RequestParam("page") int page)
     {
+        if (page <= 0) {
+            return null;
+        }
+
         long startTime = System.currentTimeMillis();
-        ResponseEntity<?> response = productService.getProduct(request);
+        ResponseEntity<?> response = productService.getProduct(page);
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
         LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
