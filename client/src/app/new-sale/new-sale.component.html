@@ -6,15 +6,11 @@
     <h2>Nova venda</h2>
     <div class="material-control" (click)="redirect('home')">
       <br />
-      <span class="material-symbols-outlined">
-        arrow_back
-      </span>
-      <span>
-        Voltar
-      </span>
+      <span class="material-symbols-outlined"> arrow_back </span>
+      <span> Voltar </span>
     </div>
     <br />
-    <h2 *ngIf="seeTable">Preço final: {{finalPrice.toFixed(2)}}</h2>
+    <h2 *ngIf="seeTable">Preço final: {{ finalPrice.toFixed(2) }}</h2>
     <br />
     <div class="sell">
       <div>
@@ -25,10 +21,10 @@
           name="name"
           placeholder="Digite o código de barras do produto."
           (keyup)="setCodeBar($event)"
-          value="{{codeBar}}"
+          value="{{ codeBar }}"
           required
         />
-      </div>      
+      </div>
       <div>
         <label for="name">Quantidade:</label>
         <input
@@ -37,13 +33,16 @@
           name="number"
           placeholder="Digite a quantidade deste mesmo produto."
           (keyup)="setQuantity($event)"
-          value="{{quantity}}"
+          value="{{ quantity }}"
           minlength="0"
           required
         />
-      </div>      
+      </div>
     </div>
     <button class="btn" (click)="addProducts()">Adicionar Produto</button>
+    <button class="btn" *ngIf="seeTable" id="sell" (click)="sell()">
+      Vender
+    </button>
     <div *ngIf="seeTable">
       <br />
       <table>
@@ -53,9 +52,9 @@
           <th>Preço</th>
         </tr>
         <tr *ngFor="let product of allData">
-          <td>{{product.name}}</td>
-          <td>{{product.quantity}}</td>
-          <td>{{product.price}}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.price }}</td>
         </tr>
       </table>
     </div>
