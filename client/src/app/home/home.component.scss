@@ -1,13 +1,9 @@
 .home-component {
   width: 100%;
   height: calc(100vh - 95.96px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   .main-container {
     padding: 40PX;
     background-color: white;
-    box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.3);
     div {
       display: flex;
       .btn {
@@ -23,6 +19,17 @@
       }
       .btn.btn-exit {
         background-color: red !important;
+      }
+    }
+    div {
+      table {
+        width: 100%; 
+        border-collapse: collapse; 
+      }
+      
+      th, td {
+        padding: 8px; 
+        border: 1px solid #dddddd; 
       }
     }
   }

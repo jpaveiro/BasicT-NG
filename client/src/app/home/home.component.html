@@ -1,4 +1,7 @@
 <div class="home-component">
+  <div *ngIf="loader">
+    <app-loader />
+  </div>
   <div class="main-container">
     <h2>Bem vindo, {{userName}}</h2>
     <p>O que vamos fazer hoje?</p>
@@ -6,6 +9,28 @@
     <div>
       <button type="submit" (click)="redirect('sell')" class="btn">Nova venda</button>
       <button type="submit" (click)="logout()" class="btn btn-exit">Sair</button>
+    </div>
+    <br />
+    <h2>Ultimas vendas</h2>
+    <div>
+      <table>
+        <tr>
+          <th>Vendedor</th>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Preço</th>
+          <th>Data da venda</th>
+          <th>Código da compra</th>
+        </tr>
+        <tr *ngFor="let sale of responseData">
+          <td>{{ sale.userName }}</td>
+          <td>{{ sale.productName }}</td>
+          <td>{{ sale.quantity }}</td>
+          <td>{{ sale.price }}</td>
+          <td>{{ sale.purchaseDate }}</td>
+          <td>{{ sale.purchaseCode }}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
