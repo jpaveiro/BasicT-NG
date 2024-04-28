@@ -1,5 +1,6 @@
 package com.gjv.basicTapi.controller;
 
+import com.gjv.basicTapi.dto.DeleteProductRequestDto;
 import com.gjv.basicTapi.dto.GetProductRequestDto;
 import com.gjv.basicTapi.dto.SetProductRequestDto;
 import com.gjv.basicTapi.usecase.ProductService;
@@ -34,6 +35,16 @@ public class ProductController {
     {
         long startTime = System.currentTimeMillis();
         ResponseEntity<?> response = productService.getProduct(request);
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
+        return response;
+    }
+    @DeleteMapping("/v1/delete")
+    public ResponseEntity<?> deleteProduct(@RequestBody DeleteProductRequestDto request)
+    {
+        long startTime = System.currentTimeMillis();
+        ResponseEntity<?> response = productService.deleteProduct(request);
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
         LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
