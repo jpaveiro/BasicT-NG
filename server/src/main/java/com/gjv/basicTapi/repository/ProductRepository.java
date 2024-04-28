@@ -27,7 +27,7 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM Products u WHERE u.id = :id")
+    @Query("DELETE FROM Product u WHERE u.id = :id")
     void deleteProduct(
             @Param("id") String id
     );
