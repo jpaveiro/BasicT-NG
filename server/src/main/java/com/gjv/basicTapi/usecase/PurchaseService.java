@@ -24,7 +24,7 @@ public class PurchaseService {
     );
 
     if (purchasePage.isEmpty()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no products found");
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no purchase found");
     }
 
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(purchasePage);
