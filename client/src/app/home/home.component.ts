@@ -36,6 +36,7 @@ export class HomeComponent {
 
   async request() {
     this.loader = true;
+    this.responseData = [];
     let response;
     try {
       response = await axios.get(
@@ -76,6 +77,19 @@ export class HomeComponent {
     setTimeout(() => this.loader = false, 1000);
     this.hasSeller = true;
     console.log(this.responseData);
+  }
+
+  advancePage(advance: boolean) {
+    if (advance) {
+      this.page++;
+      this.request();
+      return
+    }
+    if (this.page > 1 && !advance) {
+      this.page--;
+      this.request();
+    }
+
   }
 
   capitalizeName(fullName: string) {

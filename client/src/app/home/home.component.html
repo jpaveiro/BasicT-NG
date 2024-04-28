@@ -12,6 +12,11 @@
     </div>
     <br />
     <h2  *ngIf="hasSeller">Ultimas vendas</h2>
+    <p>Página: {{page}}</p>
+    <div>
+      <button class="btn" (click)="advancePage(false)"> Anterior </button>
+      <button class="btn" (click)="advancePage(true)"> Avançar </button>
+    </div>
     <div *ngIf="hasSeller">
       <table>
         <tr>
