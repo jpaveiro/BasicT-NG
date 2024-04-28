@@ -198,4 +198,18 @@ public class UserService {
                 .build();
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
+
+    public ResponseEntity<?> getUserName(String id) {
+        User user = userRepository.getUser(id);
+
+        ResponseEntity<?> responseError = Utils.validateField("user", user);
+        if (responseError != null) {
+            return responseError;
+        }
+
+        UserResponse response = UserResponse.builder()
+               .name(user.getName())
+               .build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+    }
 }
