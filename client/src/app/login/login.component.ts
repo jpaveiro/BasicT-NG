@@ -21,12 +21,23 @@ export class LoginComponent implements AfterViewInit {
   constructor(private cookieService: CookieService) { }
 
   ngAfterViewInit() {
+    if (this.isLogged()) {
+      location.href = "/home";
+    }
     window.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         this.loginEvent();
       }
     })
     this.setIconLocation("password", "visibility_icon");
+  }
+
+  isLogged(): boolean {
+    const token = this.cookieService.get("basict:user-token");
+    if (token) {
+      return true;
+    }
+    return false;
   }
 
   saveCookie(cookieName: string, cookieValue: string) {
