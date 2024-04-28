@@ -96,7 +96,7 @@ export class NewSaleComponent {
         return;
       }
       this.seeTable = true;
-      this.allData.push({name: productName, quantity: this.quantity, price: price.toFixed(2)})
+      this.allData.push({name: this.capitalizeName(productName), quantity: this.quantity, price: price.toFixed(2)})
       this.productIds.push(productId);
       this.finalPrice = 0;
       for (let product of this.allData) {
