@@ -200,7 +200,7 @@ public class UserService {
     }
 
     public ResponseEntity<?> getUserName(String id) {
-        User user = userRepository.getUser(id);
+        String name = userRepository.getUserName(id);
 
         ResponseEntity<?> responseError = Utils.validateField("user", user);
         if (responseError != null) {
@@ -208,7 +208,7 @@ public class UserService {
         }
 
         UserResponse response = UserResponse.builder()
-               .name(user.getName())
+               .name(name)
                .build();
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
