@@ -27,7 +27,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("SELECT u.name FROM User u WHERE u.id = :id")
     String getUserName(
         @Param("id") String id
-    )
+    );
 
     @Modifying
     @Transactional
