@@ -181,8 +181,6 @@ public class UserService {
     public ResponseEntity<?> deleteUser(DeleteUserRequestDto request)
     {
         String id = request.getIdUser();
-        String emailAdmin = request.getEmailAdmin();
-        String password = Utils.hashPassword(request.getPasswordAdmin());
 
         User user = userRepository.getUser(request.getIdUser());
 
