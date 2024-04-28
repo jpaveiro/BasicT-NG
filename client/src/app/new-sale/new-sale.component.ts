@@ -108,6 +108,14 @@ export class NewSaleComponent {
     alert("Preencha todos os campos");
   }
 
+  capitalizeName(fullName: string) {
+    const splitedName = fullName.toLowerCase().split(' ');
+    const capitalizedName = splitedName.map((name) => {
+      return name.charAt(0).toUpperCase() + name.slice(1);
+    });
+    return capitalizedName.join(' ');
+  }
+
   redirect(route: any) {
     location.href = "/" + route;
   }
