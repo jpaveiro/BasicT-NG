@@ -9,10 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.gjv.basicTapi.dto.DeleteUserRequestDto;
 @RestController
@@ -60,6 +62,15 @@ public class UserController {
     {
         long startTime = System.currentTimeMillis();
         ResponseEntity<?> response = userService.deleteUser(request);
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
+        return response;
+    }
+    @GetMapping("/v1/get")
+    public ResponseEntity<?> getUser(@RequestParam("id") String id) {
+        long startTime = System.currentTimeMillis();
+        ResponseEntity<?> response = userService.getUserName(id);
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
         LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
