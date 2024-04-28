@@ -1,11 +1,13 @@
 package com.gjv.basicTapi.repository;
 
 import com.gjv.basicTapi.model.User;
+
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -22,11 +24,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("SELECT u FROM User u WHERE u.id = :id")
     User getUser(
             @Param("id") String id
-    );
-
-    @Query("SELECT u.name FROM User u WHERE u.id = :id")
-    String getUserName(
-        @Param("id") String id
     );
 
     @Modifying
