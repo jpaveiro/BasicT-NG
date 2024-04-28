@@ -11,9 +11,9 @@
       <button type="submit" (click)="logout()" class="btn btn-exit">Sair</button>
     </div>
     <br />
-    <h2  *ngIf="hasSeller">Ultimas vendas</h2>
-    <p>Página: {{page}}</p>
-    <div>
+    <h2 *ngIf="hasSeller">Ultimas vendas</h2>
+    <p *ngIf="hasSeller">Página: {{page}}</p>
+    <div *ngIf="hasSeller">
       <button class="btn" (click)="advancePage(false)"> Anterior </button>
       <button class="btn" (click)="advancePage(true)"> Avançar </button>
     </div>
