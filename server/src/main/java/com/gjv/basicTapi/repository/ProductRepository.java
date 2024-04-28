@@ -24,4 +24,11 @@ public interface ProductRepository extends JpaRepository<Product, String> {
             @Param("name") String name,
             @Param("price") double price
     );
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Products u WHERE u.id = :id")
+    void deleteProduct(
+            @Param("id") String id
+    );
 }
