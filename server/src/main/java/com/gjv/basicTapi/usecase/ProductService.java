@@ -1,9 +1,11 @@
 package com.gjv.basicTapi.usecase;
 
+import com.gjv.basicTapi.dto.DeleteProductRequestDto;
 import com.gjv.basicTapi.dto.GetProductRequestDto;
 import com.gjv.basicTapi.dto.SetProductRequestDto;
 import com.gjv.basicTapi.model.Product;
 import com.gjv.basicTapi.model.StandardResponse;
+import com.gjv.basicTapi.model.User;
 import com.gjv.basicTapi.repository.ProductRepository;
 import com.gjv.basicTapi.utils.Utils;
 import org.slf4j.Logger;
@@ -81,5 +83,23 @@ public class ProductService {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(product);
+    }
+    public ResponseEntity<?> deleteProduct(DeleteProductRequestDto request)
+    {
+        String id = request.getIdProduct();
+        if (request.getIdProduct() == null) {
+            StandardResponse response = StandardResponse.builder()
+                .message("Error: id not provided.")
+                .build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+        Product product = productRepository.getProduct(request.getIdProduct());
+
+        productRepository.deleteProduct(id);
+
+        StandardResponse response = StandardResponse.builder()
+                .message("Sucess: Product has been deleted.")
+                .build();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
 }
