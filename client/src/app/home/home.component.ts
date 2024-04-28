@@ -25,6 +25,7 @@ export class HomeComponent {
   page: number = 1;
   responseData: Response[] = [];
   loader: boolean = false;
+  hasSeller: boolean = false;
 
   constructor(private cookieService: CookieService) {
     this.userName = this.capitalizeName(
@@ -35,10 +36,13 @@ export class HomeComponent {
 
   async request() {
     this.loader = true;
-    const response = await axios.get(
-      env.apiUrl + '/purchase/v1/get?page=' + this.page
-    );
-    if (response.data == 'Error: no purchase found') {
+    let response;
+    try {
+      response = await axios.get(
+        env.apiUrl + '/purchase/v1/get?page=' + this.page
+      );
+    } catch {
+      this.loader = false;
       return;
     }
 
@@ -70,6 +74,7 @@ export class HomeComponent {
       });
     }
     setTimeout(() => this.loader = false, 1000);
+    this.hasSeller = true;
     console.log(this.responseData);
   }
 

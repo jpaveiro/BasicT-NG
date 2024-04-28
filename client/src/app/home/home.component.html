@@ -11,8 +11,8 @@
       <button type="submit" (click)="logout()" class="btn btn-exit">Sair</button>
     </div>
     <br />
-    <h2>Ultimas vendas</h2>
-    <div>
+    <h2  *ngIf="hasSeller">Ultimas vendas</h2>
+    <div *ngIf="hasSeller">
       <table>
         <tr>
           <th>Vendedor</th>
