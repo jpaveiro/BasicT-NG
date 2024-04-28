@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.gjv.basicTapi.dto.DeleteUserRequestDto;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -27,8 +28,7 @@ public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/v1/set")
-    public ResponseEntity<?> setUser(@RequestBody UserRequestDto request)
-    {
+    public ResponseEntity<?> setUser(@RequestBody UserRequestDto request) {
         long startTime = System.currentTimeMillis();
         ResponseEntity<?> response = userService.setUser(request);
         long endTime = System.currentTimeMillis();
@@ -38,8 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/v1/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequestDto request)
-    {
+    public ResponseEntity<?> login(@RequestBody LoginRequestDto request) {
         long startTime = System.currentTimeMillis();
         ResponseEntity<?> response = userService.login(request);
         long endTime = System.currentTimeMillis();
@@ -47,9 +46,9 @@ public class UserController {
         LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
         return response;
     }
+
     @PutMapping("/v1/edit")
-    public ResponseEntity<?> editUser(@RequestBody EditRequestDto request)
-    {
+    public ResponseEntity<?> editUser(@RequestBody EditRequestDto request) {
         long startTime = System.currentTimeMillis();
         ResponseEntity<?> response = userService.editUser(request);
         long endTime = System.currentTimeMillis();
@@ -57,9 +56,9 @@ public class UserController {
         LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
         return response;
     }
+
     @DeleteMapping("/v1/delete")
-    public ResponseEntity<?> deleteUser(@RequestBody DeleteUserRequestDto request)
-    {
+    public ResponseEntity<?> deleteUser(@RequestBody DeleteUserRequestDto request) {
         long startTime = System.currentTimeMillis();
         ResponseEntity<?> response = userService.deleteUser(request);
         long endTime = System.currentTimeMillis();
@@ -67,13 +66,19 @@ public class UserController {
         LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
         return response;
     }
+
     @GetMapping("/v1/get")
     public ResponseEntity<?> getUser(@RequestParam("id") String id) {
         long startTime = System.currentTimeMillis();
-        ResponseEntity<?> response = userService.getUserName(id);
+        ResponseEntity<?> user = userService.getUserName(id);
+        if (user == null) {
+            LOGGER.error("User not found with id: " + id);
+            return ResponseEntity.notFound().build();
+        }
+
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
-        return response;
+        LOGGER.info("Elapsed time: " + elapsedTime + " milliseconds.");
+        return ResponseEntity.ok(user);
     }
 }
