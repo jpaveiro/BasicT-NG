@@ -4,12 +4,7 @@ import { LoaderComponent } from '../loader/loader.component';
 import axios from 'axios';
 import { env } from '../../../../config/enviroments';
 import { CookieService } from 'ngx-cookie-service';
-
-interface FinalData {
-  name: string;
-  quantity: number;
-  price: string;
-}
+import { ProductsToSellTableRequest } from '../../interfaces/productsToSellTableRequest.interface';
 
 @Component({
   selector: 'app-new-sale',
@@ -28,7 +23,7 @@ export class NewSaleComponent {
   userId: string = "";
   productIds: string[] = [];
 
-  allData: FinalData[] = [];
+  allData: ProductsToSellTableRequest[] = [];
 
   constructor(private cookieService: CookieService) {
     this.purchaseCode = this.generatePurchaseCode();
