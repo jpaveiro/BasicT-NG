@@ -27,14 +27,16 @@ CREATE TABLE purchases(
 	id_purchase	VARCHAR(255) NOT NULL,
 	id_user VARCHAR(255) NOT NULL,
 	id_prod VARCHAR(255) NOT NULL,
-  prod_quantity	INTEGER NOT NULL,
+	prod_quantity	INTEGER NOT NULL,
 	purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	purchase_code VARCHAR(255) NOT NULL,
 	total_amount NUMERIC(8,2) NOT NULL,
 	PRIMARY KEY(id_purchase),
-  FOREIGN KEY (id_user) REFERENCES Users(id),
-  FOREIGN KEY (id_prod) REFERENCES Products(id_product)
+  FOREIGN KEY (id_user) REFERENCES users(id),
+  FOREIGN KEY (id_prod) REFERENCES products(id_product)
 );
+
+DROP TABLE purchases;
 
 SELECT * 
 FROM Users;
