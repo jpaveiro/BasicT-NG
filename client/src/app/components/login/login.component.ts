@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, NgModule } from '@angular/core';
 import axios from 'axios';
-import { env } from '../../../config/enviroments';
+import { env } from '../../../../config/enviroments';
 import { CookieService } from 'ngx-cookie-service';
 import { LoaderComponent } from '../loader/loader.component';
 import { CommonModule } from '@angular/common';

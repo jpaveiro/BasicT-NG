@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LoaderComponent } from '../loader/loader.component';
 import axios from 'axios';
-import { env } from '../../../config/enviroments';
+import { env } from '../../../../config/enviroments';
 import { CookieService } from 'ngx-cookie-service';
 
 interface FinalData {

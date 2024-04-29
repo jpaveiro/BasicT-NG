@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { env } from '../../../config/enviroments';
+import { env } from '../../../../config/enviroments';
 import axios from 'axios';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
