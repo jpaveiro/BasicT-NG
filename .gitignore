@@ -75,7 +75,7 @@
 /client/Thumbs.db
 .DS_Store
 .idea/.gitignore
-.idea/BasicT-NG.iml
+.idea/basicT-NG.iml
 .idea/vcs.xml
 .idea/modules.xml
 .idea/misc.xml
