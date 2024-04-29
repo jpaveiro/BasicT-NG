@@ -36,7 +36,5 @@ CREATE TABLE purchases(
   FOREIGN KEY (id_prod) REFERENCES products(id_product)
 );
 
-DROP TABLE purchases;
-
 SELECT * 
 FROM Users;
