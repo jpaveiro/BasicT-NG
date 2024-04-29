@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS BasicT_database;
 CREATE DATABASE BasicT_database;
 USE BasicT_database;
 
-CREATE TABLE Users(
+CREATE TABLE users(
 	id VARCHAR(255) NOT NULL,
 	name CHAR(255) NOT NULL,
 	cellphone VARCHAR(20) UNIQUE NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE Users(
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE Products(
+CREATE TABLE products(
   id_product VARCHAR(255) NOT NULL,
   name VARCHAR(255) NOT NULL,
   price NUMERIC(8, 2) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE Products(
 	PRIMARY KEY (id_product)
 );
 
-CREATE TABLE Purchases(
+CREATE TABLE purchases(
 	id_purchase	VARCHAR(255) NOT NULL,
 	id_user VARCHAR(255) NOT NULL,
 	id_prod VARCHAR(255) NOT NULL,
