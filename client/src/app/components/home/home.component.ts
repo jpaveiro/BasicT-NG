@@ -4,15 +4,8 @@ import { env } from '../../../../config/enviroments';
 import axios from 'axios';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
+import { HomeTableResponse } from '../../interfaces/homeTableResponse.interface';
 
-interface Response {
-  userName: string;
-  productName: string;
-  quantity: number
-  price: number
-  purchaseDate: string;
-  purchaseCode: string
-}
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -23,7 +16,7 @@ interface Response {
 export class HomeComponent {
   userName: string = '';
   page: number = 1;
-  responseData: Response[] = [];
+  responseData: HomeTableResponse[] = [];
   loader: boolean = false;
   hasSeller: boolean = false;
 
