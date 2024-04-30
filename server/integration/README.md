@@ -21,6 +21,18 @@
 - a senha é criptografada antes de ser inserida no banco de dados
 - apenas usuarios maiores de 18 anos podem ter conta
 
+- [GET] - /api/user/v1/get
+```
+/api/user/v1/get?id=123456789
+>>> {
+    "name": "ADMIN",
+    "token": null,
+    "userId": null
+}
+```
+- Espera o id do usuário
+- Parametro id é obrigatório
+- Retorna o nome do usuário
 
 - [POST] - /api/user/v1/login
 ```
