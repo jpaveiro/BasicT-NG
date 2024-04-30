@@ -1,5 +1,6 @@
 # Rotas para a integração
 
+## Usuário
 - [POST] - /api/user/v1/set
 ```
 {
@@ -63,3 +64,18 @@
 >>> { "message": "Sucess" }
 ```
 - Edita um usuario com base no id e na senha
+
+## Produto
+- [POST] - /api/product/v1/set
+```
+{
+    "idProduct": "12345678",
+    "name": "MAIONESE",
+    "price": 8.47
+}
+
+>>> { "message": "Sucess: Product registered."}
+```
+- Todos os dados são obrigatórios
+- idProduct é seu código de barras
+- O nome do produto sera transformado para upperCase independente do jeito escrito
