@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './auth.guard';
 import { NewSaleComponent } from './components/new-sale/new-sale.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
+import { ProductComponent } from './components/product/product.component';
 
 export const routes: Routes = [
   { 
@@ -28,6 +29,12 @@ export const routes: Routes = [
     path: 'register', 
     component: RegisterComponent,
     title: 'Registrar'
+  },
+  {
+    path: 'product',
+    component: ProductComponent,
+    title: 'Produtos',
+    canActivate: [AuthGuard],
   },
   {
     path: 'product/new',
