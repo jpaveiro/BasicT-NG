@@ -94,3 +94,19 @@
 ```
 - idProduct é seu código de barras
 - Retorna todos os dados do produto com base no código de barras
+
+## Purchase
+- [POST] - /api/purchase/v1/sell
+```
+{
+    "userId": "35b325ec59ef499-35b325ec59ef499-35b325ec59ef499",
+    "productId": "12345678",
+    "quantity": 2,
+    "totalAmount": "1",
+    "purchaseCode": "84df44663bf94e1"
+}
+```
+- purchaseCode é gerado automaticamento pelo front-end
+- totalAmount é o preço final
+- userId é o indentificador para quem vendeu o produto
+- purchaseCode é o código da venda
