@@ -51,7 +51,7 @@ public class ProductService {
             );
 
             StandardResponse response = StandardResponse.builder()
-                .message("Sucess: Product registered.")
+                .message("Success: Product registered.")
                 .build();
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }
@@ -98,7 +98,7 @@ public class ProductService {
         productRepository.deleteProduct(id);
 
         StandardResponse response = StandardResponse.builder()
-                .message("Sucess: Product has been deleted.")
+                .message("Success: Product has been deleted.")
                 .build();
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
