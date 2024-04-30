@@ -4,6 +4,7 @@ import { env } from '../../../../config/enviroments';
 import axios from 'axios';
 import { CookieService } from 'ngx-cookie-service';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { capitalize } from '../../util/capitalize.util';
 
 @Component({
   selector: 'app-register',
@@ -119,7 +120,7 @@ export class RegisterComponent {
   }
 
   setName(e: any) {
-    this.name = e.target.value;
+    this.name = capitalize(e.target.value);
   }
 
   checkInformations() {
