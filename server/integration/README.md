@@ -95,7 +95,7 @@
 - idProduct é seu código de barras
 - Retorna todos os dados do produto com base no código de barras
 
-## Purchase
+## Compra/Venda
 - [POST] - /api/purchase/v1/sell
 ```
 {
