@@ -9,7 +9,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5); 
-    z-index: 0; 
+    z-index: 1001; 
   }
   #loader-control {
     position: absolute;
@@ -19,8 +19,9 @@
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.3);
     padding: 40px;
+    z-index: 1002;
     #loader {
-      -webkit-animation: spin 2s linear infinite; /* Safari */
+      -webkit-animation: spin 0.5s linear infinite; /* Safari */
       animation: spin 2s linear infinite;
       border: 16px solid #cdcdcd;
       border-radius: 50%;
