@@ -5,6 +5,7 @@ import axios from 'axios';
 import { env } from '../../../../config/enviroments';
 import { CookieService } from 'ngx-cookie-service';
 import { ProductsToSellTableRequest } from '../../interfaces/productsToSellTableRequest.interface';
+import { capitalize } from '../../util/capitalize.util';
 
 @Component({
   selector: 'app-new-sale',
@@ -91,7 +92,7 @@ export class NewSaleComponent {
         return;
       }
       this.seeTable = true;
-      this.allData.push({name: this.capitalizeName(productName), quantity: this.quantity, price: price.toFixed(2)})
+      this.allData.push({name: capitalize(productName), quantity: this.quantity, price: price.toFixed(2)})
       this.productIds.push(productId);
       this.finalPrice = 0;
       for (let product of this.allData) {
@@ -101,14 +102,6 @@ export class NewSaleComponent {
       return;
     }
     alert("Preencha todos os campos");
-  }
-
-  capitalizeName(fullName: string) {
-    const splitedName = fullName.toLowerCase().split(' ');
-    const capitalizedName = splitedName.map((name) => {
-      return name.charAt(0).toUpperCase() + name.slice(1);
-    });
-    return capitalizedName.join(' ');
   }
 
   redirect(route: any) {

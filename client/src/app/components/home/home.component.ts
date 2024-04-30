@@ -5,6 +5,7 @@ import axios from 'axios';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
 import { HomeTableResponse } from '../../interfaces/homeTableResponse.interface';
+import { capitalize } from '../../util/capitalize.util';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,7 @@ export class HomeComponent {
   hasSeller: boolean = false;
 
   constructor(private cookieService: CookieService) {
-    this.userName = this.capitalizeName(
+    this.userName = capitalize(
       localStorage.getItem('user-name') ?? ''
     );
     this.request();
@@ -52,8 +53,8 @@ export class HomeComponent {
       const nameResponse = await axios.get(
         env.apiUrl + '/user/v1/get?id=' + product.idUser
       );
-      const userName = this.capitalizeName(nameResponse.data.body.name);
-      const productName = this.capitalizeName(productResponse.data.name);
+      const userName = capitalize(nameResponse.data.body.name);
+      const productName = capitalize(productResponse.data.name);
       const purchaseDate = new Date(
         product.purchaseDate
       ).toLocaleDateString('br');
@@ -83,14 +84,6 @@ export class HomeComponent {
       this.request();
     }
 
-  }
-
-  capitalizeName(fullName: string) {
-    const splitedName = fullName.toLowerCase().split(' ');
-    const capitalizedName = splitedName.map((name) => {
-      return name.charAt(0).toUpperCase() + name.slice(1);
-    });
-    return capitalizedName.join(' ');
   }
 
   logout() {
