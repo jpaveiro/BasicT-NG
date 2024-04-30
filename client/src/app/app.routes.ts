@@ -33,5 +33,6 @@ export const routes: Routes = [
     path: 'product/new',
     component: NewProductComponent,
     title: 'Novo produto',
+    canActivate: [AuthGuard],
   },
 ];
