@@ -1,5 +1,6 @@
 package com.gjv.basicTapi.controller;
 
+import com.gjv.basicTapi.dto.DeleteUserRequestDto;
 import com.gjv.basicTapi.dto.EditRequestDto;
 import com.gjv.basicTapi.dto.LoginRequestDto;
 import com.gjv.basicTapi.dto.UserRequestDto;
@@ -8,15 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import com.gjv.basicTapi.dto.DeleteUserRequestDto;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/api/user")
@@ -27,58 +22,37 @@ public class UserController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-    @PostMapping("/v1/set")
-    public ResponseEntity<?> setUser(@RequestBody UserRequestDto request) {
+    private ResponseEntity<?> executeAndLogElapsedTime(Supplier<ResponseEntity<?>> serviceMethod) {
         long startTime = System.currentTimeMillis();
-        ResponseEntity<?> response = userService.setUser(request);
+        ResponseEntity<?> response = serviceMethod.get();
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
+        LOGGER.info("Elapsed time: {} milliseconds.", elapsedTime);
         return response;
+    }
+
+    @PostMapping("/v1/set")
+    public ResponseEntity<?> setUser(@RequestBody UserRequestDto request) {
+        return executeAndLogElapsedTime(() -> userService.setUser(request));
     }
 
     @PostMapping("/v1/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDto request) {
-        long startTime = System.currentTimeMillis();
-        ResponseEntity<?> response = userService.login(request);
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: {} milliseconds.", elapsedTime);
-        return response;
+        return executeAndLogElapsedTime(() -> userService.login(request));
     }
 
     @PutMapping("/v1/edit")
     public ResponseEntity<?> editUser(@RequestBody EditRequestDto request) {
-        long startTime = System.currentTimeMillis();
-        ResponseEntity<?> response = userService.editUser(request);
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: {} milliseconds.", elapsedTime);
-        return response;
+        return executeAndLogElapsedTime(() -> userService.editUser(request));
     }
 
     @DeleteMapping("/v1/delete")
     public ResponseEntity<?> deleteUser(@RequestBody DeleteUserRequestDto request) {
-        long startTime = System.currentTimeMillis();
-        ResponseEntity<?> response = userService.deleteUser(request);
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: {} milliseconds.", elapsedTime);
-        return response;
+        return executeAndLogElapsedTime(() -> userService.deleteUser(request));
     }
 
-    @GetMapping("/v1/get")
+    @GetMapping("/v1/get/")
     public ResponseEntity<?> getUser(@RequestParam("id") String id) {
-        long startTime = System.currentTimeMillis();
-        ResponseEntity<?> user = userService.getUserName(id);
-        if (user == null) {
-            LOGGER.error("User not found with id: {}", id);
-            return ResponseEntity.notFound().build();
-        }
-
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: {} milliseconds.", elapsedTime);
-        return ResponseEntity.ok(user);
+        return executeAndLogElapsedTime(() -> userService.getUserName(id));
     }
 }
