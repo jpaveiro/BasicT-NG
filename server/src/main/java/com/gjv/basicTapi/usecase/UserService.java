@@ -77,7 +77,7 @@ public class UserService {
                     password
             );
 
-            return Utils.generateStandardResponseEntity("Sucess: User registered.", HttpStatus.OK);
+            return Utils.generateStandardResponseEntity("Success: User registered.", HttpStatus.OK);
         }
         catch (Exception e)
         {
@@ -88,31 +88,25 @@ public class UserService {
 
     public ResponseEntity<?> login(LoginRequestDto request)
     {
-        if (request.getEmail() == null)
-        {
-            StandardResponse response = StandardResponse.builder()
-                    .message("Error: The entered email field is invalid.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-        if (request.getPassword() == null) {
-            StandardResponse response = StandardResponse.builder()
-                    .message("Error: The entered password field is invalid.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-
         String emailEntered = request.getEmail();
         String passwordEntered = Utils.hashPassword(request.getPassword());
+
+        Map<String, String> fieldsToValidate = new HashMap<>();
+        fieldsToValidate.put("email", emailEntered);
+        fieldsToValidate.put("password", passwordEntered);
+
+        for (Map.Entry<String, String> entry : fieldsToValidate.entrySet()) {
+            ResponseEntity<StandardResponse> responseError = Utils.validateField(entry.getKey(), entry.getValue());
+            if (responseError != null) {
+                return responseError;
+            }
+        }
 
         User user = userRepository.getUser(emailEntered, passwordEntered);
 
         if (user == null || !emailEntered.equals(user.getEmail()) || !passwordEntered.equals(user.getPassword()))
         {
-            StandardResponse response = StandardResponse.builder()
-                    .message("Error: Incorrect informations are provided.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            return Utils.generateStandardResponseEntity("Error: Incorrect informations are provided.", HttpStatus.UNAUTHORIZED);
         }
 
         String token = Utils.generateToken();
@@ -124,43 +118,54 @@ public class UserService {
                 .build();
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
-    public ResponseEntity<?> editUser(EditRequestDto request)
-    {
-        if (request.getName() == null || request.getCellphone() == null ||
-        request.getEmail() == null || request.getCpf() == null ||
-        request.getRg() == null || request.getPassword() == null || request.getId() == null)
-        {
-            StandardResponse response = StandardResponse.builder()
-                    .message("Error: You must fill in all fields.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-        String id = request.getId();
-        String name = Utils.checkName(request.getName());
-        String cellphone = Utils.formatPhone(request.getCellphone());
-        String email = request.getEmail();
-        String cpf = Utils.checkCpf(request.getCpf());
-        String rg = Utils.checkRg(request.getRg());
-        String password = Utils.hashPassword(request.getPassword());
+
+    public ResponseEntity<?> editUser(EditRequestDto request) {
+
+        String name, cellphone, email, cpf, rg, password;
 
         try {
-            userRepository.editUser(name, cellphone, email, cpf, rg, password, id);
+            name = Utils.checkName(request.getName());
+            cellphone = Utils.formatPhone(request.getCellphone());
+            email = request.getEmail();
+            cpf = Utils.checkCpf(request.getCpf());
+            rg = Utils.checkRg(request.getRg());
+            password = Utils.hashPassword(request.getPassword());
+        } catch (NullPointerException e) {
+            return Utils.generateStandardResponseEntity("Error: You must fill all fields.", HttpStatus.BAD_REQUEST);
+        }
 
-            StandardResponse response = StandardResponse.builder()
-                .message("Sucess: User has been edited.")
-                .build();
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+        Map<String, String> fieldsToValidate = new HashMap<>();
+        fieldsToValidate.put("name", name);
+        fieldsToValidate.put("cellphone", cellphone);
+        fieldsToValidate.put("email", email);
+        fieldsToValidate.put("cpf", cpf);
+        fieldsToValidate.put("rg", rg);
+        fieldsToValidate.put("id", request.getId());
+
+        for (Map.Entry<String, String> entry : fieldsToValidate.entrySet()) {
+            ResponseEntity<StandardResponse> responseError = Utils.validateField(entry.getKey(), entry.getValue());
+            if (responseError != null) {
+                return responseError;
+            }
+        }
+
+        User user = userRepository.getUser(request.getId());
+        if (user == null) {
+            return Utils.generateStandardResponseEntity("Error: User does not exist.", HttpStatus.NOT_FOUND);
+        }
+
+        try {
+            userRepository.editUser(name, cellphone, email, cpf, rg, password, request.getId());
+
+            return Utils.generateStandardResponseEntity("Success: User edited.", HttpStatus.OK);
         } catch (Exception e) {
-            StandardResponse response = StandardResponse.builder()
-                .message("Error: User can't be edited.")
-                .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            LOGGER.info("Error: The system was unable to edit the user.\nDetails: {}", e.getMessage());
+            return Utils.generateStandardResponseEntity("Error: The system was unable to edit the user. Verify if users exists.", HttpStatus.UNAUTHORIZED);
         }
     }
+
     public ResponseEntity<?> deleteUser(DeleteUserRequestDto request)
     {
-        String id = request.getIdUser();
-
         User user = userRepository.getUser(request.getIdUser());
 
         ResponseEntity<?> responseError = Utils.validateField("user", user);
@@ -168,12 +173,9 @@ public class UserService {
             return responseError;
         }
 
-        userRepository.deleteUser(id);
+        userRepository.deleteUser(request.getIdUser());
 
-        StandardResponse response = StandardResponse.builder()
-                .message("Sucess: User has been deleted.")
-                .build();
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+        return Utils.generateStandardResponseEntity("Success: User has been deleted.", HttpStatus.FOUND);
     }
 
     public ResponseEntity<?> getUserName(String id) {
@@ -185,8 +187,8 @@ public class UserService {
         }
 
         UserResponse response = UserResponse.builder()
-               .name(user.getName())
-               .build();
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+                .name(user.getName())
+                .build();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
