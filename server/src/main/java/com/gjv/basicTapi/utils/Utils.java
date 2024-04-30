@@ -177,7 +177,7 @@ public class Utils {
    */
   public static ResponseEntity<StandardResponse> validateField(String fieldName, Object fieldValue) {
     if (fieldValue == null) {
-      return generateStandardResponseEntity("Error: The entered" + fieldName + "field is invalid.", HttpStatus.BAD_REQUEST);
+      return generateStandardResponseEntity("Error: The entered " + fieldName + " field is invalid.", HttpStatus.BAD_REQUEST);
     }
     return null;
   }
