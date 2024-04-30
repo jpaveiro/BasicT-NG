@@ -16,6 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.gjv.basicTapi.dto.DeleteUserRequestDto;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -26,57 +29,39 @@ public class UserService {
 
     public ResponseEntity<?> setUser(UserRequestDto request)
     {
-        if (request.getName() == null || request.getCellphone() == null ||
-        request.getEmail() == null || request.getCpf() == null ||
-        request.getStateRg() == null || request.getBirthDate() == null ||
-        request.getRg() == null || request.getPassword() == null)
+
+        String id, name, cellphone, email, cpf, rg, stateRg, password;
+        Date birthDate;
+
+        try {
+            id = Utils.generateId();
+            name = Utils.checkName(request.getName());
+            cellphone = Utils.formatPhone(request.getCellphone());
+            email = request.getEmail();
+            cpf = Utils.checkCpf(request.getCpf());
+            rg = Utils.checkRg(request.getRg());
+            stateRg = request.getStateRg();
+            birthDate = Utils.checkBirthDate(request.getBirthDate());
+            password = Utils.hashPassword(request.getPassword());
+        }
+        catch (NullPointerException e)
         {
-            StandardResponse response = StandardResponse.builder()
-                    .message("Error: You must fill in all fields.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            return Utils.generateStandardResponseEntity("Error: You must fill all fields.", HttpStatus.BAD_REQUEST);
         }
 
-        String id = Utils.generateId();
-        String name = Utils.checkName(request.getName());
-        String cellphone = Utils.formatPhone(request.getCellphone());
-        String email = request.getEmail();
-        String cpf = Utils.checkCpf(request.getCpf());
-        String rg = Utils.checkRg(request.getRg());
-        String stateRg = request.getStateRg();
-        Date birthDate = Utils.checkBirthDate(request.getBirthDate());
-        String password = Utils.hashPassword(request.getPassword());
+        Map<String, String> fieldsToValidate = new HashMap<>();
+        fieldsToValidate.put("name", name);
+        fieldsToValidate.put("cellphone", cellphone);
+        fieldsToValidate.put("email", email);
+        fieldsToValidate.put("cpf", cpf);
+        fieldsToValidate.put("rg", rg);
+        fieldsToValidate.put("birthDate", Objects.toString(birthDate));
 
-        ResponseEntity<StandardResponse> responseError;
-
-        responseError = Utils.validateField("name", name);
-        if (responseError != null) {
-            return responseError;
-        }
-
-        responseError = Utils.validateField("cellphone", cellphone);
-        if (responseError != null) {
-            return responseError;
-        }
-
-        responseError = Utils.validateField("email", email);
-        if (responseError != null) {
-            return responseError;
-        }
-
-        responseError = Utils.validateField("cpf", cpf);
-        if (responseError != null) {
-            return responseError;
-        }
-
-        responseError = Utils.validateField("rg", rg);
-        if (responseError != null) {
-            return responseError;
-        }
-
-        responseError = Utils.validateField("birthDate", birthDate);
-        if (responseError != null) {
-            return responseError;
+        for (Map.Entry<String, String> entry : fieldsToValidate.entrySet()) {
+            ResponseEntity<StandardResponse> responseError = Utils.validateField(entry.getKey(), entry.getValue());
+            if (responseError != null) {
+                return responseError;
+            }
         }
 
         try {
@@ -92,18 +77,12 @@ public class UserService {
                     password
             );
 
-            StandardResponse response = StandardResponse.builder()
-                    .message("Sucess: User registered.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.OK).body(response);
+            return Utils.generateStandardResponseEntity("Sucess: User registered.", HttpStatus.OK);
         }
         catch (Exception e)
         {
-            StandardResponse response = StandardResponse.builder()
-                    .message("Error: The system was unable to register the user. Probably user already registered.")
-                    .build();
-            LOGGER.info("Error: The system was unable to register the user.\nDetails: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            LOGGER.info("Error: The system was unable to register the user.\nDetails: {}", e.getMessage());
+            return Utils.generateStandardResponseEntity("Error: The system was unable to register the user. Probably user already registered.", HttpStatus.UNAUTHORIZED);
         }
     }
 
