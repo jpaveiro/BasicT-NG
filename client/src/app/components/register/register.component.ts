@@ -77,6 +77,7 @@ export class RegisterComponent {
 
     try {
       await axios.post(env.apiUrl + "/user/v1/set", secondParams)
+      alert("Usuário cadastrado com sucesso!");
       location.href = "/";
     } catch (err: any) {
       const message = err.response.data.message;
