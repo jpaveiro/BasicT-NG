@@ -43,7 +43,7 @@ public class UserController {
         ResponseEntity<?> response = userService.login(request);
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
+        LOGGER.info("Elapsed time: {} milliseconds.", elapsedTime);
         return response;
     }
 
@@ -53,7 +53,7 @@ public class UserController {
         ResponseEntity<?> response = userService.editUser(request);
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
+        LOGGER.info("Elapsed time: {} milliseconds.", elapsedTime);
         return response;
     }
 
@@ -63,7 +63,7 @@ public class UserController {
         ResponseEntity<?> response = userService.deleteUser(request);
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
+        LOGGER.info("Elapsed time: {} milliseconds.", elapsedTime);
         return response;
     }
 
@@ -72,13 +72,13 @@ public class UserController {
         long startTime = System.currentTimeMillis();
         ResponseEntity<?> user = userService.getUserName(id);
         if (user == null) {
-            LOGGER.error("User not found with id: " + id);
+            LOGGER.error("User not found with id: {}", id);
             return ResponseEntity.notFound().build();
         }
 
         long endTime = System.currentTimeMillis();
         long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: " + elapsedTime + " milliseconds.");
+        LOGGER.info("Elapsed time: {} milliseconds.", elapsedTime);
         return ResponseEntity.ok(user);
     }
 }

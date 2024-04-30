@@ -177,12 +177,17 @@ public class Utils {
    */
   public static ResponseEntity<StandardResponse> validateField(String fieldName, Object fieldValue) {
     if (fieldValue == null) {
-      StandardResponse response = StandardResponse.builder()
-              .message("Error: The entered " + fieldName + " field is invalid.")
-              .build();
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+      return generateStandardResponseEntity("Error: The entered" + fieldName + "field is invalid.", HttpStatus.BAD_REQUEST);
     }
     return null;
+  }
+
+  public static ResponseEntity<StandardResponse> generateStandardResponseEntity(String message, HttpStatus httpStatus)
+  {
+    StandardResponse response = StandardResponse.builder()
+            .message(message)
+            .build();
+    return ResponseEntity.status(httpStatus).body(response);
   }
 
 }
