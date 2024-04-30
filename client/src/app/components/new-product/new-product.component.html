@@ -1,1 +1,53 @@
-<p>new-product works!</p>
+<div class="new-product-component">
+  <div *ngIf="loader">
+    <app-loader />
+  </div>
+  <div class="main-container">
+    <h2>Cadastrar novo produto</h2>
+    <div class="material-control" (click)="otherPage('../home')">
+      <br />
+      <span class="material-symbols-outlined"> arrow_back </span>
+      <span> Voltar </span>
+    </div>
+    <div class="form">
+      <div>
+        <label for="name">Nome:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Digite o nome do produto."
+          (keyup)="setName($event)"
+          value="{{name}}"
+          required
+        />
+      </div>
+      <div>
+        <label for="name">Preço:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Digite o nome do produto."
+          (keyup)="setPrice($event)"
+          mask="0*.00"
+          value="{{price}}"
+          required
+        />
+      </div>
+      <div>
+        <label for="name">Código de Barras:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Digite o nome do produto."
+          (keyup)="setIdProduct($event)"
+          value="{{idProduct}}"
+          required
+        />
+      </div>
+    </div>
+    <button type="button" class="btn" (click)="register()">Cadastrar</button>
+  </div>
+</div>
