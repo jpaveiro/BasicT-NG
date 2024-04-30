@@ -42,7 +42,7 @@ public class PurchaseService {
 
     try {
       purchaseRepository.save(purchase);
-      return ResponseEntity.status(HttpStatus.ACCEPTED).body("Sucess: Product has been sold.");
+      return ResponseEntity.status(HttpStatus.ACCEPTED).body("Success: Product has been sold.");
     } catch (Exception e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: Product can't be sold.");
     }
