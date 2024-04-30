@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { env } from '../../../../config/enviroments';
 import axios from 'axios';
 import { CookieService } from 'ngx-cookie-service';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgxMaskDirective, NgxMaskPipe],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
@@ -93,9 +94,8 @@ export class RegisterComponent {
     
   }
 
-  formatRg(event: any) {
-    const rg = event.target.value.replace(/\D/g, '');
-    this.rg = rg.substring(0, 2) + '.' + rg.substring(2, 5) + '.' + rg.substring(5, 8) + '-' + rg.substring(8);
+  setRg(event: any) {
+    this.rg = event.target.value;
   }
 
   setStateRg(event: any) {
@@ -172,20 +172,12 @@ export class RegisterComponent {
     }
   }
 
-  formatCpf(event: any) {
-    let cpf = event.target.value.replace(/\D/g, '');
-    this.cpf = cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9, 11);
+  setCpf(event: any) {
+    this.cpf = event.target.value;  
   }
 
-  formatCellphone(event: any) {
-    let phone = event.target.value;
-
-    phone = phone.replace(/\D/g, '');
-
-    phone = phone.replace(/(\d{2})(\d)/, '($1) $2');
-    phone = phone.replace(/(\d{5})(\d)/, '$1-$2');
-    event.target.value = phone;
-    this.cellphone = phone;
+  setCellphone(event: any) {
+    this.cellphone = event.target.value;
   }
 
   toggleSeePassword() {

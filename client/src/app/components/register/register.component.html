@@ -102,25 +102,25 @@
     <div>
       <label for="phone">Telefone:</label>
       <input
-        type="text"
+        type="tel"
         id="phone"
         name="phone"
         placeholder="DDD + Telefone."
-        minlength="14"
-        maxlength="15"
+        mask="(00) 00000-0000"
         value="{{cellphone}}"
-        (keyup)="formatCellphone($event)" />
+        [showMaskTyped]= "true"
+        (keyup)="setCellphone($event)" />
     </div>
     <div>
       <label for="cpf">CPF:</label>
       <input
-        type="text"
+        type="tel"
         id="cpf"
         name="cpf"
         placeholder="Digite seu CPF."
-        minlength="14"
-        maxlength="14"
-        (keyup)="formatCpf($event)" 
+        (keyup)="setCpf($event)"
+        mask="000.000.000-00"
+        [showMaskTyped]= "true"
         value="{{cpf}}"/>
     </div>
     <div>
@@ -130,9 +130,9 @@
         id="rg"
         name="rg"
         placeholder="Digite seu Rg."
-        minlength="12"
-        maxlength="12"
-        (keyup)="formatRg($event)" 
+        mask="00.000.000-0"
+        (keyup)="setRg($event)" 
+        [showMaskTyped]= "true"
         value="{{rg}}"/>
     </div>
     <div>
@@ -142,10 +142,10 @@
         id="rg"
         name="rg"
         placeholder="Digite seu Rg."
-        minlength="6"
-        maxlength="6"
+        mask="SSS/SS"
         (keyup)="setStateRg($event)" 
-        value="{{stateRg}}"/>
+        value="{{stateRg}}"
+        [showMaskTyped]= "true"/>
     </div>
     <div>
       <button type="submit" (click)="checkInformations()">Cadastrar</button>
