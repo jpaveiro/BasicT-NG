@@ -8,7 +8,7 @@
     <br />
     <div>
       <button type="submit" (click)="redirect('sell')" class="btn">Nova venda</button>
-      <button type="submit" (click)="redirect('product/new')" class="btn">Cadastrar produto</button>
+      <button type="submit" (click)="redirect('product/')" class="btn">Produtos</button>
       <button type="submit" (click)="logout()" class="btn btn-exit">Sair</button>
     </div>
     <br />
@@ -18,7 +18,7 @@
       <button class="btn" (click)="advancePage(false)"> Anterior </button>
       <button class="btn" (click)="advancePage(true)"> Avançar </button>
     </div>
-    <br />
+    <br/>
     <div *ngIf="hasSeller">
       <table>
         <tr>
