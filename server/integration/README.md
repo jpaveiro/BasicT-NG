@@ -79,3 +79,18 @@
 - Todos os dados são obrigatórios
 - idProduct é seu código de barras
 - O nome do produto sera transformado para upperCase independente do jeito escrito
+
+- [POST] - /api/product/v1/get
+```
+{
+    "idProduct": "12345678",
+}
+>>> {
+    "idProduct": "12345678",
+    "name": "MAIONESE",
+    "price": 8.47,
+    "createdAt": "2024-04-27 19:45:18"
+}
+```
+- idProduct é seu código de barras
+- Retorna todos os dados do produto com base no código de barras
