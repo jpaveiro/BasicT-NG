@@ -36,6 +36,8 @@ public class ProductService {
         String barCode = Utils.checkBarCode(request.getIdProduct());
         String productName = request.getName();
         double price = request.getPrice();
+        barCode.toUpperCase();
+        productName.toUpperCase();
 
         ResponseEntity<?> responseBarCode = Utils.validateField("idProduct", barCode);
         if (responseBarCode != null)

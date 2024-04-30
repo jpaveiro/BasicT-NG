@@ -13,7 +13,7 @@
     </div>
     <br />
     <h2 *ngIf="hasSeller">Ultimas vendas</h2>
-    <p *ngIf="hasSeller">Página: {{page}}</p>
+    <p *ngIf="hasSeller" style="margin-bottom: 20px;">Página: {{page}}</p>
     <div *ngIf="hasSeller">
       <button class="btn" (click)="advancePage(false)"> Anterior </button>
       <button class="btn" (click)="advancePage(true)"> Avançar </button>
