@@ -8,6 +8,9 @@ import com.gjv.basicTapi.model.User;
 import com.gjv.basicTapi.model.UserResponse;
 import com.gjv.basicTapi.repository.UserRepository;
 import com.gjv.basicTapi.utils.Utils;
+
+import org.antlr.v4.runtime.tree.pattern.TokenTagToken;
+import org.apache.tomcat.util.http.parser.TokenList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.gjv.basicTapi.dto.DeleteUserRequestDto;
+import java.util.List;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -108,11 +114,15 @@ public class UserService {
         {
             return Utils.generateStandardResponseEntity("Error: Incorrect informations are provided.", HttpStatus.UNAUTHORIZED);
         }
-
-        String token = Utils.generateToken();
+        // Gera 10 tokens e os armazena num array chamado TokenList
+        List<String> tokenList = new ArrayList<>();
+        for (int c = 0; c < 9; c++) {
+            String token = Utils.generateToken();
+            tokenList.add(token);
+        }
 
         UserResponse response = UserResponse.builder()
-                .token(token)
+                .token(tokenList)
                 .name(user.getName())
                 .userId(user.getId())
                 .build();
