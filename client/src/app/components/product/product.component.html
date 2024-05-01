@@ -1,1 +1,16 @@
-<p>product works!</p>
+<div class="product-component">
+  <div class="main-container">
+    <h2>O que deseja fazer hoje com os produtos?</h2>
+    <div>
+      <span (click)="goBack()">
+        <span class="material-symbols-outlined"> arrow_back </span>
+        Voltar
+      </span>
+      <br />
+    </div>
+    <div>
+      <button type="submit" (click)="redirect('product/new')" class="btn">Novo produto</button>
+      <button type="submit" (click)="redirect('product/edit')" class="btn">Editar</button>
+    </div>
+  </div>
+</div>

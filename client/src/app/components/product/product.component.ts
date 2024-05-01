@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { redirect } from '../../util/redirect.util';
 
 @Component({
   selector: 'app-product',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './product.component.scss'
 })
 export class ProductComponent {
+  goBack() {
+    window.history.back();
+  }
 
+  redirect(where: string) {
+    redirect(where);
+  }
 }
