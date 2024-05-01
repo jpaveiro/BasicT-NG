@@ -50,4 +50,16 @@ public class ProductController {
         LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
         return response;
     }
+    @GetMapping("v1/getAll")
+    public ResponseEntity<?> getAll(@RequestParam("page") int page) {
+        if (page <= 0) {
+            return null;
+        }
+        long startTime = System.currentTimeMillis();
+        ResponseEntity<?> response = productService.getAll(page);
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
+        return response;
+    }
 }

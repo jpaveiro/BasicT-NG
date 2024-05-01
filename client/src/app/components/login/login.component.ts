@@ -90,6 +90,9 @@ export class LoginComponent implements AfterViewInit {
       const response = await axios.post(env.apiUrl + "/user/v1/login", params);
       this.saveCookie("basict:user-token", response.data.token);
       this.saveCookie("basict:user-id", response.data.userId);
+      if (response.data.name.toUpperCase() == "ADMIN") {
+        this.saveCookie("basict:super-user-token", Math.random().toString(36).substring(2, 15));
+      }
       localStorage.setItem("user-name",  response.data.name);
       location.href = "/home";
     } catch (error) {

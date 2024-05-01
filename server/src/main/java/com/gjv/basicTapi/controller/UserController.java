@@ -51,7 +51,7 @@ public class UserController {
         return executeAndLogElapsedTime(() -> userService.deleteUser(request));
     }
 
-    @GetMapping("/v1/get/")
+    @GetMapping("/v1/get")
     public ResponseEntity<?> getUser(@RequestParam("id") String id) {
         return executeAndLogElapsedTime(() -> userService.getUserName(id));
     }
