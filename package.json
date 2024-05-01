@@ -1,6 +1,7 @@
 {
   "name": "basic-t",
   "description": "Um sistema PDV ",
+  "version": "0.0.1",
   "authors": [
     "Gabriel Araújo Lima <gabriel.araujo2902@outlook.com>",
     "João Pedro Aveiro Pereira da Silva <joaopedroaveiro2016@gmail.com>",
@@ -10,5 +11,10 @@
     "type": "git",
     "url": "https://github.com/jpaveiro/BasicT-NG.git"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "client:start": "cd client && npx ng serve",
+    "client:install": "cd client && npm install",
+    "client:build": "cd client && ng build"
+  }
 }

@@ -1,0 +1,16 @@
+.not-found-component {
+    width: 100%;
+    height: calc(100vh - 95.96px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .main-container {
+        padding: 40px;
+        box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.3);
+        a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+    }
+}

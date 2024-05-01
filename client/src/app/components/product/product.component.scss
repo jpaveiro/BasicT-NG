@@ -1,0 +1,34 @@
+.product-component {
+  padding: 40px;
+  .main-container {
+    .btn {
+      height: 35px;
+      border: 0;
+      background-color: #424242;
+      color: white;
+      padding: 0 20px;
+      margin-right: 15px;
+    }
+    .btn:last-child {
+      margin-right: 0;
+    }
+    div {
+      table {
+        width: 100%; 
+        border-collapse: collapse; 
+      }
+      
+      th, td {
+        padding: 8px; 
+        border: 1px solid #dddddd; 
+      }
+    }
+    div {
+      span {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}

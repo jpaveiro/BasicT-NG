@@ -1,0 +1,63 @@
+.login-component {
+  height: calc(100vh - 95.96px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .form {
+    box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.3);
+    display: flex;
+    // align-items: center;
+    justify-content: center;
+    background-color: white;
+    flex-direction: column;
+    width: 40%;
+    // height: 310px;
+    padding: 40px;
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      input,
+      button {
+        height: 35px;
+      }
+      input {
+        width: 80%;
+        border: 0;
+        padding: 0 10px 5px 10px;
+        border-bottom: 2px solid black;
+      }
+      input:focus {
+        outline: none;
+      }
+      button {
+        width: 100%;
+        border: 0;
+        background-color: #424242;
+        color: white;
+      }
+      .input_icons {
+        position: absolute;
+      }
+      #visibility_icon {
+        cursor: pointer;
+      }
+    }
+    div:last-child {
+      margin: 0;
+    }
+    #password_div {
+      justify-content: end;
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+  @media only screen and (max-width: 900px) {
+    .form {
+      width: 95% !important;
+    }
+  }
+}

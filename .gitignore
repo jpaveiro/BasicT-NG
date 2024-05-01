@@ -74,3 +74,12 @@
 /client/.DS_Store
 /client/Thumbs.db
 .DS_Store
+.idea/.gitignore
+.idea/basicT-NG.iml
+.idea/vcs.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/jarRepositories.xml
+.idea/encodings.xml
+.idea/compiler.xml
+.idea/uiDesigner.xml

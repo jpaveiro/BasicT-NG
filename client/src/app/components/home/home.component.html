@@ -1,0 +1,43 @@
+<div class="home-component">
+  <div *ngIf="loader">
+    <app-loader />
+  </div>
+  <div class="main-container">
+    <h2>Bem vindo, {{userName}}</h2>
+    <p>O que vamos fazer hoje?</p>
+    <br />
+    <div>
+      <button type="submit" (click)="redirect('sell')" class="btn">Nova venda</button>
+      <button type="submit" (click)="redirect('product/')" class="btn">Produtos</button>
+      <button type="submit" (click)="logout()" class="btn btn-exit">Sair</button>
+    </div>
+    <br />
+    <h2 *ngIf="hasSeller">Ultimas vendas</h2>
+    <p *ngIf="hasSeller" style="margin-bottom: 20px;">Página: {{page}}</p>
+    <div *ngIf="hasSeller">
+      <button class="btn" (click)="advancePage(false)"> Anterior </button>
+      <button class="btn" (click)="advancePage(true)"> Avançar </button>
+    </div>
+    <br/>
+    <div *ngIf="hasSeller">
+      <table>
+        <tr>
+          <th>Vendedor</th>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Preço</th>
+          <th>Data da venda</th>
+          <th>Código da compra</th>
+        </tr>
+        <tr *ngFor="let sale of responseData">
+          <td>{{ sale.userName }}</td>
+          <td>{{ sale.productName }}</td>
+          <td>{{ sale.quantity }}</td>
+          <td>{{ sale.price }}</td>
+          <td>{{ sale.purchaseDate }}</td>
+          <td>{{ sale.purchaseCode }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
