@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import axios from 'axios';
 import { env } from '../../../../config/enviroments';
 import { ProductTableResponse } from '../../interfaces/productTableResponse.interface';
+import { capitalize } from '../../util/capitalize.util';
 
 @Component({
   selector: 'app-product',
@@ -39,7 +40,7 @@ export class ProductComponent {
       const data = response.data.content;
       
       for (let product of data) {
-        this.products.push({idProduct: product.idProduct, name: product.name, price: product.price});
+        this.products.push({idProduct: product.idProduct, name: capitalize(product.name), price: product.price});
       }
 
       this.seeTable = true;
