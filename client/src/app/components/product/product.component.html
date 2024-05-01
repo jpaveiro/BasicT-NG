@@ -1,4 +1,7 @@
 <div class="product-component">
+  <div *ngIf="loader">
+    <app-loader></app-loader>
+  </div>
   <div class="main-container">
     <h2>O que deseja fazer hoje com os produtos?</h2>
     <div>
@@ -11,6 +14,22 @@
     <div>
       <button type="submit" (click)="redirect('product/new')" class="btn">Novo produto</button>
       <button type="submit" (click)="redirect('product/edit')" class="btn">Editar</button>
+    </div>
+    <br />
+    <div *ngIf="seeTable">
+      <h2>Últimos produtos cadastrados.</h2>
+      <table>
+        <tr>
+          <th>Código de Barras</th>
+          <th>Nome</th>
+          <th>Preço</th>
+        </tr>
+        <tr *ngFor="let product of products">
+          <td>{{product.idProduct}}</td>
+          <td>{{product.name}}</td>
+          <td>{{product.price}}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
