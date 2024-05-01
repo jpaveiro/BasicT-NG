@@ -53,7 +53,7 @@ export class HomeComponent {
       const nameResponse = await axios.get(
         env.apiUrl + '/user/v1/get?id=' + product.idUser
       );
-      const userName = capitalize(nameResponse.data.body.name);
+      const userName = capitalize(nameResponse.data.name);
       const productName = capitalize(productResponse.data.name);
       const purchaseDate = new Date(
         product.purchaseDate
