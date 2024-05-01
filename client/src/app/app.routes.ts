@@ -9,11 +9,6 @@ import { ProductComponent } from './components/product/product.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 export const routes: Routes = [
-  {
-    path: '**',
-    component: NotFoundComponent,
-    title: 'Página não encontrada'
-  },
   { 
     path: '', 
     component: LoginComponent, 
@@ -47,5 +42,10 @@ export const routes: Routes = [
     component: NewProductComponent,
     title: 'Novo produto',
     canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+    title: 'Página não encontrada'
   },
 ];
