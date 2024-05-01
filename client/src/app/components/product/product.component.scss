@@ -13,6 +13,17 @@
       margin-right: 0;
     }
     div {
+      table {
+        width: 100%; 
+        border-collapse: collapse; 
+      }
+      
+      th, td {
+        padding: 8px; 
+        border: 1px solid #dddddd; 
+      }
+    }
+    div {
       span {
         cursor: pointer;
         display: flex;
