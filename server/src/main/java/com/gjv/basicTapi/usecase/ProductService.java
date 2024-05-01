@@ -106,7 +106,7 @@ public class ProductService {
                 PageRequest.of(page - 1, 7, Sort.by(Sort.Direction.DESC, "createdAt")));
 
         if (productPage.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no purchase found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no products found");
         }
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(productPage);
