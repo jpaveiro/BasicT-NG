@@ -97,6 +97,7 @@ export class LoginComponent implements AfterViewInit {
       location.href = "/home";
     } catch (error) {
       console.error("Erro ao efetuar login:", error);
+      alert("Não foi possível fazer login, talvez o usuário não exista.")
     } finally {
       this.loading = false;
     }
