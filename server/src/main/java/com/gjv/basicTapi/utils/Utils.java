@@ -12,6 +12,8 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.UUID;
+import java.util.function.Supplier;
+import org.slf4j.Logger;
 
 public class Utils {
 
@@ -190,4 +192,12 @@ public class Utils {
     return ResponseEntity.status(httpStatus).body(response);
   }
 
+  public static ResponseEntity<?> executeAndLogElapsedTime(Supplier<ResponseEntity<?>> serviceMethod, Logger LOGGER) {
+    long startTime = System.currentTimeMillis();
+    ResponseEntity<?> response = serviceMethod.get();
+    long endTime = System.currentTimeMillis();
+    long elapsedTime = endTime - startTime;
+    LOGGER.info("Elapsed time: {} milliseconds.", elapsedTime);
+    return response;
+  }
 }
