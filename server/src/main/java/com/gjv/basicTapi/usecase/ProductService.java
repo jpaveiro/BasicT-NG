@@ -25,6 +25,12 @@ public class ProductService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.class);
 
+    /**
+     * Registra um novo produto no sistema com base nas informações fornecidas.
+     *
+     * @param request Um objeto SetProductRequestDto contendo as informações do novo produto a ser registrado.
+     * @return ResponseEntity indicando se o produto foi registrado com sucesso ou uma resposta de erro se algumas das informações necessárias não for fornecida ou se ocorrer algum problema durante o registro.
+     */
     public ResponseEntity<?> setProduct(SetProductRequestDto request) {
         if (request.getIdProduct() == null || request.getName() == null
                 || request.getPrice() == null) {
@@ -60,11 +66,17 @@ public class ProductService {
                     .message(
                             "Error: The system was unable to register the product. Probably product already registered.")
                     .build();
-            LOGGER.info("Error: The system was unable to register the product.\nDetails: " + e.getMessage());
+            LOGGER.info("Error: The system was unable to register the product.\nDetails: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
     }
 
+    /**
+     * Retorna as informações de um produto com base no ID fornecido.
+     *
+     * @param request Um objeto GetProductRequestDto contendo o ID do produto a ser recuperado.
+     * @return ResponseEntity contendo as informações do produto solicitado ou uma resposta de erro se o ID do produto não for fornecido ou se o produto não for encontrado.
+     */
     public ResponseEntity<?> getProduct(GetProductRequestDto request) {
         if (request.getIdProduct() == null) {
             StandardResponse response = StandardResponse.builder()
@@ -83,6 +95,12 @@ public class ProductService {
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
+    /**
+     * Remove um produto do sistema com base no ID fornecido.
+     *
+     * @param request Um objeto DeleteProductRequestDto contendo o ID do produto a ser removido.
+     * @return ResponseEntity indicando que o produto foi removido com sucesso ou uma resposta de erro se o ID do produto não for fornecido.
+     */
     public ResponseEntity<?> deleteProduct(DeleteProductRequestDto request) {
         String id = request.getIdProduct();
         if (request.getIdProduct() == null) {
@@ -101,6 +119,12 @@ public class ProductService {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
 
+    /**
+     * Retorna uma lista paginada de todos os produtos registrados no sistema.
+     *
+     * @param page O número da página a ser recuperada.
+     * @return ResponseEntity contendo a lista paginada de produtos ou uma resposta de erro se nenhum produto for encontrado.
+     */
     public ResponseEntity<?> getAll(int page) {
         Page<Product> productPage = productRepository.findAll(
                 PageRequest.of(page - 1, 7, Sort.by(Sort.Direction.DESC, "createdAt")));
