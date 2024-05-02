@@ -4,6 +4,7 @@ import com.gjv.basicTapi.dto.DeleteProductRequestDto;
 import com.gjv.basicTapi.dto.GetProductRequestDto;
 import com.gjv.basicTapi.dto.SetProductRequestDto;
 import com.gjv.basicTapi.usecase.ProductService;
+import com.gjv.basicTapi.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,44 +23,26 @@ public class ProductController {
     @PostMapping("/v1/set")
     public ResponseEntity<?> setProduct(@RequestBody SetProductRequestDto request)
     {
-        long startTime = System.currentTimeMillis();
-        ResponseEntity<?> response = productService.setProduct(request);
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
-        return response;
+        return Utils.executeAndLogElapsedTime(() -> productService.setProduct(request), LOGGER);
     }
 
     @PostMapping("/v1/get")
     public ResponseEntity<?> getProduct(@RequestBody GetProductRequestDto request)
     {
-        long startTime = System.currentTimeMillis();
-        ResponseEntity<?> response = productService.getProduct(request);
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
-        return response;
+        return Utils.executeAndLogElapsedTime(() -> productService.getProduct(request), LOGGER);
     }
+
     @DeleteMapping("/v1/delete")
     public ResponseEntity<?> deleteProduct(@RequestBody DeleteProductRequestDto request)
     {
-        long startTime = System.currentTimeMillis();
-        ResponseEntity<?> response = productService.deleteProduct(request);
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
-        return response;
+        return Utils.executeAndLogElapsedTime(() -> productService.deleteProduct(request), LOGGER);
     }
+
     @GetMapping("v1/getAll")
     public ResponseEntity<?> getAll(@RequestParam("page") int page) {
         if (page <= 0) {
             return null;
         }
-        long startTime = System.currentTimeMillis();
-        ResponseEntity<?> response = productService.getAll(page);
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        LOGGER.info("Elapsed time: " + elapsedTime + " milisseconds.");
-        return response;
+        return Utils.executeAndLogElapsedTime(() -> productService.getAll(page), LOGGER);
     }
 }
