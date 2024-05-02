@@ -18,6 +18,12 @@ public class PurchaseService {
   @Autowired
   private PurchaseRepository purchaseRepository;
 
+  /**
+   * Retorna uma lista paginada de todas as compras registradas no sistema.
+   *
+   * @param page O número da página a ser recuperada.
+   * @return ResponseEntity contendo a lista paginada de compras ou uma resposta de erro se nenhuma compra for encontrada.
+   */
   public ResponseEntity<?> getAll(int page) {
     Page<Purchase> purchasePage = purchaseRepository.findAll(
         PageRequest.of(page - 1, 7, Sort.by(Sort.Direction.DESC, "purchaseDate"))
@@ -30,6 +36,12 @@ public class PurchaseService {
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(purchasePage);
   }
 
+  /**
+   * Registra a venda de um produto no sistema com base nas informações fornecidas.
+   *
+   * @param purchaseInfo Um objeto NewPurchaseRequestDto contendo as informações da nova venda.
+   * @return ResponseEntity indicando se a venda do produto foi registrada com sucesso ou uma resposta de erro se ocorrer algum problema durante o processo.
+   */
   public ResponseEntity<?> sellProduct(NewPurchaseRequestDto purchaseInfo) {
     Purchase purchase = Purchase.builder()
        .idUser(purchaseInfo.getUserId())

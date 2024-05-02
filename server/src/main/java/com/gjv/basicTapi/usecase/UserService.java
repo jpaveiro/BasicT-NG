@@ -33,6 +33,12 @@ public class UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
+    /**
+     * Registra um novo usuário no sistema com base nos dados fornecidos.
+     *
+     * @param request Um objeto UserRequestDto contendo as informações do novo usuário a ser registrado.
+     * @return ResponseEntity indicando que o usuário foi registrado com sucesso ou uma resposta de erro se ocorrer algum problema durante o registro.
+     */
     public ResponseEntity<?> setUser(UserRequestDto request)
     {
 
@@ -92,6 +98,12 @@ public class UserService {
         }
     }
 
+    /**
+     * Autentica um usuário no sistema com base nas credenciais fornecidas.
+     *
+     * @param request Um objeto LoginRequestDto contendo o email e senha do usuário para autenticação.
+     * @return ResponseEntity indicando que o usuário foi autenticado com sucesso e fornecendo informações do usuário, incluindo tokens de acesso, ou uma resposta de erro se as credenciais estiverem incorretas.
+     */
     public ResponseEntity<?> login(LoginRequestDto request)
     {
         String emailEntered = request.getEmail();
@@ -114,6 +126,7 @@ public class UserService {
         {
             return Utils.generateStandardResponseEntity("Error: Incorrect informations are provided.", HttpStatus.UNAUTHORIZED);
         }
+
         // Gera 10 tokens e os armazena num array chamado TokenList
         List<String> tokenList = new ArrayList<>();
         for (int c = 0; c < 9; c++) {
@@ -129,6 +142,12 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
 
+    /**
+     * Edita as informações de um usuário no sistema com base nos dados fornecidos.
+     *
+     * @param request Um objeto EditRequestDto contendo as informações a serem editadas do usuário.
+     * @return ResponseEntity indicando que as informações do usuário foram editadas com sucesso ou uma resposta de erro se ocorrer algum problema durante a edição.
+     */
     public ResponseEntity<?> editUser(EditRequestDto request) {
 
         String name, cellphone, email, cpf, rg, password;
@@ -174,6 +193,12 @@ public class UserService {
         }
     }
 
+    /**
+     * Remove um usuário do sistema com base no ID fornecido.
+     *
+     * @param request Um objeto DeleteUserRequestDto contendo o ID do usuário a ser removido.
+     * @return ResponseEntity indicando que o usuário foi removido com sucesso ou uma resposta de erro se o usuário não for encontrado.
+     */
     public ResponseEntity<?> deleteUser(DeleteUserRequestDto request)
     {
         User user = userRepository.getUser(request.getIdUser());
@@ -188,6 +213,12 @@ public class UserService {
         return Utils.generateStandardResponseEntity("Success: User has been deleted.", HttpStatus.FOUND);
     }
 
+    /**
+     * Retorna o nome do usuário com base no ID fornecido.
+     *
+     * @param id O ID do usuário.
+     * @return ResponseEntity contendo o nome do usuário, ou uma resposta de erro se o usuário não for encontrado.
+     */
     public ResponseEntity<?> getUserName(String id) {
         User user = userRepository.getUser(id);
 
