@@ -9,8 +9,6 @@ import com.gjv.basicTapi.model.UserResponse;
 import com.gjv.basicTapi.repository.UserRepository;
 import com.gjv.basicTapi.utils.Utils;
 
-import org.antlr.v4.runtime.tree.pattern.TokenTagToken;
-import org.apache.tomcat.util.http.parser.TokenList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,7 +119,7 @@ public class UserService {
 
         User user = userRepository.getUser(emailEntered, passwordEntered);
 
-        if (user == null || !emailEntered.equals(user.getEmail()) || !passwordEntered.equals(user.getPassword()))
+        if (user == null)
         {
             return Utils.generateStandardResponseEntity("Error: Incorrect informations are provided.", HttpStatus.UNAUTHORIZED);
         }
@@ -220,9 +218,9 @@ public class UserService {
     public ResponseEntity<?> getUserName(String id) {
         User user = userRepository.getUser(id);
 
-        ResponseEntity<?> responseError = Utils.validateField("user", user);
-        if (responseError != null) {
-            return responseError;
+        if (user == null)
+        {
+            return Utils.generateStandardResponseEntity("Error: User does not exist.", HttpStatus.NOT_FOUND);
         }
 
         UserResponse response = UserResponse.builder()
