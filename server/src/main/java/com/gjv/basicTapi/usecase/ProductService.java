@@ -5,7 +5,6 @@ import com.gjv.basicTapi.dto.GetProductRequestDto;
 import com.gjv.basicTapi.dto.SetProductRequestDto;
 import com.gjv.basicTapi.model.Product;
 import com.gjv.basicTapi.model.StandardResponse;
-import com.gjv.basicTapi.model.User;
 import com.gjv.basicTapi.repository.ProductRepository;
 import com.gjv.basicTapi.utils.Utils;
 import org.slf4j.Logger;
@@ -17,6 +16,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class ProductService {
@@ -31,43 +34,47 @@ public class ProductService {
      * @param request Um objeto SetProductRequestDto contendo as informações do novo produto a ser registrado.
      * @return ResponseEntity indicando se o produto foi registrado com sucesso ou uma resposta de erro se algumas das informações necessárias não for fornecida ou se ocorrer algum problema durante o registro.
      */
-    public ResponseEntity<?> setProduct(SetProductRequestDto request) {
-        if (request.getIdProduct() == null || request.getName() == null
-                || request.getPrice() == null) {
-            StandardResponse response = StandardResponse.builder()
-                    .message("Error: You must fill in all fields.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    public ResponseEntity<?> setProduct(SetProductRequestDto request)
+    {
+        String barCode, productName;
+        double price;
+
+        try
+        {
+            barCode = Utils.checkBarCode(request.getIdProduct().toUpperCase());
+            productName = request.getName().toUpperCase();
+            price = request.getPrice();
+        }
+        catch (NullPointerException e)
+        {
+            return Utils.generateStandardResponseEntity("Error: You must fill all fields.", HttpStatus.BAD_REQUEST);
         }
 
-        String barCode = Utils.checkBarCode(request.getIdProduct());
-        String productName = request.getName();
-        double price = request.getPrice();
-        barCode.toUpperCase();
-        productName.toUpperCase();
+        Map<String, String> fieldsToValidate = new HashMap<>();
+        fieldsToValidate.put("barCode", barCode);
+        fieldsToValidate.put("productName", productName);
+        fieldsToValidate.put("price", Objects.toString(price));
 
-        ResponseEntity<?> responseBarCode = Utils.validateField("idProduct", barCode);
-        if (responseBarCode != null) {
-            return responseBarCode;
+        for (Map.Entry<String, String> entry : fieldsToValidate.entrySet()) {
+            ResponseEntity<StandardResponse> responseError = Utils.validateField(entry.getKey(), entry.getValue());
+            if (responseError != null) {
+                return responseError;
+            }
         }
 
-        try {
+        try
+        {
             productRepository.setProduct(
                     barCode,
                     productName,
                     price);
 
-            StandardResponse response = StandardResponse.builder()
-                    .message("Success: Product registered.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (Exception e) {
-            StandardResponse response = StandardResponse.builder()
-                    .message(
-                            "Error: The system was unable to register the product. Probably product already registered.")
-                    .build();
+            return Utils.generateStandardResponseEntity("Success: Product registered.", HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
             LOGGER.info("Error: The system was unable to register the product.\nDetails: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            return Utils.generateStandardResponseEntity("Error: The system was unable to register the product. Probably product already registered.", HttpStatus.UNAUTHORIZED);
         }
     }
 
@@ -77,12 +84,10 @@ public class ProductService {
      * @param request Um objeto GetProductRequestDto contendo o ID do produto a ser recuperado.
      * @return ResponseEntity contendo as informações do produto solicitado ou uma resposta de erro se o ID do produto não for fornecido ou se o produto não for encontrado.
      */
-    public ResponseEntity<?> getProduct(GetProductRequestDto request) {
+    public ResponseEntity<?> getProduct(GetProductRequestDto request)
+    {
         if (request.getIdProduct() == null) {
-            StandardResponse response = StandardResponse.builder()
-                    .message("Error: You must fill in all fields.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            return Utils.generateStandardResponseEntity("Error: You must fill in all fields.", HttpStatus.BAD_REQUEST);
         }
 
         Product product = productRepository.getProduct(request.getIdProduct());
@@ -101,22 +106,23 @@ public class ProductService {
      * @param request Um objeto DeleteProductRequestDto contendo o ID do produto a ser removido.
      * @return ResponseEntity indicando que o produto foi removido com sucesso ou uma resposta de erro se o ID do produto não for fornecido.
      */
-    public ResponseEntity<?> deleteProduct(DeleteProductRequestDto request) {
+    public ResponseEntity<?> deleteProduct(DeleteProductRequestDto request)
+    {
         String id = request.getIdProduct();
         if (request.getIdProduct() == null) {
-            StandardResponse response = StandardResponse.builder()
-                    .message("Error: id not provided.")
-                    .build();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            return Utils.generateStandardResponseEntity("Error: You must fill in all fields.", HttpStatus.BAD_REQUEST);
         }
+
         Product product = productRepository.getProduct(request.getIdProduct());
+
+        ResponseEntity<?> responseError = Utils.validateField("product", product);
+        if (responseError != null) {
+            return responseError;
+        }
 
         productRepository.deleteProduct(id);
 
-        StandardResponse response = StandardResponse.builder()
-                .message("Success: Product has been deleted.")
-                .build();
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+        return Utils.generateStandardResponseEntity("Success: Product has been deleted.", HttpStatus.OK);
     }
 
     /**
@@ -125,12 +131,13 @@ public class ProductService {
      * @param page O número da página a ser recuperada.
      * @return ResponseEntity contendo a lista paginada de produtos ou uma resposta de erro se nenhum produto for encontrado.
      */
-    public ResponseEntity<?> getAll(int page) {
+    public ResponseEntity<?> getAll(int page)
+    {
         Page<Product> productPage = productRepository.findAll(
                 PageRequest.of(page - 1, 7, Sort.by(Sort.Direction.DESC, "createdAt")));
 
         if (productPage.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no products found");
+            return Utils.generateStandardResponseEntity("Error: no products found", HttpStatus.NOT_FOUND);
         }
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(productPage);

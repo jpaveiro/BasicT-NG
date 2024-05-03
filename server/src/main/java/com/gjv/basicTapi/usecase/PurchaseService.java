@@ -24,13 +24,14 @@ public class PurchaseService {
    * @param page O número da página a ser recuperada.
    * @return ResponseEntity contendo a lista paginada de compras ou uma resposta de erro se nenhuma compra for encontrada.
    */
-  public ResponseEntity<?> getAll(int page) {
+  public ResponseEntity<?> getAll(int page)
+  {
     Page<Purchase> purchasePage = purchaseRepository.findAll(
         PageRequest.of(page - 1, 7, Sort.by(Sort.Direction.DESC, "purchaseDate"))
     );
 
     if (purchasePage.isEmpty()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: no purchase found");
+      return Utils.generateStandardResponseEntity("Error: No purchase found", HttpStatus.NOT_FOUND);
     }
 
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(purchasePage);
@@ -42,7 +43,8 @@ public class PurchaseService {
    * @param purchaseInfo Um objeto NewPurchaseRequestDto contendo as informações da nova venda.
    * @return ResponseEntity indicando se a venda do produto foi registrada com sucesso ou uma resposta de erro se ocorrer algum problema durante o processo.
    */
-  public ResponseEntity<?> sellProduct(NewPurchaseRequestDto purchaseInfo) {
+  public ResponseEntity<?> sellProduct(NewPurchaseRequestDto purchaseInfo)
+  {
     Purchase purchase = Purchase.builder()
        .idUser(purchaseInfo.getUserId())
        .idProduct(purchaseInfo.getProductId())
@@ -54,9 +56,9 @@ public class PurchaseService {
 
     try {
       purchaseRepository.save(purchase);
-      return ResponseEntity.status(HttpStatus.ACCEPTED).body("Success: Product has been sold.");
+      return Utils.generateStandardResponseEntity("Success: Product has been sold.", HttpStatus.OK);
     } catch (Exception e) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: Product can't be sold.");
+      return Utils.generateStandardResponseEntity("Error: Product can't be sold.", HttpStatus.BAD_REQUEST);
     }
   }
 }
