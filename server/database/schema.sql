@@ -36,5 +36,11 @@ CREATE TABLE purchases(
   FOREIGN KEY (id_prod) REFERENCES products(id_product)
 );
 
-SELECT * 
-FROM Users;
+SELECT *
+FROM users;
+
+SELECT *
+FROM products;
+
+SELECT *
+FROM purchases;
