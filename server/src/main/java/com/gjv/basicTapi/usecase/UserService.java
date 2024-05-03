@@ -41,7 +41,6 @@ public class UserService {
      */
     public ResponseEntity<?> setUser(UserRequestDto request)
     {
-
         String id, name, cellphone, email, cpf, rg, stateRg, password;
         Date birthDate;
 
@@ -127,7 +126,6 @@ public class UserService {
             return Utils.generateStandardResponseEntity("Error: Incorrect informations are provided.", HttpStatus.UNAUTHORIZED);
         }
 
-        // Gera 10 tokens e os armazena num array chamado TokenList
         List<String> tokenList = new ArrayList<>();
         for (int c = 0; c < 9; c++) {
             String token = Utils.generateToken();
