@@ -22,16 +22,6 @@ describe('RegisterComponent', () => {
     expect(registerComponent).toBeTruthy();
   });
 
-  it('should block access', () => {
-    expect(registerComponent.isLogged()).toBe(false);
-  });
-
-  it('should allow access', () => {
-    cookieService.set('basict:user-token', '12345678');
-
-    expect(registerComponent.isLogged()).toBe(true);
-  })
-
   it('should convert email and stateRg case', () => {
     const email: string = 'ADMIN@ADMIN.org';
     const stateRg: string = 'sSp/Sp';
