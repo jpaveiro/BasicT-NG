@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
 @Data
 @Builder
@@ -34,7 +36,7 @@ public class Purchase {
     private double totalAmount;
 
     @Column(name = "purchase_date")
-    private String purchaseDate;
+    private Date purchaseDate;
 
     @Column(name = "purchase_code")
     private String purchaseCode;
