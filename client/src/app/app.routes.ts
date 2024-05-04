@@ -12,40 +12,40 @@ export const routes: Routes = [
   { 
     path: '', 
     component: LoginComponent, 
-    title: 'Login' 
+    title: 'Login | BasicT' 
   },
   {
     path: 'home',
     component: HomeComponent,
-    title: 'Inicio',
+    title: 'Início| BasicT',
     canActivate: [AuthGuard],
   },
   {
     path: 'sell',
     component: NewSaleComponent,
-    title: 'Nova Venda',
+    title: 'Caixa | BasicT',
     canActivate: [AuthGuard],
   },
   { 
     path: 'register', 
     component: RegisterComponent,
-    title: 'Registrar'
+    title: 'Cadastro de usuário | BasicT'
   },
   {
     path: 'product',
     component: ProductComponent,
-    title: 'Produtos',
+    title: 'Visualizar produtos | BasicT',
     canActivate: [AuthGuard],
   },
   {
     path: 'product/new',
     component: NewProductComponent,
-    title: 'Novo produto',
+    title: 'Cadastrar produto | BasicT',
     canActivate: [AuthGuard],
   },
   {
     path: '**',
     component: NotFoundComponent,
-    title: 'Página não encontrada'
+    title: '404 Não encontrado | BasicT'
   },
 ];
