@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
 import { HomeTableResponse } from '../../interfaces/homeTableResponse.interface';
 import { capitalize } from '../../util/capitalize.util';
+import { AdminGuard } from '../../guards/admin/admin.guard';
 
 @Component({
   selector: 'app-home',
@@ -20,12 +21,24 @@ export class HomeComponent {
   responseData: HomeTableResponse[] = [];
   loader: boolean = false;
   hasSeller: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(private cookieService: CookieService) {
     this.userName = capitalize(
       localStorage.getItem('user-name') ?? ''
     );
+    this.isAdmin = this.isAdminLogged();
     this.request();
+  }
+
+  isAdminLogged(): boolean {
+    const superToken = this.cookieService.get('basict:super-user-token');
+
+    if (superToken) {
+      return true;
+    }
+
+    return false;
   }
 
   async request() {

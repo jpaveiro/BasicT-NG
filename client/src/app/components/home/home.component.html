@@ -7,11 +7,17 @@
     <p>O que vamos fazer hoje?</p>
     <br />
     <div>
-      <button type="submit" (click)="redirect('sell')" class="btn">Nova venda</button>
-      <button type="submit" (click)="redirect('product/')" class="btn">Produtos</button>
-      <button type="submit" (click)="logout()" class="btn btn-exit">Sair</button>
+      <button type="button" (click)="redirect('sell')" class="btn">Nova venda</button>
+      <button type="button" (click)="redirect('product')" class="btn">Produtos</button>
+      <button type="button" (click)="logout()" class="btn btn-exit">Sair</button>
     </div>
     <br />
+    <h2 *ngIf="isAdmin">Configurações do sistema.</h2>
+    <br/>
+    <div *ngIf="isAdmin">
+      <button type="button" (click)="redirect('register')" class="btn">Novo usuário</button>
+    </div>
+    <br/>
     <h2 *ngIf="hasSeller">Ultimas vendas</h2>
     <p *ngIf="hasSeller" style="margin-bottom: 20px;">Página: {{page}}</p>
     <div *ngIf="hasSeller">
