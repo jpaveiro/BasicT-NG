@@ -30,7 +30,8 @@ export const routes: Routes = [
   { 
     path: 'register', 
     component: RegisterComponent,
-    title: 'Cadastro de usuário | BasicT'
+    title: 'Cadastro de usuário | BasicT',
+    canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'product',
