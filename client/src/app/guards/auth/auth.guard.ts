@@ -14,6 +14,8 @@ export class AuthGuard implements CanActivate {
     if (token) {
       return true;
     } else {
+      
+      alert("Você não tem permissão para acessar essa página");
       this.router.navigate(["/"]);
       return false;
     }
