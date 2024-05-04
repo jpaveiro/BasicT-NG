@@ -124,7 +124,7 @@ export class RegisterComponent {
     this.name = capitalize(e.target.value);
   }
 
-  checkInformations() {
+  checkInformations(): boolean {
     if (
       !this.password || 
       !this.secondPassword ||
@@ -133,13 +133,14 @@ export class RegisterComponent {
      !this.email ||
      !this.bday) {
       alert("Não podem ter campos vazios.")
-      return;
+      return false;
     }
     if (this.password!== this.secondPassword) {
       alert("As senhas não são iguais");
-      return;
+      return false;
     }
     this.overlay = true;
+    return true;
   }
 
   handleBday(event: any) {
