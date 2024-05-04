@@ -1,5 +1,6 @@
 package com.gjv.basicTapi.utils;
 
+import com.gjv.basicTapi.exception.UserUnderLegalAgeException;
 import com.gjv.basicTapi.model.StandardResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -139,7 +140,7 @@ public class Utils {
    * @param birthDate espera uma data no formato yyyy-MM-dd do tipo String
    * @return retorna uma data do tipo Date apenas se a data for válida.
    */
-  public static Date checkBirthDate(String birthDate) {
+  public static Date checkBirthDate(String birthDate) throws UserUnderLegalAgeException {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     try {
@@ -153,7 +154,7 @@ public class Utils {
       int years_old = Period.between(parsedDate, now).getYears();
 
       if (years_old < 18) {
-        return null;
+        throw new UserUnderLegalAgeException();
       }
 
       return Date.valueOf(parsedDate);
