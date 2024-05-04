@@ -31,6 +31,7 @@ CREATE TABLE purchases(
 	purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	purchase_code VARCHAR(255) NOT NULL,
 	total_amount NUMERIC(8,2) NOT NULL,
+	payment_method 	VARCHAR(255) NOT NULL,
 	PRIMARY KEY(id_purchase),
   FOREIGN KEY (id_user) REFERENCES users(id),
   FOREIGN KEY (id_prod) REFERENCES products(id_product)
