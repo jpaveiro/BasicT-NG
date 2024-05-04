@@ -21,9 +21,6 @@ export class RegisterComponent {
   cellphone: String = '';
   email: String = '';
   bday: String = '';
-  overlay: boolean = false;
-  adminEmail: string = '';
-  adminPassword: string = '';
   name: string = "";
   rg: string = "";
   stateRg: string = "";
@@ -31,40 +28,11 @@ export class RegisterComponent {
   constructor(private cookieService: CookieService) { }
 
   ngAfterViewInit() {
-    if (this.isLogged()) {
-      location.href = "/home";
-    }
-    window.addEventListener('keydown', (e: any) => {
-      if (e.key === 'Escape') {
-        this.exitOverlay();
-      }
-    });
     this.setIconLocation('password', 'visibility_icon');
-  }
-
-  isLogged(): boolean {
-    const token = this.cookieService.get("basict:user-token");
-    if (token) {
-      return true;
-    }
-    return false;
   }
 
   async handleSubmit() {
     const params = {
-      email: this.adminEmail,
-      password: this.adminPassword
-    }
-    const response = await axios.post(env.apiUrl + "/user/v1/login", params)
-    if (!response.data.token) {
-      alert('Usuário ou senha inválidos.');
-      return;
-    }
-    if (response.data.name != "ADMIN") {
-      alert('Este usuário não tem permissão para isso.')
-      return;
-    }
-    const secondParams = {
       name: this.name,
       cellphone: this.cellphone,
       email: this.email,
@@ -74,9 +42,8 @@ export class RegisterComponent {
       birthDate: this.bday,
       password: this.password
     }
-
     try {
-      await axios.post(env.apiUrl + "/user/v1/set", secondParams)
+      await axios.post(env.apiUrl + "/user/v1/set", params)
       alert("Usuário cadastrado com sucesso!");
       location.href = "/";
     } catch (err: any) {
@@ -104,18 +71,6 @@ export class RegisterComponent {
     this.stateRg = event.target.value.toUpperCase();
   }
 
-  setAdminEmail(event: any) {
-    this.adminEmail = event.target.value.toLowerCase();
-  }
-
-  setAdminPassword(event: any) {
-    this.adminPassword = event.target.value;
-  }
-
-  exitOverlay() {
-    this.overlay = false;
-  }
-
   setSecondPassword(e: any) {
     this.secondPassword = e.target.value;
   }
@@ -139,7 +94,7 @@ export class RegisterComponent {
       alert("As senhas não são iguais");
       return false;
     }
-    this.overlay = true;
+    this.handleSubmit();
     return true;
   }
 

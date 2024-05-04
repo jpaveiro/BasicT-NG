@@ -1,41 +1,6 @@
 <div class="register-component">
-  <div *ngIf="overlay">
-    <div id="overlay"></div>
-  </div>
-  <div class="check-credentials" *ngIf="overlay">
-    <h2>Verifique suas credenciais.</h2>
-    <br />
-    <div>
-      <label for="email">Email:</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="Digite seu email."
-        (keyup)="setAdminEmail($event)"
-        value="{{adminEmail}}"
-        required
-      />
-    </div>
-    <div>
-      <label for="password">Senha:</label>
-      <input
-        type="password"
-        id="check-password"
-        name="check-password"
-        placeholder="Digite sua senha."
-        (keyup)="setAdminPassword($event)"
-        value="{{adminPassword}}"
-        required
-      />
-    </div>
-    <div>
-      <button type="submit" id="exit" (click)="exitOverlay()">Fechar</button>
-      <button type="submit" (click)="handleSubmit()">Verificar e Cadastrar</button>
-    </div>
-  </div>
   <div class="form">
-    <h2 style="margin-bottom: 20px;">Cadastre-se.</h2>
+    <h2 style="margin-bottom: 20px;">Cadastre um usuário novo.</h2>
     <div>
       <label for="name">Nome:</label>
       <input
@@ -149,9 +114,6 @@
     </div>
     <div>
       <button type="submit" (click)="checkInformations()">Cadastrar</button>
-    </div>
-    <div>
-      <a href="/">Faça login</a>
     </div>
   </div>
 </div>
