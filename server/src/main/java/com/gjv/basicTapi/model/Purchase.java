@@ -38,4 +38,7 @@ public class Purchase {
 
     @Column(name = "purchase_code")
     private String purchaseCode;
+
+    @Column(name = "payment_method")
+    private String paymentMethod;
 }
