@@ -1,17 +1,38 @@
-import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { TestBed } from "@angular/core/testing";
+import { AdminGuard } from "./admin.guard";
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
+import { CookieService } from "ngx-cookie-service";
 
-import { adminGuard } from './admin.guard';
-
-describe('adminGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => adminGuard(...guardParameters));
+describe('AdminGuard', () => {
+  let guard: AdminGuard;
+  let cookieService: CookieService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [AdminGuard, CookieService]
+    });
+
+    guard = TestBed.inject(AdminGuard);
+    cookieService = TestBed.inject(CookieService);
+
+    cookieService.deleteAll();
   });
 
   it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
+    expect(guard).toBeTruthy();
+  });
+
+  it ('should block normal user login', () => {
+    expect(guard.canActivate()).toBe(false);
+  });
+
+  it('should allow access when super user token is present', () => {
+    cookieService.set("basict:super-user-token", "12345678");
+
+    const canActivate = guard.canActivate();
+    expect(canActivate).toBe(true);
+
+    cookieService.delete("basict:super-user-token");
   });
 });
