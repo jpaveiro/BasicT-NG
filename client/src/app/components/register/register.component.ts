@@ -31,6 +31,10 @@ export class RegisterComponent {
     this.setIconLocation('password', 'visibility_icon');
   }
 
+  backHistory() {
+    window.history.back();
+  }
+
   async handleSubmit() {
     const params = {
       name: this.name,
