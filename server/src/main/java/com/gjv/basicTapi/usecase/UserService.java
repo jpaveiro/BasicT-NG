@@ -3,6 +3,7 @@ package com.gjv.basicTapi.usecase;
 import com.gjv.basicTapi.dto.EditRequestDto;
 import com.gjv.basicTapi.dto.LoginRequestDto;
 import com.gjv.basicTapi.dto.UserRequestDto;
+import com.gjv.basicTapi.exception.UserUnderLegalAgeException;
 import com.gjv.basicTapi.model.StandardResponse;
 import com.gjv.basicTapi.model.User;
 import com.gjv.basicTapi.model.UserResponse;
@@ -52,6 +53,10 @@ public class UserService {
             stateRg = request.getStateRg();
             birthDate = Utils.checkBirthDate(request.getBirthDate());
             password = Utils.hashPassword(request.getPassword());
+        }
+        catch (UserUnderLegalAgeException e)
+        {
+            return Utils.generateStandardResponseEntity("Error: User must be over 18 years old.", HttpStatus.NOT_ACCEPTABLE);
         }
         catch (NullPointerException e)
         {
