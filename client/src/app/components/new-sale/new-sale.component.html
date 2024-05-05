@@ -38,6 +38,15 @@
           required
         />
       </div>
+      <div>
+        <label>Método de Pagamento:</label>
+        <select [(ngModel)]="selectedPaymentMethod" (change)="setSelectedPaymentMethod($event)">
+          <option value="dinheiro">Dinheiro</option>
+          <option value="pix">PIX</option>
+          <option value="debito">Débito</option>
+          <option value="credito">Crédito</option>
+        </select>
+      </div>
     </div>
     <button class="btn" (click)="addProducts()">Adicionar Produto</button>
     <button class="btn" *ngIf="seeTable" id="sell" (click)="sell()">
