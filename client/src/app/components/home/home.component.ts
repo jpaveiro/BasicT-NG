@@ -79,11 +79,11 @@ export class HomeComponent {
         price: product.totalAmount,
         purchaseDate: purchaseDate,
         purchaseCode: product.purchaseCode,
+        paymentMethod: capitalize(product.paymentMethod),
       });
     }
     setTimeout(() => this.loader = false, 1000);
     this.hasSeller = true;
-    console.log(this.responseData);
   }
 
   advancePage(advance: boolean) {
