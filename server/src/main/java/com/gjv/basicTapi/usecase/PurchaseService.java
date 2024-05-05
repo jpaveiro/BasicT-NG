@@ -52,6 +52,7 @@ public class PurchaseService {
        .totalAmount(purchaseInfo.getTotalAmount())
        .idPurchase(Utils.generateId())
        .purchaseCode(purchaseInfo.getPurchaseCode())
+       .paymentMethod(purchaseInfo.getPaymentMethod())
        .build();
 
     try {
