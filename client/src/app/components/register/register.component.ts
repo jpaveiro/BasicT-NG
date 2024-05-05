@@ -49,13 +49,13 @@ export class RegisterComponent {
     try {
       await axios.post(env.apiUrl + "/user/v1/set", params)
       alert("Usuário cadastrado com sucesso!");
-      location.href = "/";
+      location.href = "/home";
     } catch (err: any) {
       const message = err.response.data.message;
       console.warn(message);
 
-      if (message.toLowerCase() == "error: the entered birthdate field is invalid.") {
-        alert('Data de nascimento inválida');
+      if (message == "Error: User must be over 18 years old.") {
+        alert('O usuário precisa ser maior de 18 anos.');
         return;
       }
       if(message == "Error: The system was unable to register the user. Probably user already registered.") {
