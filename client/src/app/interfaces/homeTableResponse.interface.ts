@@ -5,4 +5,5 @@ export interface HomeTableResponse {
   price: number;
   purchaseDate: string;
   purchaseCode: string;
+  paymentMethod: string;
 }
