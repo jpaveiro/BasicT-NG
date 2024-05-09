@@ -16,5 +16,4 @@ public class NewPurchaseRequestDto {
   private double totalAmount;
   private String purchaseCode;
   private String paymentMethod;
-  private String purchaseDate;
 }
