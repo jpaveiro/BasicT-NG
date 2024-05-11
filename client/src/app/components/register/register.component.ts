@@ -62,6 +62,10 @@ export class RegisterComponent {
         alert('Usuário já cadastrado');
         return;
       }
+      if (message == "Error: The entered cpf field is invalid.") {
+        alert('CPF inválido');
+        return;
+      } 
       alert("Erro interno.")
     }
     
