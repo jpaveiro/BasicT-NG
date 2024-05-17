@@ -11,7 +11,7 @@
     </div>
     <br />
     <span *ngIf="!seeTable">Nenhum produto foi adicionado ainda.</span>
-    <div *ngIf="seeTable">
+    <div *ngIf="seeTable" id="products-table">
       <br />
       <table>
         <tr>
@@ -29,7 +29,7 @@
     <div class="purchase-info">
       <div class="sell">
         <div>
-          <label for="name">Código de barras</label>
+          <label for="name">Código de barras:</label>
           <br />
           <input
             type="name"
@@ -43,7 +43,7 @@
           />
         </div>
         <div>
-          <label for="name">Quantidade</label>
+          <label for="name">Quantidade:</label>
           <br />
           <input
             type="number"
@@ -57,7 +57,7 @@
           />
         </div>
         <div>
-          <label>Método de Pagamento</label>
+          <label>Método de Pagamento:</label>
           <br />
           <select
             [(ngModel)]="selectedPaymentMethod"
@@ -71,8 +71,8 @@
         </div>
       </div>
       <div class="buttons">
-        <button class="btn" (click)="addProducts()">Adicionar Produto</button>
-        <button class="btn" id="sell" (click)="sell()">Vender</button>
+        <button class="btn" (click)="addProducts()">Adicionar</button>
+        <button class="btn" id="sell" (click)="sell()" *ngIf="seeTable">Vender</button>
       </div>
       <div class="total">
         <h2 *ngIf="seeTable">Total: R$ {{ finalPrice.toFixed(2) }}</h2>
