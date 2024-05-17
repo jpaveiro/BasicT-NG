@@ -117,6 +117,9 @@
   background-color: #008000;
 }
 #products-table {
-  max-height: 40vh;
+  max-height: 47vh;
   overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+  border-collapse: collapse;
 }
