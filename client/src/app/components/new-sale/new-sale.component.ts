@@ -82,6 +82,7 @@ export class NewSaleComponent {
     let productName: any = null;
     let price: number = 0;
     let productId: string = "";
+    let hasElement: boolean = false;
 
     if (
       this.codeBar &&
@@ -98,6 +99,21 @@ export class NewSaleComponent {
         this.loader = false;
         return;
       }
+      
+      console.log(this.allData);
+      this.allData.forEach((data) => {
+        if (data.name.toLowerCase() == productName.toLowerCase()) {
+          hasElement = true;
+        }
+      });
+
+      if (hasElement) {
+        alert("Este produto já foi adicionado");
+        this.loader = false;
+        return;
+      }
+
+
       this.seeTable = true;
       this.allData.push({name: capitalize(productName), quantity: this.quantity, price: price.toFixed(2)})
       this.productIds.push(productId);
