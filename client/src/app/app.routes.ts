@@ -8,6 +8,7 @@ import { NewProductComponent } from './components/new-product/new-product.compon
 import { ProductComponent } from './components/product/product.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AdminGuard } from './guards/admin/admin.guard';
+import { AboutComponent } from './components/about/about.component';
 
 export const routes: Routes = [
   { 
@@ -19,6 +20,12 @@ export const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     title: 'Início | BasicT',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    title: 'Sobre | BasicT',
     canActivate: [AuthGuard],
   },
   {
