@@ -78,6 +78,16 @@ export class NewSaleComponent {
     this.quantity = parseInt(e.target.value);
   }
 
+  removeProduct(product: any) {
+
+    const index = this.allData.indexOf(product);
+    this.allData.splice(index, 1);
+    this.productIds.splice(index, 1);
+    this.finalPrice -= product.price;
+    this.finalPrice = Math.round(this.finalPrice * 100) / 100;
+
+  }
+
   async addProducts() {
     let productName: any = null;
     let price: number = 0;

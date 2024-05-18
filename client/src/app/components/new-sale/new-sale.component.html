@@ -23,6 +23,9 @@
           <td>{{ product.name }}</td>
           <td>{{ product.quantity }}</td>
           <td>R$ {{ product.price }}</td>
+          <td class="remove">
+            <button (click)="removeProduct(product)">Remover</button>
+          </td>
         </tr>
       </table>
     </div>
