@@ -82,7 +82,7 @@ export class HomeComponent {
         paymentMethod: capitalize(product.paymentMethod),
       });
     }
-    setTimeout(() => this.loader = false, 1000);
+    this.loader = false;
     this.hasSeller = true;
   }
 
