@@ -22,6 +22,7 @@ export class HomeComponent {
   loader: boolean = false;
   hasSeller: boolean = false;
   isAdmin: boolean = false;
+  maxPages: number = 0;
 
   constructor(private cookieService: CookieService) {
     this.userName = capitalize(
@@ -49,6 +50,7 @@ export class HomeComponent {
       response = await axios.get(
         env.apiUrl + '/purchase/v1/get?page=' + this.page
       );
+      this.maxPages = response.data.totalPages;
     } catch {
       this.loader = false;
       return;
@@ -88,6 +90,10 @@ export class HomeComponent {
 
   advancePage(advance: boolean) {
     if (advance) {
+      if (this.page >= this.maxPages) {
+        alert("Não foi possível encontrar mais produtos.")
+        return;
+      }
       this.page++;
       this.request();
       return
