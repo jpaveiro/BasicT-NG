@@ -1,3 +1,29 @@
 .about-component {
   padding: 40px;
+  line-height: 1.5;
+
+  .content {
+    padding: 2vh 2vh 0 2vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    .material-control {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    ul {
+      margin: 1vh 0 0 3vh;
+      list-style: circle;
+    }
+    a {
+      text-decoration: underline;
+      color: royalblue;
+    }
+    p {
+      font-size: 17px;
+    }
+    li {
+      font-size: 16px;
+    }
+  }
 }
