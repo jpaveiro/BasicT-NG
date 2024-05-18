@@ -60,10 +60,10 @@ export class NewSaleComponent {
           paymentMethod: this.selectedPaymentMethod.toUpperCase(),
         };
         await axios.post(env.apiUrl + "/purchase/v1/sell", params);
-        alert("Você vendeu!");
-        location.href = "/home";
+        alert("Venda realizada com sucesso!");
+        location.reload();
       } catch (error) {
-        alert("Não foi possível vender");
+        alert("Não foi possível realizar a venda! Tente novamente.");
         break;
       } finally {
         this.loader = false;
