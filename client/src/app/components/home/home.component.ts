@@ -91,7 +91,7 @@ export class HomeComponent {
   advancePage(advance: boolean) {
     if (advance) {
       if (this.page >= this.maxPages) {
-        alert("Não foi possível encontrar mais produtos.")
+        alert("Não foi possível encontrar mais vendas.")
         return;
       }
       this.page++;
