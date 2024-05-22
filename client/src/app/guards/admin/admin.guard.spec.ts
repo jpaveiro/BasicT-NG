@@ -1,7 +1,5 @@
 import { TestBed } from "@angular/core/testing";
 import { AdminGuard } from "./admin.guard";
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
 import { CookieService } from "ngx-cookie-service";
 
 describe('AdminGuard', () => {
