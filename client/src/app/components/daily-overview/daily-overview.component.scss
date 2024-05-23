@@ -1,0 +1,13 @@
+.daily-overview-component {
+  height: calc(100vh - 95.96px);
+  width: 100%;
+  .main-container {
+    padding: 40px;
+    background-color: white;
+    .material-control {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
