@@ -1,0 +1,14 @@
+<div class="daily-overview-component">
+  <div *ngIf="loader">
+    <app-loader />
+  </div>
+  <div class="main-container">
+    <h2>Resumo diário</h2>
+    <div class="material-control" (click)="goBack()">
+      <br />
+      <span class="material-symbols-outlined"> arrow_back </span>
+      <span> Voltar </span>
+    </div>
+    <div class="content"></div>
+  </div>
+</div>
