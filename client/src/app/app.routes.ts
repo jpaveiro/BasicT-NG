@@ -9,52 +9,61 @@ import { ProductComponent } from './components/product/product.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AdminGuard } from './guards/admin/admin.guard';
 import { AboutComponent } from './components/about/about.component';
+import { DailyOverviewComponent } from './components/daily-overview/daily-overview.component';
+
+const APP_TITLE = '| BasicT';
 
 export const routes: Routes = [
   { 
     path: '', 
     component: LoginComponent, 
-    title: 'Login | BasicT' 
+    title: `Login ${APP_TITLE}`,
   },
   {
     path: 'home',
     component: HomeComponent,
-    title: 'Início | BasicT',
+    title: `Início ${APP_TITLE}`,
     canActivate: [AuthGuard],
   },
   {
     path: 'about',
     component: AboutComponent,
-    title: 'Sobre | BasicT',
+    title: `Sobre ${APP_TITLE}`,
     canActivate: [AuthGuard],
   },
   {
     path: 'sell',
     component: NewSaleComponent,
-    title: 'Caixa | BasicT',
+    title: `Caixa ${APP_TITLE}`,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'daily-overview',
+    component: DailyOverviewComponent,
+    title: `Visão geral diária ${APP_TITLE}`,
+    canActivate: [AuthGuard, AdminGuard],
   },
   { 
     path: 'register', 
     component: RegisterComponent,
-    title: 'Cadastro de usuário | BasicT',
+    title: `Cadastro de usuário ${APP_TITLE}`,
     canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'product',
     component: ProductComponent,
-    title: 'Visualizar produtos | BasicT',
+    title: `Visualizar produtos ${APP_TITLE}`,
     canActivate: [AuthGuard],
   },
   {
     path: 'product/new',
     component: NewProductComponent,
-    title: 'Cadastrar produto | BasicT',
+    title: `Cadastrar produto ${APP_TITLE}`,
     canActivate: [AuthGuard, AdminGuard],
   },
   {
     path: '**',
     component: NotFoundComponent,
-    title: '404 Não encontrado | BasicT'
+    title: `404 Não encontrado ${APP_TITLE}`,
   },
 ];
