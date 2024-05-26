@@ -14,6 +14,7 @@ import { setTimeout } from 'timers/promises';
 })
 export class DailyOverviewComponent {
   userName: string = '';
+  today_sales = 0
   loader: boolean = false;
 
   constructor(private cookieService: CookieService) {
