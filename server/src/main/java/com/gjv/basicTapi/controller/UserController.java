@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
+    public UserController(UserService userService)
+    {
+        this.userService = userService;
+    }
 
     @PostMapping("/v1/set")
     public ResponseEntity<?> setUser(@RequestBody UserRequestDto request) {

@@ -9,7 +9,6 @@ import com.gjv.basicTapi.repository.ProductRepository;
 import com.gjv.basicTapi.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -23,10 +22,13 @@ import java.util.Objects;
 
 @Service
 public class ProductService {
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductService.class);
+
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     /**
      * Registra um novo produto no sistema com base nas informações fornecidas.

@@ -5,7 +5,6 @@ import com.gjv.basicTapi.usecase.PurchaseService;
 import com.gjv.basicTapi.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/purchase/")
 public class PurchaseController {
-  @Autowired
-  private PurchaseService purchaseService;
-
+  private final PurchaseService purchaseService;
   private static final Logger LOGGER = LoggerFactory.getLogger(PurchaseController.class);
+
+  public PurchaseController(PurchaseService purchaseService)
+  {
+    this.purchaseService = purchaseService;
+  }
 
   @GetMapping("/v1/get")
   public ResponseEntity<?> getAll(@RequestParam("page") int page) {

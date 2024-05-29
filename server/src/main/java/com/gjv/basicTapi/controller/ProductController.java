@@ -7,18 +7,19 @@ import com.gjv.basicTapi.usecase.ProductService;
 import com.gjv.basicTapi.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/product/")
 public class ProductController {
-
-    @Autowired
-    private ProductService productService;
-
+    private final ProductService productService;
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+
+    public ProductController(ProductService productService)
+    {
+        this.productService = productService;
+    }
 
     @PostMapping("/v1/set")
     public ResponseEntity<?> setProduct(@RequestBody SetProductRequestDto request)
