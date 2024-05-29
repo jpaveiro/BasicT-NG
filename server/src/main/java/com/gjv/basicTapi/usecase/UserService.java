@@ -12,11 +12,12 @@ import com.gjv.basicTapi.utils.Utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.gjv.basicTapi.dto.DeleteUserRequestDto;
+
 import java.util.List;
 
 import java.util.ArrayList;
@@ -27,10 +28,14 @@ import java.util.Objects;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+
+    public UserService(UserRepository userRepository)
+    {
+        this.userRepository = userRepository;
+    }
 
     /**
      * Registra um novo usuário no sistema com base nos dados fornecidos.
@@ -93,10 +98,14 @@ public class UserService {
 
             return Utils.generateStandardResponseEntity("Success: User registered.", HttpStatus.OK);
         }
+        catch (DataIntegrityViolationException e)
+        {
+            return Utils.generateStandardResponseEntity("Error: The user is already registered", HttpStatus.UNAUTHORIZED);
+        }
         catch (Exception e)
         {
             LOGGER.info("Error: The system was unable to register the user.\nDetails: {}", e.getMessage());
-            return Utils.generateStandardResponseEntity("Error: The system was unable to register the user. Probably user already registered.", HttpStatus.UNAUTHORIZED);
+            return Utils.generateStandardResponseEntity("Error: The system was unable to register the user. Probably user already registered.", HttpStatus.BAD_REQUEST);
         }
     }
 
