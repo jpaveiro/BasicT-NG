@@ -62,9 +62,7 @@ public class Utils {
    * @return retorna um id com 47 carácteres separados por (15 carácteres)-(15 carácteres)-(carácteres).
    */
   public static String generateId() {
-    String id = UUID.randomUUID().toString();
-    String formatId = id.replaceAll("-", "").substring(0, 15);
-    return formatId + "-" + formatId + "-" + formatId;
+    return generateToken() + "-" + generateToken() + "-" + generateToken();
   }
 
   public static String generateToken() {
