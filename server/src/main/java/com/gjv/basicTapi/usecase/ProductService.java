@@ -5,7 +5,6 @@ import com.gjv.basicTapi.dto.GetProductRequestDto;
 import com.gjv.basicTapi.dto.SetProductRequestDto;
 import com.gjv.basicTapi.model.Product;
 import com.gjv.basicTapi.model.StandardResponse;
-import com.gjv.basicTapi.model.User;
 import com.gjv.basicTapi.repository.ProductRepository;
 import com.gjv.basicTapi.utils.Utils;
 import org.slf4j.Logger;
@@ -91,8 +90,6 @@ public class ProductService {
                     .build();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-        Product product = productRepository.getProduct(request.getIdProduct());
-
         productRepository.deleteProduct(id);
 
         StandardResponse response = StandardResponse.builder()
