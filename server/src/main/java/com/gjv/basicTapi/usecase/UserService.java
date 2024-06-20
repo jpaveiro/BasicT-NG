@@ -1,7 +1,5 @@
 package com.gjv.basicTapi.usecase;
 
-import com.gjv.basicTapi.dto.EditRequestDto;
-import com.gjv.basicTapi.dto.LoginRequestDto;
 import com.gjv.basicTapi.dto.UserRequestDto;
 import com.gjv.basicTapi.exception.UserUnderLegalAgeException;
 import com.gjv.basicTapi.model.StandardResponse;
@@ -16,7 +14,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import com.gjv.basicTapi.dto.DeleteUserRequestDto;
 
 import java.util.List;
 
@@ -115,7 +112,7 @@ public class UserService {
      * @param request Um objeto LoginRequestDto contendo o email e senha do usuário para autenticação.
      * @return ResponseEntity indicando que o usuário foi autenticado com sucesso e fornecendo informações do usuário, incluindo tokens de acesso, ou uma resposta de erro se as credenciais estiverem incorretas.
      */
-    public ResponseEntity<?> login(LoginRequestDto request)
+    public ResponseEntity<?> login(UserRequestDto request)
     {
         String emailEntered = request.getEmail();
         String passwordEntered = Utils.hashPassword(request.getPassword());
@@ -158,7 +155,7 @@ public class UserService {
      * @param request Um objeto EditRequestDto contendo as informações a serem editadas do usuário.
      * @return ResponseEntity indicando que as informações do usuário foram editadas com sucesso ou uma resposta de erro se ocorrer algum problema durante a edição.
      */
-    public ResponseEntity<?> editUser(EditRequestDto request) {
+    public ResponseEntity<?> editUser(UserRequestDto request) {
 
         String name, cellphone, email, cpf, rg, password;
 
@@ -179,7 +176,7 @@ public class UserService {
         fieldsToValidate.put("email", email);
         fieldsToValidate.put("cpf", cpf);
         fieldsToValidate.put("rg", rg);
-        fieldsToValidate.put("id", request.getId());
+        fieldsToValidate.put("idUser", request.getIdUser());
 
         for (Map.Entry<String, String> entry : fieldsToValidate.entrySet()) {
             ResponseEntity<StandardResponse> responseError = Utils.validateField(entry.getKey(), entry.getValue());
@@ -188,13 +185,13 @@ public class UserService {
             }
         }
 
-        User user = userRepository.getUser(request.getId());
+        User user = userRepository.getUser(request.getIdUser());
         if (user == null) {
             return Utils.generateStandardResponseEntity("Error: User does not exist.", HttpStatus.NOT_FOUND);
         }
 
         try {
-            userRepository.editUser(name, cellphone, email, cpf, rg, password, request.getId());
+            userRepository.editUser(name, cellphone, email, cpf, rg, password, request.getIdUser());
 
             return Utils.generateStandardResponseEntity("Success: User edited.", HttpStatus.OK);
         } catch (Exception e) {
@@ -209,7 +206,7 @@ public class UserService {
      * @param request Um objeto DeleteUserRequestDto contendo o ID do usuário a ser removido.
      * @return ResponseEntity indicando que o usuário foi removido com sucesso ou uma resposta de erro se o usuário não for encontrado.
      */
-    public ResponseEntity<?> deleteUser(DeleteUserRequestDto request)
+    public ResponseEntity<?> deleteUser(UserRequestDto request)
     {
         User user = userRepository.getUser(request.getIdUser());
 

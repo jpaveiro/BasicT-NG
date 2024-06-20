@@ -1,8 +1,5 @@
 package com.gjv.basicTapi.controller;
 
-import com.gjv.basicTapi.dto.DeleteUserRequestDto;
-import com.gjv.basicTapi.dto.EditRequestDto;
-import com.gjv.basicTapi.dto.LoginRequestDto;
 import com.gjv.basicTapi.dto.UserRequestDto;
 import com.gjv.basicTapi.usecase.UserService;
 import com.gjv.basicTapi.utils.Utils;
@@ -29,22 +26,22 @@ public class UserController {
     }
 
     @PostMapping("/v1/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequestDto request) {
+    public ResponseEntity<?> login(@RequestBody UserRequestDto request) {
         return Utils.executeAndLogElapsedTime(() -> userService.login(request), LOGGER);
     }
 
     @PutMapping("/v1/edit")
-    public ResponseEntity<?> editUser(@RequestBody EditRequestDto request) {
+    public ResponseEntity<?> editUser(@RequestBody UserRequestDto request) {
         return Utils.executeAndLogElapsedTime(() -> userService.editUser(request), LOGGER);
     }
 
     @DeleteMapping("/v1/delete")
-    public ResponseEntity<?> deleteUser(@RequestBody DeleteUserRequestDto request) {
+    public ResponseEntity<?> deleteUser(@RequestBody UserRequestDto request) {
         return Utils.executeAndLogElapsedTime(() -> userService.deleteUser(request), LOGGER);
     }
 
     @GetMapping("/v1/get")
-    public ResponseEntity<?> getUser(@RequestParam("id") String id) {
-        return Utils.executeAndLogElapsedTime(() -> userService.getUserName(id), LOGGER);
+    public ResponseEntity<?> getUser(@RequestParam("idUser") String idUser) {
+        return Utils.executeAndLogElapsedTime(() -> userService.getUserName(idUser), LOGGER);
     }
 }
