@@ -1,8 +1,6 @@
 package com.gjv.basicTapi.controller;
 
-import com.gjv.basicTapi.dto.DeleteProductRequestDto;
-import com.gjv.basicTapi.dto.GetProductRequestDto;
-import com.gjv.basicTapi.dto.SetProductRequestDto;
+import com.gjv.basicTapi.dto.ProductRequestDto;
 import com.gjv.basicTapi.usecase.ProductService;
 import com.gjv.basicTapi.utils.Utils;
 import org.slf4j.Logger;
@@ -22,19 +20,19 @@ public class ProductController {
     }
 
     @PostMapping("/v1/set")
-    public ResponseEntity<?> setProduct(@RequestBody SetProductRequestDto request)
+    public ResponseEntity<?> setProduct(@RequestBody ProductRequestDto request)
     {
         return Utils.executeAndLogElapsedTime(() -> productService.setProduct(request), LOGGER);
     }
 
     @PostMapping("/v1/get")
-    public ResponseEntity<?> getProduct(@RequestBody GetProductRequestDto request)
+    public ResponseEntity<?> getProduct(@RequestBody ProductRequestDto request)
     {
         return Utils.executeAndLogElapsedTime(() -> productService.getProduct(request), LOGGER);
     }
 
     @DeleteMapping("/v1/delete")
-    public ResponseEntity<?> deleteProduct(@RequestBody DeleteProductRequestDto request)
+    public ResponseEntity<?> deleteProduct(@RequestBody ProductRequestDto request)
     {
         return Utils.executeAndLogElapsedTime(() -> productService.deleteProduct(request), LOGGER);
     }

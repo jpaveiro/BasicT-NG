@@ -1,8 +1,6 @@
 package com.gjv.basicTapi.usecase;
 
-import com.gjv.basicTapi.dto.DeleteProductRequestDto;
-import com.gjv.basicTapi.dto.GetProductRequestDto;
-import com.gjv.basicTapi.dto.SetProductRequestDto;
+import com.gjv.basicTapi.dto.ProductRequestDto;
 import com.gjv.basicTapi.model.Product;
 import com.gjv.basicTapi.model.StandardResponse;
 import com.gjv.basicTapi.repository.ProductRepository;
@@ -36,7 +34,7 @@ public class ProductService {
      * @param request Um objeto SetProductRequestDto contendo as informações do novo produto a ser registrado.
      * @return ResponseEntity indicando se o produto foi registrado com sucesso ou uma resposta de erro se algumas das informações necessárias não for fornecida ou se ocorrer algum problema durante o registro.
      */
-    public ResponseEntity<?> setProduct(SetProductRequestDto request)
+    public ResponseEntity<?> setProduct(ProductRequestDto request)
     {
         String barCode, productName;
         double price;
@@ -86,7 +84,7 @@ public class ProductService {
      * @param request Um objeto GetProductRequestDto contendo o ID do produto a ser recuperado.
      * @return ResponseEntity contendo as informações do produto solicitado ou uma resposta de erro se o ID do produto não for fornecido ou se o produto não for encontrado.
      */
-    public ResponseEntity<?> getProduct(GetProductRequestDto request)
+    public ResponseEntity<?> getProduct(ProductRequestDto request)
     {
         if (request.getIdProduct() == null) {
             return Utils.generateStandardResponseEntity("Error: You must fill in all fields.", HttpStatus.BAD_REQUEST);
@@ -108,7 +106,7 @@ public class ProductService {
      * @param request Um objeto DeleteProductRequestDto contendo o ID do produto a ser removido.
      * @return ResponseEntity indicando que o produto foi removido com sucesso ou uma resposta de erro se o ID do produto não for fornecido.
      */
-    public ResponseEntity<?> deleteProduct(DeleteProductRequestDto request)
+    public ResponseEntity<?> deleteProduct(ProductRequestDto request)
     {
         String id = request.getIdProduct();
         if (request.getIdProduct() == null) {
