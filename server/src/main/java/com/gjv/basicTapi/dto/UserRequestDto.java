@@ -5,13 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/* Quando for adicionar atributos, usar CONSTANTES e não PRIMITIVAS */
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequestDto {
+    private String idUser;
     private String name;
     private String cellphone;
     private String email;
@@ -20,4 +19,7 @@ public class UserRequestDto {
     private String stateRg;
     private String birthDate;
     private String password;
+
+    private String emailAdmin;
+    private String passwordAdmin;
 }
