@@ -112,14 +112,6 @@ public class ProductService {
         if (request.getIdProduct() == null) {
             return Utils.generateStandardResponseEntity("Error: You must fill in all fields.", HttpStatus.BAD_REQUEST);
         }
-
-        Product product = productRepository.getProduct(request.getIdProduct());
-
-        ResponseEntity<?> responseError = Utils.validateField("product", product);
-        if (responseError != null) {
-            return responseError;
-        }
-
         productRepository.deleteProduct(id);
 
         return Utils.generateStandardResponseEntity("Success: Product has been deleted.", HttpStatus.OK);
