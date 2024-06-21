@@ -4,9 +4,8 @@ import { env } from '../../../../config/enviroments';
 import axios from 'axios';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
-import { HomeTableResponse } from '../../interfaces/homeTableResponse.interface';
+import { HomeTableResponse } from '../../core/models/homeTableResponse.interface';
 import { capitalize } from '../../util/capitalize.util';
-import { AdminGuard } from '../../guards/admin/admin.guard';
 
 @Component({
   selector: 'app-home',
@@ -25,9 +24,7 @@ export class HomeComponent {
   maxPages: number = 0;
 
   constructor(private cookieService: CookieService) {
-    this.userName = capitalize(
-      localStorage.getItem('user-name') ?? ''
-    );
+    this.userName = capitalize(localStorage.getItem('user-name') ?? '');
     this.isAdmin = this.isAdminLogged();
     this.request();
   }
@@ -56,7 +53,7 @@ export class HomeComponent {
       return;
     }
 
-    console.log(response.data)
+    console.log(response.data);
     for (const product of response.data.content) {
       const params = {
         idProduct: product.idProduct,
@@ -70,10 +67,10 @@ export class HomeComponent {
       );
       const userName = capitalize(nameResponse.data.name);
       const productName = capitalize(productResponse.data.name);
-      const purchaseDate = new Date(
-        product.purchaseDate
-      ).toLocaleDateString('br');
-  
+      const purchaseDate = new Date(product.purchaseDate).toLocaleDateString(
+        'br'
+      );
+
       this.responseData.push({
         userName: userName,
         productName: productName,
@@ -91,18 +88,17 @@ export class HomeComponent {
   advancePage(advance: boolean) {
     if (advance) {
       if (this.page >= this.maxPages) {
-        alert("Não foi possível encontrar mais vendas.")
+        alert('Não foi possível encontrar mais vendas.');
         return;
       }
       this.page++;
       this.request();
-      return
+      return;
     }
     if (this.page > 1 && !advance) {
       this.page--;
       this.request();
     }
-
   }
 
   logout() {
