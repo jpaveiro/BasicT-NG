@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { capitalize } from '../../util/capitalize.util';
+import { capitalize } from '../../core/util/capitalize.util';
 import { LoaderComponent } from '../loader/loader.component';
 import { CommonModule } from '@angular/common';
 import { setTimeout } from 'timers/promises';
@@ -14,7 +14,7 @@ import { setTimeout } from 'timers/promises';
 })
 export class DailyOverviewComponent {
   userName: string = '';
-  today_sales = 0
+  today_sales = 0;
   loader: boolean = false;
 
   constructor(private cookieService: CookieService) {
@@ -32,13 +32,11 @@ export class DailyOverviewComponent {
     return false;
   }
 
-  goBack()
-  {
+  goBack() {
     window.history.back();
   }
 
-  async request()
-  {
+  async request() {
     this.loader = true;
     this.loader = false;
   }

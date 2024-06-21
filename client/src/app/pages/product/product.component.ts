@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { redirect } from '../../util/redirect.util';
+import { redirect } from '../../core/util/redirect.util';
 import { LoaderComponent } from '../loader/loader.component';
 import { CommonModule } from '@angular/common';
 import axios from 'axios';
 import { env } from '../../../../config/enviroments';
 import { ProductTableResponse } from '../../core/models/productTableResponse.interface';
-import { capitalize } from '../../util/capitalize.util';
+import { capitalize } from '../../core/util/capitalize.util';
 
 @Component({
   selector: 'app-product',

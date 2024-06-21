@@ -5,7 +5,7 @@ import axios from 'axios';
 import { env } from '../../../../config/enviroments';
 import { CookieService } from 'ngx-cookie-service';
 import { ProductsToSellTableRequest } from '../../core/models/productsToSellTableRequest.interface';
-import { capitalize } from '../../util/capitalize.util';
+import { capitalize } from '../../core/util/capitalize.util';
 import { FormsModule } from '@angular/forms';
 
 @Component({

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
 import { HomeTableResponse } from '../../core/models/homeTableResponse.interface';
-import { capitalize } from '../../util/capitalize.util';
+import { capitalize } from '../../core/util/capitalize.util';
 
 @Component({
   selector: 'app-home',

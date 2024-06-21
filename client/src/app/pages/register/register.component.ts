@@ -4,7 +4,7 @@ import { env } from '../../../../config/enviroments';
 import axios from 'axios';
 import { CookieService } from 'ngx-cookie-service';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
-import { capitalize } from '../../util/capitalize.util';
+import { capitalize } from '../../core/util/capitalize.util';
 
 @Component({
   selector: 'app-register',
@@ -21,11 +21,11 @@ export class RegisterComponent {
   cellphone: String = '';
   email: String = '';
   bday: String = '';
-  name: string = "";
-  rg: string = "";
-  stateRg: string = "";
+  name: string = '';
+  rg: string = '';
+  stateRg: string = '';
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService) {}
 
   ngAfterViewInit() {
     this.setIconLocation('password', 'visibility_icon');
@@ -44,31 +44,33 @@ export class RegisterComponent {
       rg: this.rg,
       stateRg: this.stateRg,
       birthDate: this.bday,
-      password: this.password
-    }
+      password: this.password,
+    };
     try {
-      await axios.post(env.apiUrl + "/user/v1/set", params)
-      alert("Usuário cadastrado com sucesso!");
-      location.href = "/home";
+      await axios.post(env.apiUrl + '/user/v1/set', params);
+      alert('Usuário cadastrado com sucesso!');
+      location.href = '/home';
     } catch (err: any) {
       const message = err.response.data.message;
       console.warn(message);
 
-      if (message == "Error: User must be over 18 years old.") {
+      if (message == 'Error: User must be over 18 years old.') {
         alert('O usuário precisa ser maior de 18 anos.');
         return;
       }
-      if(message == "Error: The system was unable to register the user. Probably user already registered.") {
+      if (
+        message ==
+        'Error: The system was unable to register the user. Probably user already registered.'
+      ) {
         alert('Usuário já cadastrado');
         return;
       }
-      if (message == "Error: The entered cpf field is invalid.") {
+      if (message == 'Error: The entered cpf field is invalid.') {
         alert('CPF inválido');
         return;
-      } 
-      alert("Erro interno.")
+      }
+      alert('Erro interno.');
     }
-    
   }
 
   setRg(event: any) {
@@ -89,17 +91,18 @@ export class RegisterComponent {
 
   checkInformations(): boolean {
     if (
-      !this.password || 
+      !this.password ||
       !this.secondPassword ||
-     !this.cpf ||
-     !this.cellphone ||
-     !this.email ||
-     !this.bday) {
-      alert("Não podem ter campos vazios.")
+      !this.cpf ||
+      !this.cellphone ||
+      !this.email ||
+      !this.bday
+    ) {
+      alert('Não podem ter campos vazios.');
       return false;
     }
-    if (this.password!== this.secondPassword) {
-      alert("As senhas não são iguais");
+    if (this.password !== this.secondPassword) {
+      alert('As senhas não são iguais');
       return false;
     }
     this.handleSubmit();
@@ -133,13 +136,13 @@ export class RegisterComponent {
       const inputTop = inputRect.top;
       const inputRight = inputRect.right;
 
-      icon.style.top = (inputTop + 'px') + '5cm';
+      icon.style.top = inputTop + 'px' + '5cm';
       icon.style.right = window.innerWidth - inputRight + 'px';
     }
   }
 
   setCpf(event: any) {
-    this.cpf = event.target.value;  
+    this.cpf = event.target.value;
   }
 
   setCellphone(event: any) {
