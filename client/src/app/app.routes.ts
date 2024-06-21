@@ -1,22 +1,22 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { AuthGuard } from './guards/auth/auth.guard';
-import { NewSaleComponent } from './components/new-sale/new-sale.component';
-import { NewProductComponent } from './components/new-product/new-product.component';
-import { ProductComponent } from './components/product/product.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { AdminGuard } from './guards/admin/admin.guard';
-import { AboutComponent } from './components/about/about.component';
-import { DailyOverviewComponent } from './components/daily-overview/daily-overview.component';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { AuthGuard } from './core/guards/auth/auth.guard';
+import { NewSaleComponent } from './pages/new-sale/new-sale.component';
+import { NewProductComponent } from './pages/new-product/new-product.component';
+import { ProductComponent } from './pages/product/product.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AdminGuard } from './core/guards/admin/admin.guard';
+import { AboutComponent } from './pages/about/about.component';
+import { DailyOverviewComponent } from './pages/daily-overview/daily-overview.component';
 
 const APP_TITLE = '| BasicT';
 
 export const routes: Routes = [
-  { 
-    path: '', 
-    component: LoginComponent, 
+  {
+    path: '',
+    component: LoginComponent,
     title: `Login ${APP_TITLE}`,
   },
   {
@@ -43,11 +43,11 @@ export const routes: Routes = [
     title: `Visão geral diária ${APP_TITLE}`,
     canActivate: [AuthGuard, AdminGuard],
   },
-  { 
-    path: 'register', 
+  {
+    path: 'register',
     component: RegisterComponent,
     title: `Cadastro de usuário ${APP_TITLE}`,
-    canActivate: [AuthGuard, AdminGuard]
+    canActivate: [AuthGuard, AdminGuard],
   },
   {
     path: 'product',
