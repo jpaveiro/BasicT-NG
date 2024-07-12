@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './components/button/button.component';
-import { HandCoins, LogOut, LucideAngularModule } from 'lucide-angular';
+import {
+  Eye,
+  EyeOff,
+  HandCoins,
+  LogOut,
+  LucideAngularModule,
+  Mail,
+} from 'lucide-angular';
 import { InputComponent } from './components/input/input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -9,7 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [ButtonComponent, InputComponent],
   imports: [
     CommonModule,
-    LucideAngularModule.pick({ HandCoins, LogOut }),
+    LucideAngularModule.pick({ HandCoins, LogOut, Mail, Eye, EyeOff }),
     ReactiveFormsModule,
   ],
   exports: [ButtonComponent, InputComponent],
