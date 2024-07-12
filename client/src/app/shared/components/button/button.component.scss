@@ -1,0 +1,31 @@
+.btn {
+  width: auto;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 0;
+  font-size: 14px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 25px;
+  &.no-color {
+    background-color: #fff;
+    text-decoration: underline;
+  }
+  &.green {
+    background-color: #00ba00;
+  }
+  &.red {
+    background-color: #f00;
+  }
+  &.green,
+  &.red {
+    color: #fff;
+    border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.3);
+    &:hover {
+      box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.6);
+    }
+  }
+}
