@@ -6,3 +6,21 @@
   box-sizing: content-box;
   font-family: "Inter";
 }
+
+@media (max-width: 900px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 900px) {
+  .desktop {
+    display: block;
+  }
+  .mobile {
+    display: none;
+  }
+}
