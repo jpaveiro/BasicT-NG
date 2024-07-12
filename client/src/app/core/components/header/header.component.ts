@@ -7,6 +7,6 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  @Input()
+  @Input({ required: true })
   isLogged!: boolean;
 }
