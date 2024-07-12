@@ -8,6 +8,8 @@ import {
   LogOut,
   LucideAngularModule,
   Mail,
+  Lock,
+  LogIn,
 } from 'lucide-angular';
 import { InputComponent } from './components/input/input.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [ButtonComponent, InputComponent],
   imports: [
     CommonModule,
-    LucideAngularModule.pick({ HandCoins, LogOut, Mail, Eye, EyeOff }),
+    LucideAngularModule.pick({ HandCoins, LogOut, Mail, Lock, LogIn }),
     ReactiveFormsModule,
   ],
   exports: [ButtonComponent, InputComponent],
