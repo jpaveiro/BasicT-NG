@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { HeaderComponent } from './components/header/header.component';
+import { LucideAngularModule, Menu } from 'lucide-angular';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  declarations: [HeaderComponent],
+  imports: [CommonModule, LucideAngularModule.pick({ Menu }), AppRoutingModule],
+  exports: [HeaderComponent],
 })
-export class CoreModule { }
+export class CoreModule {}
