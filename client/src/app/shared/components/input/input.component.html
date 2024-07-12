@@ -1,0 +1,8 @@
+<div class="app-input">
+  @if (icon) {
+  <div class="icon">
+    <lucide-icon [name]="icon"></lucide-icon>
+  </div>
+  }
+  <input [type]="type" [placeholder]="placeholder" [formControl]="control" />
+</div>
