@@ -13,5 +13,8 @@ export class ButtonComponent {
   variant: 'green' | 'no-color' | 'red' = 'no-color';
 
   @Input()
+  type: 'button' | 'submit' = 'button';
+
+  @Input()
   icon: string = '';
 }
