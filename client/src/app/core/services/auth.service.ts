@@ -1,0 +1,46 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable, signal } from '@angular/core';
+import { DEVENV } from '../../config/env.dev';
+import { ToastrService } from 'ngx-toastr';
+import { catchError, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  id = signal<string>('');
+  name = signal<string>('');
+
+  constructor(
+    private readonly httpClient: HttpClient,
+    private readonly toastr: ToastrService,
+    private readonly router: Router
+  ) {}
+
+  login(email: string, password: string) {
+    this.httpClient
+      .post(`${DEVENV.API_URL}api/user/v1/login`, {
+        email,
+        password,
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            this.toastr.error(
+              'Informações incorretas ou usuário inexistente.',
+              'Erro!'
+            );
+          }
+
+          return throwError(error);
+        })
+      )
+      .subscribe((response: any) => {
+        this.id.set(response.userId);
+        this.name.set(response.name);
+
+        this.router.navigate(['/home']);
+      });
+  }
+}
