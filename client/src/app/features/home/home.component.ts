@@ -10,6 +10,8 @@ export class HomeComponent {
   name: string;
 
   constructor(private readonly authService: AuthService) {
-    this.name = authService.name();
+    const user = authService.getUser();
+
+    this.name = user.name ?? '';
   }
 }
