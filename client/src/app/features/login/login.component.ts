@@ -27,7 +27,7 @@ export class LoginComponent {
 
       if (this.userForm.get('password')?.hasError('minlength')) {
         this.toastr.error(
-          'A senha precisa ter no minimo 8 caractéres.',
+          'A senha precisa ter no minimo 8 caracteres.',
           'Erro!'
         );
         return;
