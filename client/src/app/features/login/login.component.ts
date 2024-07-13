@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,10 @@ export class LoginComponent {
     ]),
   });
 
-  constructor(private readonly toastr: ToastrService) {}
+  constructor(
+    private readonly toastr: ToastrService,
+    private readonly authService: AuthService
+  ) {}
 
   onSubmit(): void {
     if (this.userForm.invalid) {
@@ -36,5 +40,10 @@ export class LoginComponent {
       this.toastr.error('Todos os dados são obrigatórios.', 'Atenção');
       return;
     }
+
+    const email = this.userForm.value.email ?? '';
+    const password = this.userForm.value.password ?? '';
+
+    this.authService.login(email, password);
   }
 }
