@@ -5,7 +5,20 @@
   <div>
     @if (isLogged) {
     <div class="mobile">
-      <lucide-icon name="menu"></lucide-icon>
+      <lucide-icon name="menu" (click)="changeMenuVisible()"></lucide-icon>
+      <div class="menu {{ showMenu() }}">
+        <custom-button
+          child="Nova Venda"
+          variant="green"
+          icon="hand-coins"
+        ></custom-button>
+        <custom-button
+          child="Sair"
+          variant="red"
+          icon="log-out"
+          (click)="logout()"
+        ></custom-button>
+      </div>
     </div>
     <div class="desktop">
       <custom-button

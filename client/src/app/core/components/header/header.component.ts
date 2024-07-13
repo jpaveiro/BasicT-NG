@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -11,7 +11,13 @@ export class HeaderComponent {
   @Input({ required: true })
   isLogged!: boolean;
 
+  showMenu = signal(false);
+
   constructor(private readonly authService: AuthService) {}
+
+  changeMenuVisible() {
+    this.showMenu.update((value) => !value);
+  }
 
   logout() {
     this.authService.logout();
