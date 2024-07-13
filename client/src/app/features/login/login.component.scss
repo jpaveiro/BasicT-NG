@@ -1,0 +1,21 @@
+.app-login {
+  height: calc(100vh - 105px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .container {
+    width: 60%;
+    border: 2px solid #bababa;
+    border-radius: 7px;
+    padding: 20px;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      custom-button {
+        display: inherit;
+        justify-content: end;
+      }
+    }
+  }
+}

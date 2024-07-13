@@ -1,0 +1,25 @@
+<app-header [isLogged]="false"></app-header>
+<div class="app-login">
+  <div class="container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <h3>Fazer login.</h3>
+      <custom-input
+        placeholder="Digite seu email"
+        icon="mail"
+        [control]="userForm.controls['email']"
+      ></custom-input>
+      <custom-input
+        placeholder="Digite sua senha"
+        icon="lock"
+        type="password"
+        [control]="userForm.controls['password']"
+      ></custom-input>
+      <custom-button
+        child="Fazer login"
+        icon="log-in"
+        variant="green"
+        type="submit"
+      ></custom-button>
+    </form>
+  </div>
+</div>
