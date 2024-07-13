@@ -43,4 +43,11 @@ export class AuthService {
         this.router.navigate(['/home']);
       });
   }
+
+  logout() {
+    this.name.set('');
+    this.id.set('');
+
+    this.router.navigate(['/login']);
+  }
 }
