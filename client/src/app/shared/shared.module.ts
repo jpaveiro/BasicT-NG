@@ -22,6 +22,6 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
     LucideAngularModule.pick({ HandCoins, LogOut, Mail, Lock, LogIn }),
     ReactiveFormsModule,
   ],
-  exports: [ButtonComponent, InputComponent],
+  exports: [ButtonComponent, InputComponent, CapitalizePipe],
 })
 export class SharedModule {}
