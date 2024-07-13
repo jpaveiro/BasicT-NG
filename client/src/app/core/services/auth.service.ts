@@ -51,4 +51,11 @@ export class AuthService {
 
     this.router.navigate(['/login']);
   }
+
+  getUser() {
+    return {
+      token: this.cookieService.get('basict:token'),
+      name: localStorage.getItem('basict:name'),
+    };
+  }
 }
