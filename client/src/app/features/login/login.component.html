@@ -4,14 +4,16 @@
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <h3>Fazer login.</h3>
       <custom-input
-        placeholder="Digite seu email"
+        placeholder="johndoe@example.com"
         icon="mail"
+        label="Insira seu email: "
         [control]="userForm.controls['email']"
       ></custom-input>
       <custom-input
-        placeholder="Digite sua senha"
+        placeholder="12345678"
         icon="lock"
         type="password"
+        label="Insira sua senha: "
         [control]="userForm.controls['password']"
       ></custom-input>
       <custom-button
