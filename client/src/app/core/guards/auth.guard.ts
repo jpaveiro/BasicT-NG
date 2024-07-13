@@ -12,8 +12,8 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   canActivate(): boolean {
-    const id = this.authService.id;
-    const email = this.authService.name;
+    const id = this.authService.id();
+    const email = this.authService.name();
 
     if (!id || !email) {
       this.router.navigate(['/login']);
