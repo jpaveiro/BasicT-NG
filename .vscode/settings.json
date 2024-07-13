@@ -1,7 +1,8 @@
 {
   "material-icon-theme.activeIconPack": "angular",
   "material-icon-theme.folders.associations": {
-    "features": "views"
+    "features": "views",
+    "interceptors": "tools"
   },
   "java.compile.nullAnalysis.mode": "automatic",
   "java.debug.settings.onBuildFailureProceed": true
