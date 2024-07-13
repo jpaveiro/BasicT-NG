@@ -13,9 +13,10 @@ import {
 } from 'lucide-angular';
 import { InputComponent } from './components/input/input.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 
 @NgModule({
-  declarations: [ButtonComponent, InputComponent],
+  declarations: [ButtonComponent, InputComponent, CapitalizePipe],
   imports: [
     CommonModule,
     LucideAngularModule.pick({ HandCoins, LogOut, Mail, Lock, LogIn }),
