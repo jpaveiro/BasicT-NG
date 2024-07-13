@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { TokenUtil } from '../../utils/token.util';
 
 @Component({
   selector: 'custom-input',
@@ -18,4 +19,13 @@ export class InputComponent {
 
   @Input()
   control!: FormControl;
+
+  @Input()
+  label: string = '';
+
+  protected id: string;
+
+  constructor(private readonly token: TokenUtil) {
+    this.id = token.generate();
+  }
 }
