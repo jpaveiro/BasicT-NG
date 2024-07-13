@@ -9,9 +9,6 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root',
 })
 export class AuthService {
-  id = signal<string>('');
-  name = signal<string>('');
-
   constructor(
     private readonly httpClient: HttpClient,
     private readonly toastr: ToastrService,
