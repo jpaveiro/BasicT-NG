@@ -4,7 +4,7 @@ import { DEVENV } from '../../config/env.dev';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-
+import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +15,8 @@ export class AuthService {
   constructor(
     private readonly httpClient: HttpClient,
     private readonly toastr: ToastrService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly cookieService: CookieService
   ) {}
 
   login(email: string, password: string) {
@@ -37,16 +38,16 @@ export class AuthService {
         })
       )
       .subscribe((response: any) => {
-        this.id.set(response.userId);
-        this.name.set(response.name);
+        this.cookieService.set('basict:token', response.userId);
+        localStorage.setItem('basict:name', response.name);
 
         this.router.navigate(['/home']);
       });
   }
 
   logout() {
-    this.name.set('');
-    this.id.set('');
+    localStorage.clear();
+    this.cookieService.deleteAll();
 
     this.router.navigate(['/login']);
   }
