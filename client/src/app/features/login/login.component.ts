@@ -33,8 +33,6 @@ export class LoginComponent {
         return;
       }
 
-      console.log(this.userForm.get('password'));
-
       this.toastr.error('Todos os dados são obrigatórios.', 'Atenção');
       return;
     }
