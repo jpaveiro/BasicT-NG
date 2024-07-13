@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class TokenUtil {
-  static generate(): string {
+  generate(): string {
     return 'b' + Math.random().toString(36).substring(2, 15);
   }
 }
