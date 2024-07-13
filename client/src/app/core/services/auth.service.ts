@@ -36,14 +36,13 @@ export class AuthService {
       )
       .subscribe((response: any) => {
         this.cookieService.set('basict:token', response.userId);
-        localStorage.setItem('basict:name', response.name);
+        this.cookieService.set('basict:name', response.name);
 
         this.router.navigate(['/home']);
       });
   }
 
   logout() {
-    localStorage.clear();
     this.cookieService.deleteAll();
 
     this.router.navigate(['/login']);
@@ -52,7 +51,7 @@ export class AuthService {
   getUser() {
     return {
       token: this.cookieService.get('basict:token'),
-      name: localStorage.getItem('basict:name'),
+      name: this.cookieService.get('basict:name'),
     };
   }
 }
