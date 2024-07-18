@@ -1,7 +1,19 @@
 <app-header [isLogged]="true"></app-header>
 <div class="app-home">
   <div class="container">
-    <h2>Bem vindo,</h2>
-    <h1>{{ name | capitalize }}</h1>
+    <div id="name-section">
+      <h2>Bem vindo,</h2>
+      <h1>{{ name | capitalize }}</h1>
+    </div>
+    <div id="fast-menu-control">
+      <fast-menu legend="Menu rápido">
+        <custom-button
+          child="Nova venda"
+          variant="green"
+          icon="hand-coins"
+        ></custom-button>
+        <custom-button child="Produtos" variant="no-color"></custom-button>
+      </fast-menu>
+    </div>
   </div>
 </div>
