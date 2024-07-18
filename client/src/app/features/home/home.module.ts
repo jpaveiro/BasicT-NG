@@ -5,9 +5,10 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard } from '../../core/guards/auth.guard';
 import { CoreModule } from '../../core/core.module';
 import { SharedModule } from '../../shared/shared.module';
+import { FastMenuComponent } from './components/fast-menu/fast-menu.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, FastMenuComponent],
   imports: [
     CommonModule,
     RouterModule.forRoot([
