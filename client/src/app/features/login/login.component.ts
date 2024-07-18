@@ -17,6 +17,8 @@ export class LoginComponent {
     ]),
   });
 
+  isLoading = false;
+
   constructor(
     private readonly toastr: ToastrService,
     private readonly authService: AuthService
@@ -41,9 +43,13 @@ export class LoginComponent {
       return;
     }
 
+    this.isLoading = true;
+
     const email = this.userForm.value.email ?? '';
     const password = this.userForm.value.password ?? '';
 
     this.authService.login(email, password);
+
+    this.isLoading = false;
   }
 }

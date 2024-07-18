@@ -1,4 +1,7 @@
 <app-header [isLogged]="false"></app-header>
+@if (isLoading) {
+<loader />
+}
 <div class="app-login">
   <div class="container">
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
