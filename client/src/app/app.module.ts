@@ -11,7 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { FeaturesModule } from './features/features.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +27,7 @@ import { provideHttpClient } from '@angular/common/http';
     SharedModule,
     FeaturesModule,
   ],
-  providers: [provideClientHydration(), provideHttpClient()],
+  providers: [provideClientHydration(), provideHttpClient(withFetch())],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
