@@ -2,7 +2,7 @@ import { CapitalizePipe } from './capitalize.pipe';
 
 describe('CapitalizePipe', () => {
   it('Should capitalize a Uppercase text', () => {
-    cy.mount('<p>{{ "HII" | capitalize}}</p>', {
+    cy.mount('<p>{{ "HII" | capitalize }}</p>', {
       declarations: [CapitalizePipe],
     });
 
